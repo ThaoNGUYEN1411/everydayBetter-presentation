@@ -1,0 +1,42 @@
+@import url("https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,300;0,400;0,500;0,700;0,900;1,300&display=swap");
+
+#root {
+  max-width: 1280px;
+  margin: 0 auto;
+  padding: 2rem;
+  /* text-align: center; */
+}
+
+:root {
+  --orange: #ffcc9c;
+  --title-color: #f1b022;
+  --black: #000;
+  --text-color: #333;
+  --red: #e41f36;
+  --white: #fff;
+  --logo-width: 130px;
+  --button-color: #f49c17;
+  --input-focus-color: rgb(13, 13, 211);
+  /* Default layout */
+  --default-layout-header-height: 120px;
+  --default-layout-width: 1024px;
+}
+
+/* changer * par les balise on utilise */
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 62.5%;
+}
+
+body {
+  font-family: "Roboto", sans-serif;
+  font-size: 1.6rem;
+  line-height: 1.5;
+  text-rendering: optimizeSpeed;
+  color: var(--text-color);
+}
