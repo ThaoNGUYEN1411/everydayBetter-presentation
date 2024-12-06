@@ -1,12 +1,13 @@
+import axios from "axios";
 import { useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 
 interface HabitData {
-  name: String;
+  habitName: String;
   description: String;
   isPositive: Boolean;
-  label: String;
+  labelName: String;
   resetCounter: String;
 }
 
@@ -20,6 +21,15 @@ export const CreateHabit = () => {
 
   const onSubmit: SubmitHandler<HabitData> = async (values) => {
     console.log(values);
+    const { data } = await axios.post(
+      "http://localhost:8080/habits/",
+      JSON.stringify(values),
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      }
+    );
   };
 
   useEffect(() => {
@@ -34,12 +44,12 @@ export const CreateHabit = () => {
         <Form.Control
           type="text"
           placeholder="Ajouter un titre"
-          {...register("name", { required: "Name is required" })}
-          isInvalid={!!errors.name}
+          {...register("habitName", { required: "habitName is required" })}
+          isInvalid={!!errors.habitName}
         />
         {/*The !! (double bang) operator is a common JavaScript trick to coerce a value to a boolean.undefined or null => false, exist value => true */}
         <Form.Control.Feedback type="invalid">
-          {errors.name?.message}
+          {errors.habitName?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
@@ -81,7 +91,10 @@ export const CreateHabit = () => {
       </div>
       <Form.Group>
         <Form.Label>Etiquettes</Form.Label>
-        <Form.Select aria-label="Select une étiquette" {...register("label")}>
+        <Form.Select
+          aria-label="Select une étiquette"
+          {...register("labelName")}
+        >
           <option>Entrez une étiquette</option>
           <option value="Travailler">Travailler</option>
           <option value="Faire de l'exercice">Faire de l'exercice</option>
