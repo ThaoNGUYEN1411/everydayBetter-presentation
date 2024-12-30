@@ -1,0 +1,7 @@
+{
+	"welcome": "Welcome to our app!",
+	"greeting": "Hello!",
+	"createHabit": {
+		"title": "Create a new habit"
+	}
+}

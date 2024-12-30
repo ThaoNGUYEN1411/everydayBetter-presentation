@@ -1,9 +1,9 @@
 import axios from "axios";
-import { useEffect } from "react";
+import { FC, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 
-interface HabitData {
+export interface HabitData {
   habitName: String;
   description: String;
   isPositive: Boolean;
@@ -11,7 +11,7 @@ interface HabitData {
   resetCounter: String;
 }
 
-export const CreateHabit = () => {
+export const CreateHabit: FC = () => {
   const {
     formState: { errors },
     handleSubmit,

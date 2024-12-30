@@ -1,12 +1,13 @@
 import "bootstrap/dist/css/bootstrap.min.css";
 import "./assets/globalStyle.css";
-import { CreateHabit } from "./components/CreateHabit";
+import { RouterProvider } from "react-router-dom";
+import router from "./routers/router";
 
 function App() {
   return (
-    <h1>
-      <CreateHabit />
-    </h1>
+    <div>
+      <RouterProvider router={router} />
+    </div>
   );
 }
 
