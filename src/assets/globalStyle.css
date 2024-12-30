@@ -40,3 +40,13 @@ body {
   text-rendering: optimizeSpeed;
   color: var(--text-color);
 }
+
+/* Header */
+.logo {
+  width: 100px;
+}
+
+.wrapper-header {
+  box-shadow: 0px 1px 1px rgb(0, 0, 0/ 12%);
+  border-bottom: 2px solid #eee;
+}
