@@ -1,21 +1,28 @@
 import { createBrowserRouter } from "react-router-dom";
-
+import RootLayout from "../layouts/RootLayout";
+//to do: read more in rootlayout
 const router = createBrowserRouter([
   {
     path: "/",
-    lazy: async () => {
-      const { default: HomePage } = await import("../pages/HomePage");
-      return { Component: HomePage };
-    },
-  },
-  {
-    path: "/create",
-    lazy: async () => {
-      const { default: CreateHabitPage } = await import(
-        "../pages/CreateHabitPage"
-      );
-      return { Component: CreateHabitPage };
-    },
+    element: <RootLayout />,
+    children: [
+      {
+        path: "",
+        lazy: async () => {
+          const { default: HomePage } = await import("../pages/HomePage");
+          return { Component: HomePage };
+        },
+      },
+      {
+        path: "/create",
+        lazy: async () => {
+          const { default: CreateHabitPage } = await import(
+            "../pages/CreateHabitPage"
+          );
+          return { Component: CreateHabitPage };
+        },
+      },
+    ],
   },
 ]);
 
