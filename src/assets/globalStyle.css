@@ -3,7 +3,7 @@
 #root {
   max-width: 1280px;
   margin: 0 auto;
-  padding: 2rem;
+  padding: 0;
   /* text-align: center; */
 }
 
@@ -40,6 +40,16 @@ body {
   text-rendering: optimizeSpeed;
   color: var(--text-color);
 }
+.grid {
+  width: 100%;
+  display: block;
+  padding: 0;
+}
+/* layout centre ecran */
+.grid.wide {
+  max-width: 1024px;
+  margin: 0 auto;
+}
 
 /* Header */
 .logo {
@@ -49,4 +59,21 @@ body {
 .wrapper-header {
   box-shadow: 0px 1px 1px rgb(0, 0, 0/ 12%);
   border-bottom: 2px solid #eee;
+}
+
+/* Homepage */
+
+.bg-banner {
+  background-image: url("../../public/bg-banner3.png");
+  background-size: cover;
+  background-position: top center;
+  height: 550px;
+  max-width: auto;
+}
+.text-banner {
+  position: absolute;
+  top: 30%;
+}
+.img-func {
+  max-width: 200px;
 }
