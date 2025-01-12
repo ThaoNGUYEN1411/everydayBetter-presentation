@@ -22,12 +22,16 @@ const Header: FC = () => {
             </NavLink>
           </Nav>
           <Nav className="d-lg-flex justify-content-end">
-            <Button variant="light" size="lg" className="mx-5 px-5">
-              Sign In
-            </Button>
-            <Button variant="primary" size="lg" className=" px-5">
-              Sign up
-            </Button>
+            <Link to={"/accounts/authenticate"}>
+              <Button variant="light" size="lg" className="mx-5 px-5">
+                Sign In
+              </Button>
+            </Link>
+            <Link to={"/accounts/create"}>
+              <Button variant="primary" size="lg" className=" px-5">
+                Sign up
+              </Button>
+            </Link>
           </Nav>
         </Navbar.Collapse>
       </Container>
@@ -36,3 +40,4 @@ const Header: FC = () => {
 };
 
 export default Header;
+//todo: i18n

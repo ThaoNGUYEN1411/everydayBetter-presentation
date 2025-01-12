@@ -16,5 +16,8 @@
 		"password_placeHolder": "Password",
 		"password_errors_message": "Password est requis",
 		"btn": "Créer"
+	},
+	"accountAuthentificate": {
+		"title": "Se connecter"
 	}
 }

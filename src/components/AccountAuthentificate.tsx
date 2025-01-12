@@ -5,12 +5,11 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
 export interface AccountData {
-  username: String;
   email: String;
   password: String;
 }
 
-const CreateAccount: FC = () => {
+const AccountAuthentificate: FC = () => {
   const {
     formState: { errors },
     handleSubmit,
@@ -20,7 +19,7 @@ const CreateAccount: FC = () => {
 
   const onSubmit: SubmitHandler<AccountData> = async (values) => {
     const { data } = await axios.post(
-      "http://localhost:8080/accounts/create",
+      "http://localhost:8080/accounts/authenticate",
       JSON.stringify(values),
       {
         headers: {
@@ -40,30 +39,8 @@ const CreateAccount: FC = () => {
 
   return (
     <div>
-      <h1>{t("createAccount.title")}</h1>
+      <h1>{t("accountAuthentificate.title")}</h1>
       <Form onSubmit={handleSubmit(onSubmit)}>
-        <Form.Group className="mb-3" controlId="username">
-          <Form.Label className="mandatory">
-            {t("createAccount.username")}
-          </Form.Label>
-          <Col sm="3">
-            <Form.Control
-              type="text"
-              placeholder={t("createAccount.username_placeHolder")}
-              {...register("username", {
-                required: {
-                  value: true,
-                  message: t("createAccount.username_errors_message"),
-                },
-              })}
-              isInvalid={!!errors.username}
-            />
-            <Form.Control.Feedback type="invalid">
-              {errors.username?.message}
-            </Form.Control.Feedback>
-          </Col>
-        </Form.Group>
-
         <Form.Group className="mb-3" controlId="email">
           <Form.Label className="mandatory">
             {t("createAccount.email")}
@@ -115,4 +92,6 @@ const CreateAccount: FC = () => {
   );
 };
 
-export default CreateAccount;
+export default AccountAuthentificate;
+
+//todo: revoir titre translate+ validation
