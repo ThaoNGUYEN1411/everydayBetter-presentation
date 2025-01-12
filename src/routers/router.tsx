@@ -1,6 +1,5 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
-import CreateAccountPage from "../pages/CreateAccountPage";
 //to do: read more in rootlayout
 const router = createBrowserRouter([
   {
@@ -24,12 +23,21 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/account/create",
+        path: "/accounts/create",
         lazy: async () => {
           const { default: CreateAccountPage } = await import(
             "../pages/CreateAccountPage"
           );
           return { Component: CreateAccountPage };
+        },
+      },
+      {
+        path: "/accounts/authenticate",
+        lazy: async () => {
+          const { default: AccountAuthentificatePage } = await import(
+            "../pages/AccountAuthentificatePage"
+          );
+          return { Component: AccountAuthentificatePage };
         },
       },
     ],

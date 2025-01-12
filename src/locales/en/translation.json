@@ -16,5 +16,8 @@
 		"password_placeHolder": "Password",
 		"password_errors_message": "Password is required",
 		"btn": "Create"
+	},
+	"accountAuthentificate": {
+		"title": "Sign up"
 	}
 }
