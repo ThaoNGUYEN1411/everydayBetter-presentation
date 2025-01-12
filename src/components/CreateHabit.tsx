@@ -6,9 +6,8 @@ import { SubmitHandler, useForm } from "react-hook-form";
 export interface HabitData {
   habitName: String;
   description: String;
-  isPositive: Boolean;
+  positive: Boolean;
   labelName: String;
-  resetCounter: String;
 }
 
 export const CreateHabit: FC = () => {
@@ -72,19 +71,19 @@ export const CreateHabit: FC = () => {
           label="Positive"
           type="radio"
           value="true"
-          {...register("isPositive", { required: "You must choose an option" })}
+          {...register("positive", { required: "You must choose an option" })}
         />
         <Form.Check
           inline
           label="Negative"
           type="radio"
           value="false"
-          {...register("isPositive", { required: "You must choose an option" })}
+          {...register("positive", { required: "You must choose an option" })}
         />
         {/* Display error message if no option is selected */}
-        {errors.isPositive && (
+        {errors.positive && (
           <Form.Text className="text-danger">
-            {errors.isPositive.message}
+            {errors.positive.message}
           </Form.Text>
         )}
       </div>
@@ -97,15 +96,7 @@ export const CreateHabit: FC = () => {
           <option>Entrez une étiquette</option>
           <option value="Travailler">Travailler</option>
           <option value="Faire de l'exercice">Faire de l'exercice</option>
-          <option value="Ecole">Ecole</option>
-        </Form.Select>
-      </Form.Group>
-      <Form.Group>
-        <Form.Label>Réinitialiser le compteur</Form.Label>
-        <Form.Select aria-label="" {...register("resetCounter")}>
-          <option value="Quotidienne">Quotidienne</option>
-          <option value="Hebdomadire">Hebdomadire</option>
-          <option value="Mensuelle">Mensuelle</option>
+          <option value="school">school</option>
         </Form.Select>
       </Form.Group>
       <Button variant="primary" type="submit">
@@ -121,3 +112,5 @@ export const CreateHabit: FC = () => {
 // !!null;  // false
 // !!"text"; // true
 // This ensures isInvalid receives a proper true or false value.
+//todo: refactor with translate file
+//todo: recuperer list label from back
