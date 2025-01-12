@@ -6,11 +6,7 @@ const Header: FC = () => {
     <Navbar collapseOnSelect expand="lg" className="wrapper-header">
       <Container>
         <Link to={"/"}>
-          <img
-            src="../../public/logo.png"
-            alt="Everyday Better"
-            className="logo"
-          />
+          <img src="/logo.png" alt="Everyday Better" className="logo" />
         </Link>
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
