@@ -77,3 +77,9 @@ body {
 .img-func {
   max-width: 200px;
 }
+
+/* Create account */
+.mandatory::after {
+  content: "*";
+  color: red;
+}

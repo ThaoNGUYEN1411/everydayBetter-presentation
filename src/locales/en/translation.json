@@ -3,5 +3,18 @@
 	"greeting": "Hello!",
 	"createHabit": {
 		"title": "Create a new habit"
+	},
+	"createAccount": {
+		"title": "Create a new account",
+		"username": "User name",
+		"username_placeHolder": "User name",
+		"username_errors_message": "User name is required",
+		"email": "Email",
+		"email_placeHolder": "email@example.com",
+		"email_errors_message": "Email is required",
+		"password": "Password",
+		"password_placeHolder": "Password",
+		"password_errors_message": "Password is required",
+		"btn": "Create"
 	}
 }

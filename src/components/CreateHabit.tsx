@@ -20,7 +20,6 @@ export const CreateHabit: FC = () => {
   } = useForm<HabitData>();
 
   const onSubmit: SubmitHandler<HabitData> = async (values) => {
-    console.log(values);
     const { data } = await axios.post(
       "http://localhost:8080/habits/",
       JSON.stringify(values),
@@ -115,3 +114,10 @@ export const CreateHabit: FC = () => {
     </Form>
   );
 };
+
+// !! (Double Bang):
+// It ensures a value is explicitly converted to a boolean.
+// Example:
+// !!null;  // false
+// !!"text"; // true
+// This ensures isInvalid receives a proper true or false value.

@@ -41,7 +41,7 @@ const HomePage: FC = () => {
           </div>
           <Col>
             <article>
-              <img className="img-func" src="../../public/func-1.png" alt="" />
+              <img className="img-func" src="/func-1.png" alt="" />
               <h3>HABIT</h3>
               <p>
                 Good or Bad Habits. Swipe to Log Yes/No. Flexible Reminders.
@@ -50,7 +50,7 @@ const HomePage: FC = () => {
           </Col>
           <Col>
             <article>
-              <img className="img-func" src="../../public/func-2.png" alt="" />
+              <img className="img-func" src="/func-2.png" alt="" />
               <h3>AVERAGE</h3>
               <p>
                 By Any Time Period. Or Rolling Average. Current or Overall.{" "}
@@ -59,7 +59,7 @@ const HomePage: FC = () => {
           </Col>
           <Col>
             <article>
-              <img className="img-func" src="../../public/func-3.png" alt="" />
+              <img className="img-func" src="/func-3.png" alt="" />
               <h3>TARGET</h3>
               <p>Goal Value by Date. Enter Any Number. Helpful Pace Line. </p>
             </article>
