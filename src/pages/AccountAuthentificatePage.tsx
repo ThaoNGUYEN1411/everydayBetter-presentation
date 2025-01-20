@@ -1,10 +1,10 @@
 import { FC } from "react";
-import AccountAuthentificate from "../components/AccountAuthentificate";
+import AccountAuthenticate from "../components/UserAuthenticate";
 
 const CreateAccountPage: FC = () => {
   return (
     <div className="grid wide">
-      <AccountAuthentificate />
+      <AccountAuthenticate />
     </div>
   );
 };

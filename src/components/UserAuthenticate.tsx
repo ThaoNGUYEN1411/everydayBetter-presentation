@@ -4,22 +4,22 @@ import { Button, Col, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 
-export interface AccountData {
+export interface UserData {
   email: String;
   password: String;
 }
 
-const AccountAuthentificate: FC = () => {
+const UserAuthenticate: FC = () => {
   const {
     formState: { errors },
     handleSubmit,
     register,
     watch,
-  } = useForm<AccountData>();
+  } = useForm<UserData>();
 
-  const onSubmit: SubmitHandler<AccountData> = async (values) => {
+  const onSubmit: SubmitHandler<UserData> = async (values) => {
     const { data } = await axios.post(
-      "http://localhost:8080/accounts/authenticate",
+      "http://localhost:8080/users/authenticate",
       JSON.stringify(values),
       {
         headers: {
@@ -28,31 +28,30 @@ const AccountAuthentificate: FC = () => {
       }
     );
     console.log(values);
+    console.log(data);
   };
 
   useEffect(() => {
-    const obsever = watch((values) => console.log(values));
-    return () => obsever.unsubscribe();
+    const observer = watch((values) => console.log(values));
+    return () => observer.unsubscribe();
   }, [watch]);
 
   const { t } = useTranslation();
 
   return (
     <div>
-      <h1>{t("accountAuthentificate.title")}</h1>
+      <h1>{t("userAuthenticate.title")}</h1>
       <Form onSubmit={handleSubmit(onSubmit)}>
         <Form.Group className="mb-3" controlId="email">
-          <Form.Label className="mandatory">
-            {t("createAccount.email")}
-          </Form.Label>
+          <Form.Label className="mandatory">{t("createUser.email")}</Form.Label>
           <Col sm="3">
             <Form.Control
               type="text"
-              placeholder={t("createAccount.email_placeHolder")}
+              placeholder={t("createUser.email_placeHolder")}
               {...register("email", {
                 required: {
                   value: true,
-                  message: t("createAccount.email_errors_message"),
+                  message: t("createUser.email_errors_message"),
                 },
               })}
               isInvalid={!!errors.email}
@@ -65,16 +64,16 @@ const AccountAuthentificate: FC = () => {
 
         <Form.Group className="mb-3" controlId="password">
           <Form.Label className="mandatory">
-            {t("createAccount.password")}
+            {t("createUser.password")}
           </Form.Label>
           <Col sm="3">
             <Form.Control
               type="password"
-              placeholder={t("createAccount.password_placeHolder")}
+              placeholder={t("createUser.password_placeHolder")}
               {...register("password", {
                 required: {
                   value: true,
-                  message: t("createAccount.password_errors_message"),
+                  message: t("createUser.password_errors_message"),
                 },
               })}
               isInvalid={!!errors.password}
@@ -85,13 +84,13 @@ const AccountAuthentificate: FC = () => {
           </Col>
         </Form.Group>
         <Button variant="primary" type="submit">
-          {t("createAccount.btn")}
+          {t("createUser.btn")}
         </Button>
       </Form>
     </div>
   );
 };
 
-export default AccountAuthentificate;
+export default UserAuthenticate;
 
 //todo: revoir titre translate+ validation

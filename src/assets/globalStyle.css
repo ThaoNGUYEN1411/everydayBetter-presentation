@@ -64,7 +64,7 @@ body {
 /* Homepage */
 
 .bg-banner {
-  background-image: url("../../public/bg-banner3.png");
+  background-image: url("/bg-banner3.png");
   background-size: cover;
   background-position: top center;
   height: 550px;

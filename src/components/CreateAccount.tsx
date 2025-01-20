@@ -29,11 +29,12 @@ const CreateAccount: FC = () => {
       }
     );
     console.log(values);
+    console.log(data);
   };
 
   useEffect(() => {
-    const obsever = watch((values) => console.log(values));
-    return () => obsever.unsubscribe();
+    const observer = watch((values) => console.log(values));
+    return () => observer.unsubscribe();
   }, [watch]);
 
   const { t } = useTranslation();

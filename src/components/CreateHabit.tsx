@@ -28,11 +28,12 @@ export const CreateHabit: FC = () => {
         },
       }
     );
+    console.log(data);
   };
 
   useEffect(() => {
-    const obsever = watch((values) => null);
-    return () => obsever.unsubscribe();
+    const observer = watch((values) => console.log(values));
+    return () => observer.unsubscribe();
   }, [watch]);
 
   return (
