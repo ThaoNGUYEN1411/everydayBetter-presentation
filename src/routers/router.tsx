@@ -14,30 +14,30 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/create",
+        path: "activities/create",
         lazy: async () => {
-          const { default: CreateHabitPage } = await import(
-            "../pages/CreateHabitPage"
+          const { default: CreateActivityPage } = await import(
+            "../pages/CreateActivityPage"
           );
-          return { Component: CreateHabitPage };
+          return { Component: CreateActivityPage };
         },
       },
       {
-        path: "/accounts/create",
+        path: "users/create",
         lazy: async () => {
-          const { default: CreateAccountPage } = await import(
-            "../pages/CreateAccountPage"
+          const { default: CreateUserPage } = await import(
+            "../pages/CreateUserPage"
           );
-          return { Component: CreateAccountPage };
+          return { Component: CreateUserPage };
         },
       },
       {
-        path: "/accounts/authenticate",
+        path: "/users/authenticate",
         lazy: async () => {
-          const { default: AccountAuthentificatePage } = await import(
-            "../pages/AccountAuthentificatePage"
+          const { default: UserAuthenticatePage } = await import(
+            "../pages/UserAuthenticatePage"
           );
-          return { Component: AccountAuthentificatePage };
+          return { Component: UserAuthenticatePage };
         },
       },
     ],

@@ -1,10 +1,18 @@
 {
 	"welcome": "Welcome to our app!",
 	"greeting": "Hello!",
-	"createHabit": {
-		"title": "Create a new habit"
+	"createActivity": {
+		"title": "Create a new activity",
+		"activityName": "Nom",
+		"activityName_placeHolder": "Ajouter un titre",
+		"activityName_errors_message": "Nom d'activité est requis",
+		"description": "Description",
+		"description_placeHolder": "Ajouter une description",
+		"description_errors_message": "Description max",
+		"btn": "Créer",
+		"category": "Etiquettes"
 	},
-	"createAccount": {
+	"createUser": {
 		"title": "Create a new account",
 		"username": "User name",
 		"username_placeHolder": "User name",
@@ -17,7 +25,7 @@
 		"password_errors_message": "Password is required",
 		"btn": "Create"
 	},
-	"accountAuthentificate": {
+	"userAuthenticate": {
 		"title": "Sign up"
 	}
 }
