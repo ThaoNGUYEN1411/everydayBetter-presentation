@@ -2,25 +2,26 @@ import axios from "axios";
 import { FC, useEffect } from "react";
 import { Button, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
+import { useTranslation } from "react-i18next";
 
-export interface HabitData {
-  habitName: String;
+export interface ActivityData {
+  activityName: String;
   description: String;
   positive: Boolean;
   labelName: String;
 }
 
-export const CreateHabit: FC = () => {
+export const CreateActivity: FC = () => {
   const {
     formState: { errors },
     handleSubmit,
     register,
     watch,
-  } = useForm<HabitData>();
+  } = useForm<ActivityData>();
 
-  const onSubmit: SubmitHandler<HabitData> = async (values) => {
+  const onSubmit: SubmitHandler<ActivityData> = async (values) => {
     const { data } = await axios.post(
-      "http://localhost:8080/habits/",
+      "http://localhost:8080/activities/create",
       JSON.stringify(values),
       {
         headers: {
@@ -35,29 +36,35 @@ export const CreateHabit: FC = () => {
     const observer = watch((values) => console.log(values));
     return () => observer.unsubscribe();
   }, [watch]);
+  const { t } = useTranslation();
 
   return (
     <Form className="w-50" onSubmit={handleSubmit(onSubmit)}>
       <Form.Group className="mb">
-        <Form.Label>Nom</Form.Label>
+        <Form.Label>{t("createActivity.activityName")}</Form.Label>
         <Form.Control
           type="text"
-          placeholder="Ajouter un titre"
-          {...register("habitName", { required: "habitName is required" })}
-          isInvalid={!!errors.habitName}
+          placeholder={t("createActivity.activityName_placeHolder")}
+          {...register("activityName", {
+            required: {
+              value: true,
+              message: t("createActivity.activityName_errors_message"),
+            },
+          })}
+          isInvalid={!!errors.activityName}
         />
         {/*The !! (double bang) operator is a common JavaScript trick to coerce a value to a boolean.undefined or null => false, exist value => true */}
         <Form.Control.Feedback type="invalid">
-          {errors.habitName?.message}
+          {errors.activityName?.message}
         </Form.Control.Feedback>
       </Form.Group>
 
       <Form.Group className="mb-3">
-        <Form.Label>Notes</Form.Label>
+        <Form.Label>{t("createActivity.description")}</Form.Label>
         <Form.Control
           as="textarea"
           rows={3}
-          placeholder="Ajouter une note"
+          placeholder={t("createActivity.description_placeHolder")}
           {...register("description", { maxLength: 20 })}
           isInvalid={!!errors.description}
         />
@@ -89,7 +96,7 @@ export const CreateHabit: FC = () => {
         )}
       </div>
       <Form.Group>
-        <Form.Label>Etiquettes</Form.Label>
+        <Form.Label> {t("createActivity.category")}</Form.Label>
         <Form.Select
           aria-label="Select une étiquette"
           {...register("labelName")}
@@ -101,12 +108,12 @@ export const CreateHabit: FC = () => {
         </Form.Select>
       </Form.Group>
       <Button variant="primary" type="submit">
-        Créer
+        {t("createActivity.btn")}
       </Button>
     </Form>
   );
 };
-
+export default CreateActivity;
 // !! (Double Bang):
 // It ensures a value is explicitly converted to a boolean.
 // Example:

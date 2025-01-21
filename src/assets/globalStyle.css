@@ -78,7 +78,7 @@ body {
   max-width: 200px;
 }
 
-/* Create account */
+/* Create user */
 .mandatory::after {
   content: "*";
   color: red;
