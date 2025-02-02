@@ -1,5 +1,5 @@
 import { FC } from "react";
-import UserAuthenticate from "../components/UserAuthenticate";
+import UserAuthenticate from "../components/AuthenticateUser";
 
 const UserAuthenticatePage: FC = () => {
   return (

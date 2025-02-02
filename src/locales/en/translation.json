@@ -1,31 +1,65 @@
 {
-	"welcome": "Welcome to our app!",
-	"greeting": "Hello!",
-	"createActivity": {
-		"title": "Create a new activity",
-		"activityName": "Nom",
-		"activityName_placeHolder": "Ajouter un titre",
-		"activityName_errors_message": "Nom d'activité est requis",
-		"description": "Description",
-		"description_placeHolder": "Ajouter une description",
-		"description_errors_message": "Description max",
-		"btn": "Créer",
-		"category": "Etiquettes"
+	"activity": {
+		"btn-add": "Add",
+		"list": {
+			"title": "Activity List",
+			"title_follow": "Activity tracking by date"
+		},
+		"modal_create_activity": {
+			"title": "Create a new activity",
+			"input_name": {
+				"title": "Title",
+				"placeholder": "Add a title",
+				"errors_message": "Activity name is required"
+			},
+			"description": {
+				"title": "Description",
+				"placeholder": "Add a description",
+				"errors_message": "Description is too long"
+			},
+			"type": {
+				"title": "Choose activity type",
+				"positive": "Positive",
+				"negative": "Negative",
+				"errors_message": "You must choose an option"
+			},
+			"category": {
+				"title": "Choose activity categories",
+				"selected_categories": "Selected categories",
+				"placeholder": "Enter a tag"
+			},
+			"btn": "Create"
+		}
 	},
-	"createUser": {
-		"title": "Create a new account",
-		"username": "User name",
-		"username_placeHolder": "User name",
-		"username_errors_message": "User name is required",
-		"email": "Email",
-		"email_placeHolder": "email@example.com",
-		"email_errors_message": "Email is required",
-		"password": "Password",
-		"password_placeHolder": "Password",
-		"password_errors_message": "Password is required",
-		"btn": "Create"
-	},
-	"userAuthenticate": {
-		"title": "Sign up"
+	"user": {
+		"createUser": {
+			"title": "Create an account",
+			"btn": "Create",
+			"alert.success": "Thank you! Your account has been successfully created.",
+			"alert.error": "An error occurred while creating the account. Please try again."
+		},
+		"userAuthenticate": {
+			"title": "Login",
+			"btn": "Log in",
+			"alert.success": "You have successfully logged in.",
+			"alert.error": "An error occurred while logging in. Please try again."
+		},
+		"nickname": {
+			"title": "Nickname",
+			"placeholder": "Enter your nickname",
+			"errors_message": "Nickname is required"
+		},
+		"email": {
+			"title": "Email",
+			"placeholder": "email@example.com",
+			"errors_message": "Email is required",
+			"invalid_message": "The email address is not valid. Please enter a correct address."
+		},
+		"password": {
+			"title": "Password",
+			"placeholder": "Enter your password",
+			"errors_message": "Password is required",
+			"minLength_message": "Password must be at least 6 characters long."
+		}
 	}
 }
