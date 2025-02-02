@@ -8,6 +8,7 @@
 }
 
 :root {
+  --logo-color: #51bfa6;
   --orange: #ffcc9c;
   --title-color: #f1b022;
   --black: #000;
@@ -22,6 +23,16 @@
   --default-layout-width: 1024px;
 }
 
+.logo-color {
+  color: var(--logo-color);
+}
+
+.bg-logo-color {
+  background: var(--logo-color);
+}
+.bg-btn {
+  background: #f6deab;
+}
 /* changer * par les balise on utilise */
 * {
   box-sizing: border-box;
@@ -53,26 +64,24 @@ body {
 
 /* Header */
 .logo {
-  width: 100px;
+  width: 120px;
 }
 
 .wrapper-header {
   box-shadow: 0px 1px 1px rgb(0, 0, 0/ 12%);
   border-bottom: 2px solid #eee;
+  background: #f0f0e7;
 }
 
 /* Homepage */
-
-.bg-banner {
-  background-image: url("/bg-banner3.png");
-  background-size: cover;
-  background-position: top center;
-  height: 550px;
-  max-width: auto;
+.banner {
+  margin-top: 80px;
 }
+
 .text-banner {
-  position: absolute;
-  top: 30%;
+  position: relative;
+  top: 15%;
+  margin-left: 3rem;
 }
 .img-func {
   max-width: 200px;
@@ -82,4 +91,21 @@ body {
 .mandatory::after {
   content: "*";
   color: red;
+}
+
+/* .bg {
+  height: 500px;
+  display: flex;
+  flex-direction: row;
+} */
+
+.bloc1 {
+  height: 400px;
+  max-width: 100%;
+}
+
+.bg-img > img {
+  display: block;
+  height: auto;
+  max-width: 95%;
 }

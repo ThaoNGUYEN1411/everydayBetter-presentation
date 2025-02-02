@@ -1,31 +1,66 @@
 {
-	"welcome": "Bienvenue dans notre application!",
-	"greeting": "Bonjour!",
-	"createActivity": {
-		"title": "Créer une nouvelle activité",
-		"activityName": "Nom",
-		"activityName_placeHolder": "Ajouter un titre",
-		"activityName_errors_message": "Nom d'activité est requis",
-		"description": "Description",
-		"description_placeHolder": "Ajouter une description",
-		"description_errors_message": "Description max",
-		"btn": "Créer",
-		"category": "Etiquettes"
+	"activity": {
+		"btn-add": "Ajouter",
+		"list": {
+			"title": "List activités",
+			"title_follow": "Suivi des activités selon la date"
+		},
+		"modal_create_activity": {
+			"title": "Créer une nouvelle activité",
+			"input_name": {
+				"title": "Title",
+				"placeholder": "Ajouter un titre",
+				"errors_message": "Nom d'activité est requis"
+			},
+			"description": {
+				"title": "Description",
+				"placeholder": "Ajouter une description",
+				"errors_message": "Description trop longue"
+			},
+			"type": {
+				"title": "Choisir le type d'activité",
+				"positive": "Positif",
+				"negative": "Négatif",
+				"errors_message": "Vous devez choisir une option"
+			},
+			"category": {
+				"title": "Choisissez des catégories d'activité",
+				"selected_categories": "Catégories sélectionnées",
+				"placeholder": "Entrez une étiquette"
+			},
+
+			"btn": "Créer"
+		}
 	},
-	"createUser": {
-		"title": "Créer un compte",
-		"username": "Nom d'utilisateur",
-		"username_placeHolder": "User name",
-		"username_errors_message": "Nom d'utilisateur est requis",
-		"email": "Email",
-		"email_placeHolder": "email@example.com",
-		"email_errors_message": "Email est requis",
-		"password": "Mot de passe",
-		"password_placeHolder": "Password",
-		"password_errors_message": "Password est requis",
-		"btn": "Créer"
-	},
-	"userAuthenticate": {
-		"title": "Se connecter"
+	"user": {
+		"createUser": {
+			"title": "Créer un compte",
+			"btn": "Créer",
+			"alert.success": "Merci! Votre compte a été créé avec succès",
+			"alert.error": "Une erreur est survenue lors de la création du compte. Veuillez réessayer."
+		},
+		"userAuthenticate": {
+			"title": "Connexion",
+			"btn": "Se connecter",
+			"alert.success": "Vous êtes connecté avec succès.",
+			"alert.error": "Une erreur est survenue lors de la connexion. Veuillez réessayer."
+		},
+		"nickname": {
+			"title": "Pseudonyme",
+			"placeholder": "Entrez votre pseudonyme",
+			"errors_message": "Le pseudonyme est requis"
+		},
+		"email": {
+			"title": "E-mail",
+			"placeholder": "email@example.com",
+			"errors_message": "L'email est requis",
+			"invalid_message": "L'adresse email n'est pas valide. Veuillez entrer une adresse correcte."
+		},
+		"password": {
+			"title": "Mot de passe",
+			"placeholder": "Entrez votre mot de passe",
+			"errors_message": "Le mot de passe est requis",
+			"minLength_message": "Le mot de passe doit comporter au moins 6 caractères."
+		}
 	}
 }

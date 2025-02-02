@@ -3,14 +3,9 @@ import { Button, Col, Row } from "react-bootstrap";
 //import { useTranslation } from "react-i18next";
 
 const HomePage: FC = () => {
-  //  const { t, i18n } = useTranslation();
-  //  const changeLanguage = (lng: string) => {
-  //    i18n.changeLanguage(lng); // Change language
-  //};
-  // to do: change bg image more quality
   return (
     <div className="grid wide">
-      <section className="bg-banner position-relative">
+      {/* <section className="bg-banner position-relative">
         <article className="w-50 d-flex flex-column ms-5 ps-lg-5 text-banner">
           <h1 className="d-flex flex-column">
             <span>Changing habits is hard work.</span>
@@ -27,6 +22,37 @@ const HomePage: FC = () => {
             <Button>Inscription</Button>
           </div>
         </article>
+      </section> */}
+      <section className="banner">
+        <Row>
+          <Col md={4}>
+            <div className="bloc1">
+              <article className="text-banner">
+                <h1 className="d-flex flex-column">
+                  Everryday Better, l'appli qui booste vos habitudes.
+                </h1>
+                <p className="d-block w-lg-50 my-lg-5 w-sm-100">
+                  Suivez vos progrès et devenez une meilleure version de
+                  vous-même. Essayez-la gratuitement !
+                </p>
+                <div>
+                  <Button
+                    variant="light"
+                    size="lg"
+                    className="px-5 bg-logo-color"
+                  >
+                    Inscription
+                  </Button>
+                </div>
+              </article>
+            </div>
+          </Col>{" "}
+          <Col md={8}>
+            <div className="bg-img">
+              <img src="/bg.png" alt="" />
+            </div>
+          </Col>
+        </Row>
       </section>
       {/* fonction */}
       <section className="my-5">
