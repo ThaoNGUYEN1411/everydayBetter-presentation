@@ -23,15 +23,6 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "activities/create",
-        lazy: async () => {
-          const { default: CreateActivityPage } = await import(
-            "../pages/CreateActivityPage"
-          );
-          return { Component: CreateActivityPage };
-        },
-      },
-      {
         path: "users/create",
         lazy: async () => {
           const { default: CreateUserPage } = await import(
