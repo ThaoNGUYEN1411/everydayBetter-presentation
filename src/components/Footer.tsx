@@ -2,10 +2,17 @@ import { Col, Container, Row } from "react-bootstrap";
 //to do: add content necessary
 const Footer = () => {
   return (
-    <footer className="d-block my-5">
+    <footer className="d-block mt-5 pt-4">
       <Container>
         <Row>
-          <Col>Logo</Col>
+          <Col>
+            {" "}
+            <img
+              src="/logo4-removebg.png"
+              alt="Everyday Better"
+              className="logo"
+            />
+          </Col>
           <Col>Qui sommes nous?</Col>
           <Col>
             <h3>Social</h3>

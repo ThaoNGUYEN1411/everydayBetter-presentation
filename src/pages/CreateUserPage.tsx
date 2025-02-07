@@ -3,7 +3,7 @@ import CreateUser from "../components/CreateUser";
 
 const CreateUserPage: FC = () => {
   return (
-    <div className="grid wide">
+    <div className="grid wide page">
       <CreateUser />
     </div>
   );

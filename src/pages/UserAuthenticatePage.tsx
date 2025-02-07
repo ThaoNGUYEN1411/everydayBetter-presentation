@@ -3,7 +3,7 @@ import UserAuthenticate from "../components/AuthenticateUser";
 
 const UserAuthenticatePage: FC = () => {
   return (
-    <div className="grid wide">
+    <div className="grid wide page">
       <UserAuthenticate />
     </div>
   );

@@ -1,28 +1,10 @@
 import { FC } from "react";
-import { Button, Col, Row } from "react-bootstrap";
+import { Button, Card, CardGroup, Col, Row } from "react-bootstrap";
 //import { useTranslation } from "react-i18next";
 
 const HomePage: FC = () => {
   return (
     <div className="grid wide">
-      {/* <section className="bg-banner position-relative">
-        <article className="w-50 d-flex flex-column ms-5 ps-lg-5 text-banner">
-          <h1 className="d-flex flex-column">
-            <span>Changing habits is hard work.</span>
-            <span>Having the right tool is half the battle !</span>
-          </h1>
-          <p className="d-block w-lg-50 my-lg-5 w-sm-100">
-            <span>
-              The Way of Life app is that tool - a beautiful, intuitive habit
-              tracker that motivates you to build a better, stronger and
-              healthier you! Try the app for free!
-            </span>
-          </p>
-          <div>
-            <Button>Inscription</Button>
-          </div>
-        </article>
-      </section> */}
       <section className="banner">
         <Row>
           <Col md={4}>
@@ -54,41 +36,59 @@ const HomePage: FC = () => {
           </Col>
         </Row>
       </section>
-      {/* fonction */}
-      <section className="my-5">
+
+      <section className="feature-block" id="features">
+        <div className="text-center">
+          <h2 className="feature-title">Suivez tout ce que vous voulez</h2>
+        </div>
+        <div className="d-flex justify-content-center">
+          <p className="w-75 feature-sub-title">
+            Everyday better est totalement flexible. Vous pouvez suivre tout ce
+            qui est important pour vous, et il est facile de le personnaliser en
+            fonction de vos besoins.
+          </p>
+        </div>
         <Row>
-          <div className="text-center">
-            <h2>Track anything you want</h2>
-            <p className="w-75">
-              Strides is totally flexible. With four unique tracker types, you
-              can track anything that matters to you, and it’s easy to customize
-              to fit your needs.
-            </p>
-          </div>
-          <Col>
-            <article>
-              <img className="img-func" src="/func-1.png" alt="" />
-              <h3>HABIT</h3>
-              <p>
-                Good or Bad Habits. Swipe to Log Yes/No. Flexible Reminders.
-              </p>
-            </article>
+          <Col className="d-flex justify-content-center text-center">
+            <Card style={{ width: "23rem" }}>
+              <Card.Img
+                variant="top"
+                src="/feature1.jpg"
+                className="w-80 text-center"
+              />
+              <Card.Body>
+                <Card.Title>Notifications de rappel</Card.Title>
+                <Card.Text>
+                  Des notifications rappellent aux utilisateurs d’accomplir
+                  leurs activités régulières pour les aider à maintenir leurs
+                  habitudes.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
-          <Col>
-            <article>
-              <img className="img-func" src="/func-2.png" alt="" />
-              <h3>AVERAGE</h3>
-              <p>
-                By Any Time Period. Or Rolling Average. Current or Overall.{" "}
-              </p>
-            </article>
+          <Col className="d-flex justify-content-center text-center">
+            <Card style={{ width: "23rem" }}>
+              <Card.Img variant="top" src="/feature2.jpg" />
+              <Card.Body>
+                <Card.Title>Objectifs personnalisable</Card.Title>
+                <Card.Text>
+                  Les utilisateurs peuvent définir leurs propres activités et
+                  suivre celles qui leur tiennent à cœur.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
-          <Col>
-            <article>
-              <img className="img-func" src="/func-3.png" alt="" />
-              <h3>TARGET</h3>
-              <p>Goal Value by Date. Enter Any Number. Helpful Pace Line. </p>
-            </article>
+          <Col className="d-flex justify-content-center text-center">
+            <Card style={{ width: "23rem" }}>
+              <Card.Img variant="top" src="/feature3.jpg" />
+              <Card.Body>
+                <Card.Title>Suivi des progrès</Card.Title>
+                <Card.Text>
+                  Un tableau de bord visuel permet aux utilisateurs de rester
+                  motivés grâce à un retour clair sur leur progression.
+                </Card.Text>
+              </Card.Body>
+            </Card>
           </Col>
         </Row>
       </section>

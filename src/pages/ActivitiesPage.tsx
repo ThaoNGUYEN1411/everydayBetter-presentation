@@ -82,7 +82,7 @@ const ActivitiesPage: FC = () => {
   }, []);
 
   return (
-    <div className="grid wide">
+    <div className="grid wide page">
       <div className="d-flex justify-content-between w-75">
         <h1 className="mt-5 mb-3">{t("activity.list.title")}</h1>
         <div>
@@ -106,7 +106,7 @@ const ActivitiesPage: FC = () => {
       <Row className="wh-80">
         <Col md={8} className="">
           <Row>
-            <Col xs={4} className="">
+            <Col xs={4} className="mt-5">
               <ul>
                 {activitiesList.map((activity) => {
                   return (
@@ -129,9 +129,11 @@ const ActivitiesPage: FC = () => {
                 })}
               </ul>
             </Col>
-            <Col xs={8} className="bg-light">
-              {t("activity.list.title_follow")}
-            </Col>
+            {activitiesList?.length > 0 && (
+              <Col xs={8} className="bg-light">
+                {t("activity.list.title_follow")}
+              </Col>
+            )}
           </Row>
         </Col>
         <Col md={4} className="xs-display-none">
