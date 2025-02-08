@@ -21,10 +21,10 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            <NavLink to="/activities/create" className="nav-link">
+            <NavLink to="/" className="nav-link">
               Fonctionnalités
             </NavLink>
-            <NavLink to="/activities" className="nav-link">
+            <NavLink to="/" className="nav-link">
               Blog
             </NavLink>
             <NavDropdown title="En savoir plus" id="nav-dropdown">

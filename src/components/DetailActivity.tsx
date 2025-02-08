@@ -1,6 +1,6 @@
 import axios from "axios";
 import { FC, useEffect, useState } from "react";
-import { Button } from "react-bootstrap";
+import { Button, Card } from "react-bootstrap";
 import { getToken } from "../utils/Token";
 
 interface DetailActivityModel {
@@ -40,6 +40,7 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
           },
         }
       );
+      console.log(response.data);
 
       setActivity(response.data);
     };
@@ -48,30 +49,45 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
   }, [id]);
 
   return (
-    <div className="mx-3 my-3">
-      <div className="d-flex justify-content-between">
-        <h2>Détail de l'activité</h2>
-        <Button
-          variant="primary"
-          type="submit"
-          size="lg"
-          className="px-5"
-          onClick={() => {
-            id && deleteOneActivity(id);
-          }}
-        >
-          Delete
-        </Button>
-      </div>
-      <p>{id}</p>
-      <p>{activity?.name}</p>
-      <p>{activity?.description}</p>
-      <p>{activity?.categoriesId}</p>
-      <div className="text-center">
-        <Button variant="primary" type="submit" size="lg" className="px-5 mt-5">
-          Modifier
-        </Button>
-      </div>
+    <div className="card-detail px-5">
+      <Card className="p-4">
+        <Card.Body>
+          <Card.Title className="display-6 weight-300">
+            Détail de l'activité
+          </Card.Title>
+
+          <h2 className="mb-2">{activity?.name}</h2>
+          <Card.Text>{activity?.description}</Card.Text>
+          <p>{activity?.categoriesId}</p>
+
+          <div>
+            <Card.Link href="#">
+              {" "}
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                className="px-5"
+                onClick={() => {
+                  id && deleteOneActivity(id);
+                }}
+              >
+                Delete
+              </Button>
+            </Card.Link>
+            <Card.Link href="#">
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                className="px-5"
+              >
+                Modifier
+              </Button>
+            </Card.Link>
+          </div>
+        </Card.Body>
+      </Card>
     </div>
   );
 };
