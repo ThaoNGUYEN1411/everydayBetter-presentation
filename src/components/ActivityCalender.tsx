@@ -7,17 +7,7 @@ import {
   faChevronRight,
   faXmark,
 } from "@fortawesome/free-solid-svg-icons";
-import { dateFnsLocalizer } from "react-big-calendar";
-import "react-big-calendar/lib/css/react-big-calendar.css";
-import { format, parse, startOfWeek, getDay } from "date-fns";
 import { v4 as uuid } from "uuid";
-
-const localizer = dateFnsLocalizer({
-  format,
-  parse,
-  startOfWeek,
-  getDay,
-});
 
 interface ActivityStatus {
   statuses: ("check" | "xmark")[]; // Represents the status for each day of the week
@@ -69,7 +59,6 @@ const CalendarTable: FC<{ lineNumber?: string }> = ({ lineNumber }) => {
       <Table striped bordered hover>
         <thead>
           <tr>
-            {/* <th>Activité</th> */}
             {daysOfWeek.map((day) => (
               <th key={uuid()}>{day}</th>
             ))}

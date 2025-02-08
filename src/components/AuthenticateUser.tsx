@@ -1,5 +1,5 @@
 import axios from "axios";
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -15,7 +15,6 @@ const UserAuthenticate: FC = () => {
     formState: { errors },
     handleSubmit,
     register,
-    watch,
   } = useForm<UserData>();
   const navigate = useNavigate();
   const onSubmit: SubmitHandler<UserData> = async (values) => {
@@ -42,10 +41,10 @@ const UserAuthenticate: FC = () => {
     }
   };
 
-  useEffect(() => {
-    const subscription = watch((values) => null);
-    return () => subscription.unsubscribe();
-  }, [watch]);
+  // useEffect(() => {
+  //   const subscription = watch((values) => null);
+  //   return () => subscription.unsubscribe();
+  // }, [watch]);
 
   const { t } = useTranslation();
 
