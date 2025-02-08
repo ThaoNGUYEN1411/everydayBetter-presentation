@@ -5,6 +5,13 @@ import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { getToken } from "../utils/Token";
 
+interface Props {
+  show: boolean;
+  handleClose: () => void;
+  categories: CategoryModel[];
+  refreshActivities: () => void;
+}
+
 export interface ActivityModel {
   name: string;
   description: string;
@@ -17,14 +24,7 @@ export interface CategoryModel {
   name: string;
 }
 
-interface Props {
-  show: boolean;
-  handleClose: () => void;
-  categories: CategoryModel[];
-  refreshActivities: () => void;
-}
-
-const CreateActivityModal: FC<Props> = ({
+const CreateAndUpdateActivityModal: FC<Props> = ({
   show,
   handleClose,
   categories,
@@ -217,7 +217,7 @@ const CreateActivityModal: FC<Props> = ({
     </Modal>
   );
 };
-export default CreateActivityModal;
+export default CreateAndUpdateActivityModal;
 // !! (Double Bang):
 // It ensures a value is explicitly converted to a boolean.
 // Example:

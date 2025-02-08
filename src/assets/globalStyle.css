@@ -132,6 +132,23 @@ footer {
   background: #f8f8f4;
 }
 .page {
-  height: 400px;
+  height: 430px;
   width: auto;
+}
+
+.list-activities {
+  margin-top: 39px;
+  margin-left: 23px;
+  background: none;
+}
+.activity-line {
+  width: 300px;
+}
+
+.card-detail {
+  margin-top: 80px !important ;
+}
+
+.btn-add {
+  background-color: #1a8f73;
 }
