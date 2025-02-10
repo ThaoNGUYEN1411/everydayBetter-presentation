@@ -18,7 +18,7 @@ i18next
 				translation: frTranslation,
 			},
 		},
-		fallbackLng: "fr", // Langue par défaut
+		fallbackLng: "fr", // Default language
 		debug: true,
 		interpolation: { escapeValue: false }, // react already safes from xss
 	});

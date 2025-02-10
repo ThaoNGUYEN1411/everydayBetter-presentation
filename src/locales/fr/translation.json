@@ -29,7 +29,9 @@
 				"placeholder": "Entrez une étiquette"
 			},
 
-			"btn": "Créer"
+			"btn": "Créer",
+			"alert.success": "Activité créée avec succès !",
+			"alert.error": "Impossible de créer l’activité ! Vérifiez si elle existe déjà."
 		}
 	},
 	"user": {

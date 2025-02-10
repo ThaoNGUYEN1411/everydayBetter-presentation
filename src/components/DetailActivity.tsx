@@ -25,6 +25,7 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
         },
       }
     );
+
     console.log("delete one activity");
   };
   useEffect(() => {

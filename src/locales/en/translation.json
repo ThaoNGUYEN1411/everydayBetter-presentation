@@ -28,7 +28,9 @@
 				"selected_categories": "Selected categories",
 				"placeholder": "Enter a tag"
 			},
-			"btn": "Create"
+			"btn": "Create",
+			"alert.success": "Activity created successfully!",
+			"alert.error": "Failed to create activity."
 		}
 	},
 	"user": {

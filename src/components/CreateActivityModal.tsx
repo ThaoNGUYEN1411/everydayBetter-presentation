@@ -36,16 +36,14 @@ const CreateActivityModal: FC<Props> = ({
     formState: { errors },
     handleSubmit,
     register,
-    watch,
     setValue,
+    reset,
   } = useForm<ActivityModel>();
 
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
-  const categoryIds = watch("categoryIds", []); //listens to changes dan updates state when user select category, [] empty when not select
-  //to reflect selected categories dynamically
+  const [loading, setLoading] = useState<boolean>(false);
 
-  // Handle category selection
   const handleCategoryChange = (
     event: React.ChangeEvent<HTMLSelectElement>
   ) => {
@@ -64,22 +62,23 @@ const CreateActivityModal: FC<Props> = ({
 
   const onSubmit: SubmitHandler<ActivityModel> = async (values) => {
     const token = getToken();
+    setLoading(true); // Active loading
 
     try {
-      const { data } = await axios.post(
-        "http://localhost:8080/activities/",
-        JSON.stringify(values),
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      refreshActivities(); // Refresh list
+      await axios.post("http://localhost:8080/activities/", values, {
+        headers: {
+          "Content-Type": "application/json",
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      reset();
       handleClose(); // Close modal
+      refreshActivities(); // Refresh list
+      alert(t("activity.modal_create_activity.alert.success"));
     } catch (error) {
-      console.log("Error creating activity", error);
+      alert(t("activity.modal_create_activity.alert.error"));
+    } finally {
+      setLoading(false); // Disable loading mode
     }
   };
 
@@ -208,7 +207,13 @@ const CreateActivityModal: FC<Props> = ({
             </Form.Select>
           </Form.Group>
           <div className="text-center">
-            <Button variant="primary" type="submit" size="lg" className="px-5">
+            <Button
+              variant="primary"
+              type="submit"
+              size="lg"
+              className="px-5"
+              disabled={loading}
+            >
               {t("activity.modal_create_activity.btn")}
             </Button>
           </div>
