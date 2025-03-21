@@ -14,7 +14,6 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
   const [activity, setActivity] = useState<DetailActivityModel>();
   const deleteOneActivity = async (id: string) => {
     const token = getToken();
-    console.log("token here", { token });
 
     const response = await axios.delete(
       `http://localhost:8080/activities/${id}`,
@@ -26,7 +25,7 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
       }
     );
 
-    console.log("delete one activity");
+    //console.log("delete one activity");
   };
   useEffect(() => {
     const getActivityById = async (id: string) => {

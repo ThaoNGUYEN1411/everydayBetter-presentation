@@ -132,7 +132,7 @@ footer {
   background: #f8f8f4;
 }
 .page {
-  height: 430px;
+  min-height: 430px;
   width: auto;
 }
 

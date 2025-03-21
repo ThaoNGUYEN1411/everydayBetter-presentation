@@ -32,7 +32,7 @@ const CreateUser: FC = () => {
           },
         }
       );
-      console.log(response.status);
+      //console.log(response.status);
 
       if (response.status === 201) {
         window.alert(t("user.createUser.alert.success"));
@@ -41,7 +41,7 @@ const CreateUser: FC = () => {
         window.alert(t("user.createUser.alert.error"));
       }
     } catch (error) {
-      console.log(error);
+      //console.log(error);
       window.alert(t("user.createUser.alert.error"));
     }
 

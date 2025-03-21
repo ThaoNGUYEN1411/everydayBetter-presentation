@@ -50,7 +50,6 @@ const ActivitiesPage: FC = () => {
         }
       );
       setActivitiesList(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log("Error fetching activities", error);
     }
@@ -70,7 +69,6 @@ const ActivitiesPage: FC = () => {
       );
 
       setCategories(response.data);
-      console.log(response.data);
     } catch (error) {
       console.log("Error fetching activities", error);
     }
