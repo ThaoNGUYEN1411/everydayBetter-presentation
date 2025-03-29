@@ -18,11 +18,7 @@ const HomePage: FC = () => {
                   vous-même. Essayez-la gratuitement !
                 </p>
                 <div>
-                  <Button
-                    variant="light"
-                    size="lg"
-                    className="px-5 bg-logo-color"
-                  >
+                  <Button variant="light" size="lg" className="px-5 bg-green">
                     Inscription
                   </Button>
                 </div>

@@ -8,7 +8,7 @@
 }
 
 :root {
-  --logo-color: #51bfa6;
+  --green: #51bfa6;
   --orange: #ffcc9c;
   --title-color: #f1b022;
   --black: #000;
@@ -23,12 +23,12 @@
   --default-layout-width: 1024px;
 }
 
-.logo-color {
-  color: var(--logo-color);
+.text-green {
+  color: var(--green);
 }
 
-.bg-logo-color {
-  background: var(--logo-color);
+.bg-green {
+  background: var(--green);
 }
 .bg-btn {
   background: #f6deab;

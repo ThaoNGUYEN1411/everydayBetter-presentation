@@ -4,9 +4,15 @@ import { Link, NavLink } from "react-router-dom";
 import { getToken } from "../utils/Token";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { useStoreState } from "easy-peasy";
+import { AppStoreModel } from "../store";
 
 const Header: FC = () => {
   const token = getToken();
+  const userData = useStoreState(
+    (state: AppStoreModel) => state.user.usersData
+  );
+  console.log("header", userData);
 
   return (
     <Navbar collapseOnSelect expand="lg" className="wrapper-header">
@@ -21,6 +27,7 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
+            <p>{userData[0]?.nickname}</p>
             <NavLink to="/" className="nav-link">
               Fonctionnalités
             </NavLink>
@@ -51,11 +58,7 @@ const Header: FC = () => {
                 </Button>
               </Link>
               <Link to={"/users/create"}>
-                <Button
-                  variant="light"
-                  size="lg"
-                  className="px-5 bg-logo-color"
-                >
+                <Button variant="light" size="lg" className="px-5 bg-green">
                   S'inscrire
                 </Button>
               </Link>
