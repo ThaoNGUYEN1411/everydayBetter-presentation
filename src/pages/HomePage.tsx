@@ -11,7 +11,7 @@ const HomePage: FC = () => {
             <div className="bloc1">
               <article className="text-banner">
                 <h1 className="d-flex flex-column">
-                  Everryday Better, l'appli qui booste vos habitudes.
+                  Everyday Better, l'appli qui booste vos habitudes.
                 </h1>
                 <p className="d-block w-lg-50 my-lg-5 w-sm-100">
                   Suivez vos progrès et devenez une meilleure version de

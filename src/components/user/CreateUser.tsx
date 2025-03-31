@@ -1,5 +1,5 @@
 import { Actions, useStoreActions } from "easy-peasy";
-import { FC } from "react";
+import { FC, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -9,30 +9,26 @@ import { AppStoreModel } from "../../store";
 
 const CreateUser: FC = () => {
   const { t } = useTranslation();
+  const navigate = useNavigate();
+  const [isErrorCreate, setIsErrorCreate] = useState(false);
   const {
     formState: { errors },
     handleSubmit,
     register,
-    //watch,
-    reset,
   } = useForm<UserData>();
-  const navigate = useNavigate();
-  // const userData = useStoreState(
-  //   (state: AppStoreModel) => state.user.usersData
-  // );
   const createUser = useStoreActions(
-    (actions: Actions<AppStoreModel>) => actions.user.createUser
+    (actions: Actions<AppStoreModel>) => actions.user.create
   );
 
   const onSubmit: SubmitHandler<UserData> = async (values) => {
     const response = await createUser(values);
     if (response?.success) {
-      window.alert(t("user.createUser.alert.success"));
+      // window.alert(t("user.createUser.alert.success"));
       navigate("/users/authenticate");
     } else {
-      window.alert(t("user.createUser.alert.error"));
+      setIsErrorCreate(true);
     }
-    reset();
+    // reset();//
   };
 
   return (
@@ -104,6 +100,14 @@ const CreateUser: FC = () => {
                   {errors.password?.message}
                 </Form.Control.Feedback>
               </Col>
+              {isErrorCreate && (
+                // <Form.Control.Feedback>
+                //   {t("user.createUser.alert.error")}
+                // </Form.Control.Feedback>
+                <p className="text-danger small mt-2">
+                  {t("user.createUser.alert.error")}
+                </p>
+              )}
             </Form.Group>
             <div className="text-center mt-5">
               <Button

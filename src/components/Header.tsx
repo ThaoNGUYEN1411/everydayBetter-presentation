@@ -1,18 +1,16 @@
-import { FC } from "react";
+import { FC, useEffect } from "react";
 import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
 import { Link, NavLink } from "react-router-dom";
-import { getToken } from "../utils/Token";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { useStoreState } from "easy-peasy";
+import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
 
 const Header: FC = () => {
-  const token = getToken();
-  const userData = useStoreState(
-    (state: AppStoreModel) => state.user.usersData
+  const authInfo = useStoreState((state: AppStoreModel) => state.user.authInfo);
+  const logout = useStoreActions(
+    (actions: Actions<AppStoreModel>) => actions.user.logout
   );
-  console.log("header", userData);
 
   return (
     <Navbar collapseOnSelect expand="lg" className="wrapper-header">
@@ -27,7 +25,7 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            <p>{userData[0]?.nickname}</p>
+            {/* <p>{userData[0]?.nickname}</p> */}
             <NavLink to="/" className="nav-link">
               Fonctionnalités
             </NavLink>
@@ -37,19 +35,36 @@ const Header: FC = () => {
             <NavDropdown title="En savoir plus" id="nav-dropdown">
               <NavDropdown.Item eventKey="4.1">Témoignages</NavDropdown.Item>
               <NavDropdown.Item eventKey="4.2">Contact</NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.3">FQA</NavDropdown.Item>
+              {/* <NavDropdown.Item eventKey="4.3">FQA</NavDropdown.Item> */}
             </NavDropdown>
           </Nav>
-          {token ? (
-            <Link
-              to={"/activities"}
-              className="text-decoration-none text-black"
+          {authInfo ? (
+            <NavDropdown
+              title={
+                <span>
+                  <FontAwesomeIcon icon={faUser} /> {authInfo?.nickname}
+                </span>
+              }
+              id="nav-dropdown"
             >
-              <span className="px-2">
-                <FontAwesomeIcon icon={faUser} />
-              </span>
-              User name
-            </Link>
+              <NavDropdown.Item eventKey="4.1">
+                <NavLink to="/activities" className="nav-link">
+                  Compte
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="4.2">
+                <NavLink
+                  to="/"
+                  onClick={() => {
+                    //e.preventDefault(); // Empêche le rechargement immédiat
+                    logout();
+                  }}
+                  className="nav-link"
+                >
+                  Logout
+                </NavLink>
+              </NavDropdown.Item>
+            </NavDropdown>
           ) : (
             <Nav className="d-lg-flex justify-content-end">
               <Link to={"/users/authenticate"}>

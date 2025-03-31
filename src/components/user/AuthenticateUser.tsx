@@ -17,31 +17,19 @@ const UserAuthenticate: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
   const authenticateUser = useStoreActions(
-    (actions: Actions<AppStoreModel>) => actions.user.authenticateUser
+    (actions: Actions<AppStoreModel>) => actions.user.authenticate
   );
   const onSubmit: SubmitHandler<UserData> = async (values) => {
-    //   // Sauvegarder le token uniquement si le serveur ne le met pas en cookie
-    //   //The cookie will expire in 3600 seconds (1 hour)
-    //   document.cookie = `token=${data.token}; Path=/; Secure; Max-Age=3600`;
-    //   window.alert(t("user.userAuthenticate.alert.success"));
-    //   navigate("/activities");
-    // } catch (error) {
-    //   window.alert(t("user.userAuthenticate.alert.error"));
-    // }
     const response = await authenticateUser(values);
     if (response?.success) {
-      window.alert(t("user.userAuthenticate.alert.success"));
+      // window.alert(t("user.userAuthenticate.alert.success"));
       navigate("/activities");
+      console.log(document.cookie.toString);
     } else {
       window.alert(t("user.userAuthenticate.alert.error"));
     }
     console.log(response);
   };
-
-  // useEffect(() => {
-  //   const subscription = watch((values) => null);
-  //   return () => subscription.unsubscribe();
-  // }, [watch]);
 
   return (
     <div className="page d-flex justify-content-center mt-5">
@@ -120,3 +108,12 @@ const UserAuthenticate: FC = () => {
 };
 
 export default UserAuthenticate;
+
+//   // Sauvegarder le token uniquement si le serveur ne le met pas en cookie
+//   //The cookie will expire in 3600 seconds (1 hour)
+//   document.cookie = `token=${data.token}; Path=/; Secure; Max-Age=3600`;
+//   window.alert(t("user.userAuthenticate.alert.success"));
+//   navigate("/activities");
+// } catch (error) {
+//   window.alert(t("user.userAuthenticate.alert.error"));
+// }
