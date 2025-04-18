@@ -3,13 +3,10 @@ import { FC, useEffect, useState } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import DetailActivity from "../components/DetailActivity";
-import { getToken } from "../utils/Token";
 import CreateActivityModal from "../components/CreateActivityModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import CalendarTable from "../components/ActivityCalender";
-import { useStoreActions, useStoreState } from "easy-peasy";
-import { Todo, TodoModel } from "../store/todos.model";
 
 export interface ActivityModel {
   id: number;
@@ -38,27 +35,14 @@ const ActivitiesPage: FC = () => {
 
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-  const todos = useStoreState((state: TodoModel) => state.todos);
-  console.log(todos.todos);
-
-  // const { todos } = useStoreState((state) => state.todos);
-  const addTodo = useStoreActions<TodoModel>((actions) => actions.addTodo);
-  // const { addTodo } = useStoreActions(
-  //   (actions: Action<StoreModel>) => actions.addTodo
-  // );
 
   const fetchActivities = async () => {
     try {
-      const token = getToken();
-      console.log(token);
+      // const token = getToken();
+      // console.log(token);
 
       const response = await axios.get<ActivityModel[]>(
-        "http://localhost:8080/activities",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        "http://localhost:8080/activities"
       );
       setActivitiesList(response.data);
     } catch (error) {
@@ -66,43 +50,26 @@ const ActivitiesPage: FC = () => {
     }
   };
 
-  // Fetch Categories
-  const fetchCategories = async () => {
-    try {
-      const token = getToken();
-      const response = await axios.get<CategoryModel[]>(
-        "http://localhost:8080/categories/",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  // const fetchCategories = async () => {
+  //   try {
+  //     const token = getToken();
+  //     const response = await axios.get<CategoryModel[]>(
+  //       "http://localhost:8080/categories/"
+  //     );
 
-      setCategories(response.data);
-    } catch (error) {
-      console.log("Error fetching activities", error);
-    }
-  };
+  //     setCategories(response.data);
+  //   } catch (error) {
+  //     console.log("Error fetching activities", error);
+  //   }
+  // };
 
   // Load Data on Component Mount
   useEffect(() => {
     fetchActivities();
-    fetchCategories();
   }, []);
 
   return (
     <div className="grid wide page">
-      {/* <button
-        onClick={() => addTodo({ text: "learning something that you like" })}
-      >
-        Add todo
-      </button>
-      <ul>
-        {todos.todos.map((todo, index) => (
-          <li key={index}>{todo.text}</li>
-        ))}
-      </ul> */}
       <div className="d-flex justify-content-between w-100">
         <h1 className="mt-5 mb-3">{t("activity.list.title")}</h1>
         <div>

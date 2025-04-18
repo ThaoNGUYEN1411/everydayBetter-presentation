@@ -100,15 +100,12 @@ const CreateUser: FC = () => {
                   {errors.password?.message}
                 </Form.Control.Feedback>
               </Col>
-              {isErrorCreate && (
-                // <Form.Control.Feedback>
-                //   {t("user.createUser.alert.error")}
-                // </Form.Control.Feedback>
-                <p className="text-danger small mt-2">
-                  {t("user.createUser.alert.error")}
-                </p>
-              )}
             </Form.Group>
+            {isErrorCreate && (
+              <p className="text-danger small mt-2">
+                {t("user.createUser.alert.error")}
+              </p>
+            )}
             <div className="text-center mt-5">
               <Button
                 variant="info"

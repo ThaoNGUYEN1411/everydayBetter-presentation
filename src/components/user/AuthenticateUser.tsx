@@ -1,6 +1,5 @@
-import axios from "axios";
-import { Action, Actions, useStoreActions } from "easy-peasy";
-import { FC } from "react";
+import { Actions, useStoreActions } from "easy-peasy";
+import { FC, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -9,6 +8,7 @@ import { AppStoreModel } from "../../store";
 import { UserData } from "../../store/user.model";
 
 const UserAuthenticate: FC = () => {
+  const [isErrorCreate, setIsErrorCreate] = useState(false);
   const {
     formState: { errors },
     handleSubmit,
@@ -22,11 +22,9 @@ const UserAuthenticate: FC = () => {
   const onSubmit: SubmitHandler<UserData> = async (values) => {
     const response = await authenticateUser(values);
     if (response?.success) {
-      // window.alert(t("user.userAuthenticate.alert.success"));
       navigate("/activities");
-      console.log(document.cookie.toString);
     } else {
-      window.alert(t("user.userAuthenticate.alert.error"));
+      setIsErrorCreate(true);
     }
     console.log(response);
   };
@@ -90,6 +88,11 @@ const UserAuthenticate: FC = () => {
                 </Form.Control.Feedback>
               </Col>
             </Form.Group>
+            {isErrorCreate && (
+              <p className="text-danger small mt-2">
+                {t("user.userAuthenticate.alert.error")}
+              </p>
+            )}
             <div className="text-center mt-5">
               <Button
                 variant="info"
