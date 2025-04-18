@@ -61,7 +61,8 @@
 			"title": "Password",
 			"placeholder": "Enter your password",
 			"errors_message": "Password is required",
-			"minLength_message": "Password must be at least 6 characters long."
+			"invalid_message": "Please choose a password containing at least 8 characters, including an uppercase letter, a lowercase letter, a digit, and a special character (@$!%*?&)",
+			"incorrect": "Incorrect password"
 		}
 	}
 }

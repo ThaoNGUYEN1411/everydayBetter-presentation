@@ -1,9 +1,12 @@
 import axios from "axios";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { getToken } from "../utils/Token";
+import { Action, Actions, useStoreActions, useStoreState } from "easy-peasy";
+import { ReferentialDataModel } from "../store/referentialData";
+import { AppStoreModel } from "../store";
 
 export interface ActivityModel {
   name: string;
@@ -31,6 +34,16 @@ const CreateActivityModal: FC<Props> = ({
   refreshActivities,
 }) => {
   const { t } = useTranslation();
+  const { categoryList } = useStoreState((state: any) => state.referentialData);
+
+  const { getAllCategoryList } = useStoreActions(
+    (actions: Actions<AppStoreModel>) => actions.referentialData
+  );
+
+  // Load Data on Component Mount
+  useEffect(() => {
+    getAllCategoryList();
+  }, [show]);
 
   const {
     formState: { errors },
@@ -187,23 +200,26 @@ const CreateActivityModal: FC<Props> = ({
           )}
 
           <Form.Group className="mb-4 mt-4">
-            <Form.Label>
+            <Form.Label for="category">
               {t("activity.modal_create_activity.category.title")}
             </Form.Label>
             <Form.Select
+              id="category"
               {...register("categoryIds")}
               onChange={handleCategoryChange}
+              //value={CreateActivityModalFormDraft?.categoryName ?? ""}
+              // onChange={(e) => {
+              //   updateCategory(e.target.value);
+              // }}
             >
               <option value="">
                 {t("activity.modal_create_activity.category.placeholder")}
               </option>
-              {categories.map((category) => {
-                return (
-                  <option key={category.id} value={category.id}>
-                    {category.name}
-                  </option>
-                );
-              })}
+              {categoryList.map((category: any) => (
+                <option key={category.id} value={category.id}>
+                  {category.name}
+                </option>
+              ))}
             </Form.Select>
           </Form.Group>
           <div className="text-center">
@@ -241,3 +257,5 @@ export default CreateActivityModal;
 // - need to update form fields programmatically
 // - When you're loading initial data into a form.
 // - When handling dynamic form inputs (e.g., checkboxes, dropdowns).
+//!!!!! for="category" id: important for input=> not validate if not know that
+//?? what is differente Actions<AppStoreModel> and Action

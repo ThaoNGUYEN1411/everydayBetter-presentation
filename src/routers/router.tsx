@@ -26,7 +26,7 @@ const router = createBrowserRouter([
         path: "users/create",
         lazy: async () => {
           const { default: CreateUserPage } = await import(
-            "../pages/CreateUserPage"
+            "../components/user/CreateUser"
           );
           return { Component: CreateUserPage };
         },
@@ -35,7 +35,7 @@ const router = createBrowserRouter([
         path: "/users/authenticate",
         lazy: async () => {
           const { default: UserAuthenticatePage } = await import(
-            "../pages/UserAuthenticatePage"
+            "../components/user/AuthenticateUser"
           );
           return { Component: UserAuthenticatePage };
         },

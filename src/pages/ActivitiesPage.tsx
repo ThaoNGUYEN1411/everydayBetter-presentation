@@ -3,7 +3,6 @@ import { FC, useEffect, useState } from "react";
 import { Button, Col, Row, Table } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import DetailActivity from "../components/DetailActivity";
-import { getToken } from "../utils/Token";
 import CreateActivityModal from "../components/CreateActivityModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
@@ -37,17 +36,13 @@ const ActivitiesPage: FC = () => {
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
 
-  // Fetch Activities
   const fetchActivities = async () => {
     try {
-      const token = getToken();
+      // const token = getToken();
+      // console.log(token);
+
       const response = await axios.get<ActivityModel[]>(
-        "http://localhost:8080/activities",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
+        "http://localhost:8080/activities"
       );
       setActivitiesList(response.data);
     } catch (error) {
@@ -55,29 +50,22 @@ const ActivitiesPage: FC = () => {
     }
   };
 
-  // Fetch Categories
-  const fetchCategories = async () => {
-    try {
-      const token = getToken();
-      const response = await axios.get<CategoryModel[]>(
-        "http://localhost:8080/categories/",
-        {
-          headers: {
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
+  // const fetchCategories = async () => {
+  //   try {
+  //     const token = getToken();
+  //     const response = await axios.get<CategoryModel[]>(
+  //       "http://localhost:8080/categories/"
+  //     );
 
-      setCategories(response.data);
-    } catch (error) {
-      console.log("Error fetching activities", error);
-    }
-  };
+  //     setCategories(response.data);
+  //   } catch (error) {
+  //     console.log("Error fetching activities", error);
+  //   }
+  // };
 
   // Load Data on Component Mount
   useEffect(() => {
     fetchActivities();
-    fetchCategories();
   }, []);
 
   return (
@@ -109,7 +97,7 @@ const ActivitiesPage: FC = () => {
               {/* change here */}
               <Table className="list-activities" striped hover>
                 <thead className="text-center">
-                  <h3 className="mb-3">Activités</h3>
+                  {/* <h3 className="mb-3">Activités</h3> */}
                 </thead>
                 <tbody>
                   {activitiesList.map((activity) => {
