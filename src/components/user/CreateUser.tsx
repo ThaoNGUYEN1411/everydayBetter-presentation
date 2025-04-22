@@ -23,7 +23,6 @@ const CreateUser: FC = () => {
   const onSubmit: SubmitHandler<UserData> = async (values) => {
     const response = await createUser(values);
     if (response?.success) {
-      // window.alert(t("user.createUser.alert.success"));
       navigate("/users/authenticate");
     } else {
       setIsErrorCreate(true);
