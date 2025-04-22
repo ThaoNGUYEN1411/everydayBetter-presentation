@@ -22,7 +22,10 @@ export const referentialDataModel: ReferentialDataModel = {
     if (getState().categoryList.length === 0) {
       try {
         const response = await axios.get("http://localhost:8080/categories", {
-          withCredentials: true,
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, //add the cookies if server send Set-Cookie
         });
         console.log(response.data);
 

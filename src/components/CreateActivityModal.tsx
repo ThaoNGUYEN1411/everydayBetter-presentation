@@ -3,96 +3,100 @@ import { FC, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { getToken } from "../utils/Token";
-import { Action, Actions, useStoreActions, useStoreState } from "easy-peasy";
-import { ReferentialDataModel } from "../store/referentialData";
+import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
-
-export interface ActivityModel {
-  name: string;
-  description: string;
-  positive: boolean;
-  categoryIds: number[];
-}
-
-export interface CategoryModel {
-  id: number;
-  name: string;
-}
+import { ActivityModel, CreateActivity } from "../store/activity.model";
 
 interface Props {
   show: boolean;
   handleClose: () => void;
-  categories: CategoryModel[];
   refreshActivities: () => void;
 }
 
 const CreateActivityModal: FC<Props> = ({
   show,
   handleClose,
-  categories,
   refreshActivities,
 }) => {
   const { t } = useTranslation();
   const { categoryList } = useStoreState((state: any) => state.referentialData);
-
   const { getAllCategoryList } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.referentialData
   );
-
+  const { createActivityFormDraft } = useStoreState(
+    (state: any) => state.activity
+  );
+  const { setCreateActivityFormDraft, create } = useStoreActions(
+    (actions: Actions<AppStoreModel>) => actions.activity
+  );
   // Load Data on Component Mount
   useEffect(() => {
     getAllCategoryList();
   }, [show]);
 
+  const updateCategory = (categoryName: string) => {
+    const category = categoryList.find(
+      (category: any) => category.name === categoryName
+    );
+    setCreateActivityFormDraft({
+      ...createActivityFormDraft,
+      categoryId: category?.id ?? null,
+    });
+  };
   const {
     formState: { errors },
     handleSubmit,
     register,
     setValue,
     reset,
-  } = useForm<ActivityModel>();
+  } = useForm<CreateActivity>();
 
   const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
 
   const [loading, setLoading] = useState<boolean>(false);
 
-  const handleCategoryChange = (
-    event: React.ChangeEvent<HTMLSelectElement>
-  ) => {
-    const selectedValue = Number(event.target.value);
+  // const handleCategoryChange = (
+  //   event: React.ChangeEvent<HTMLSelectElement>
+  // ) => {
+  //   const selectedValue = Number(event.target.value);
 
-    setSelectedCategories((prev) => {
-      const isAlreadySelected = prev.includes(selectedValue);
-      const updatedCategories = isAlreadySelected
-        ? prev.filter((id) => id !== selectedValue) // Supprime si déjà sélectionné
-        : [...prev, selectedValue]; // Ajoute sinon
+  //   setSelectedCategories((prev) => {
+  //     const isAlreadySelected = prev.includes(selectedValue);
+  //     const updatedCategories = isAlreadySelected
+  //       ? prev.filter((id) => id !== selectedValue) // Supprime si déjà sélectionné
+  //       : [...prev, selectedValue]; // Ajoute sinon
 
-      setValue("categoryIds", updatedCategories); // Met à jour React Hook Form
-      return updatedCategories;
-    });
-  };
+  //     setValue("categoryId", updatedCategories); // Met à jour React Hook Form
+  //     return updatedCategories;
+  //   });
+  // };
 
-  const onSubmit: SubmitHandler<ActivityModel> = async (values) => {
-    const token = getToken();
-    setLoading(true); // Active loading
-
-    try {
-      await axios.post("http://localhost:8080/activities/", values, {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      });
-      reset();
-      handleClose(); // Close modal
-      refreshActivities(); // Refresh list
-      alert(t("activity.modal_create_activity.alert.success"));
-    } catch (error) {
-      alert(t("activity.modal_create_activity.alert.error"));
-    } finally {
-      setLoading(false); // Disable loading mode
+  const onSubmit: SubmitHandler<CreateActivity> = async (values) => {
+    // setLoading(true); // Active loading
+    console.log(values);
+    setCreateActivityFormDraft({ ...values });
+    const response = await create(values);
+    if (response?.success) {
+      console.log("ok");
+    } else {
+      console.log("error");
     }
+    // try {
+    //   await axios.post("http://localhost:8080/activities/", values, {
+    //     headers: {
+    //       "Content-Type": "application/json",
+    //     },
+    //   });
+    //   reset();
+    //   handleClose(); // Close modal
+    //   refreshActivities(); // Refresh list
+    //   alert(t("activity.modal_create_activity.alert.success"));
+    // } catch (error) {
+    //   alert(t("activity.modal_create_activity.alert.error"));
+    // } finally {
+    //   setLoading(false); // Disable loading mode
+    // }
+    setLoading(false); // Active loading
   };
 
   return (
@@ -105,9 +109,9 @@ const CreateActivityModal: FC<Props> = ({
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="mx-5 mb-5">
-        <Form className="" onSubmit={handleSubmit(onSubmit)}>
+        <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-4">
-            <Form.Label>
+            <Form.Label for="title" className="mandatory">
               {t("activity.modal_create_activity.input_name.title")}
             </Form.Label>
             <Form.Control
@@ -115,6 +119,7 @@ const CreateActivityModal: FC<Props> = ({
               placeholder={t(
                 "activity.modal_create_activity.input_name.placeholder"
               )}
+              id="title"
               {...register("name", {
                 required: {
                   value: true,
@@ -148,7 +153,7 @@ const CreateActivityModal: FC<Props> = ({
             </Form.Control.Feedback>
           </Form.Group>
 
-          <Form.Label className="mb-4">
+          <Form.Label className="mb-4 mandatory">
             {t("activity.modal_create_activity.type.title")}
           </Form.Label>
           <div>
@@ -157,6 +162,7 @@ const CreateActivityModal: FC<Props> = ({
               label={t("activity.modal_create_activity.type.positive")}
               type="radio"
               value="true"
+              // onChange={}
               {...register("positive", {
                 required: t(
                   "activity.modal_create_activity.type.errors_message"
@@ -180,37 +186,15 @@ const CreateActivityModal: FC<Props> = ({
               </Form.Text>
             )}
           </div>
-          {/* Selected Categories Display */}
-          {selectedCategories.length > 0 && (
-            <div className="mb-2 mt-4">
-              <strong>
-                {t(
-                  "activity.modal_create_activity.category.selected_categories"
-                )}
-                :
-              </strong>
-              <div>
-                {selectedCategories.map((id) => (
-                  <span key={id} className="badge bg-primary me-2">
-                    {categories.find((cat) => cat.id === id)?.name}
-                  </span>
-                ))}
-              </div>
-            </div>
-          )}
-
           <Form.Group className="mb-4 mt-4">
-            <Form.Label for="category">
+            <Form.Label for="category" className="mandatory">
               {t("activity.modal_create_activity.category.title")}
             </Form.Label>
             <Form.Select
               id="category"
-              {...register("categoryIds")}
-              onChange={handleCategoryChange}
-              //value={CreateActivityModalFormDraft?.categoryName ?? ""}
-              // onChange={(e) => {
-              //   updateCategory(e.target.value);
-              // }}
+              {...register("categoryId")}
+              onChange={(e) => updateCategory(e.target.value)}
+              // value={createActivityFormDraft?.categoryName ?? ""}
             >
               <option value="">
                 {t("activity.modal_create_activity.category.placeholder")}
@@ -228,7 +212,7 @@ const CreateActivityModal: FC<Props> = ({
               type="submit"
               size="lg"
               className="px-5"
-              disabled={loading}
+              // disabled={loading}
             >
               {t("activity.modal_create_activity.btn")}
             </Button>
@@ -259,3 +243,4 @@ export default CreateActivityModal;
 // - When handling dynamic form inputs (e.g., checkboxes, dropdowns).
 //!!!!! for="category" id: important for input=> not validate if not know that
 //?? what is differente Actions<AppStoreModel> and Action
+// error: () => qqch or ()=>{return qqch}

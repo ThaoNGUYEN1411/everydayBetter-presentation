@@ -120,3 +120,7 @@ export default UserAuthenticate;
 // } catch (error) {
 //   window.alert(t("user.userAuthenticate.alert.error"));
 // }
+//useStoreState : hook Easy Peasy pour lire des données depuis le store.
+// useStoreActions : hook Easy Peasy pour appeler une action.
+
+// actions.counter.increase : va chercher l’action increase dans le module counter.
