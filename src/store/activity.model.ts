@@ -14,40 +14,39 @@ export class CreateActivity {
   }
 }
 
-export interface ActivityInfo {
+export interface ActivityDto {
   id: number;
-  createActivity: CreateActivity;
+  name: string;
+  positive: boolean;
+}
+
+export interface CurrentActivityDetail {
+  id: number;
+  name: string;
+  description: string;
+  categoryId: number;
+  categoryName: string;
 }
 
 //définit le type du modèle (les données + les actions).
 export interface ActivityModel {
-  activityInfo: ActivityInfo | null;
-  initialActivityInfo: ActivityInfo | null;
-  createActivityFormDraft: CreateActivity;
-
-  setActivityInfo: Action<ActivityModel, ActivityInfo | null>;
-  setCreateActivityFormDraft: Action<ActivityModel, CreateActivity>;
   create: Thunk<ActivityModel, CreateActivity>;
+  activityList: ActivityDto[];
+  setActivityList: Action<ActivityModel, ActivityDto[]>;
+  getAllActivityList: Thunk<ActivityModel>;
+  deleteActivity: Thunk<ActivityModel, string>;
+  removeActivityFromList: Action<ActivityModel, string>;
+  currentActivityDetail: CurrentActivityDetail | null;
+  setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
+  getCurrentActivityDetail: Thunk<ActivityModel, string>;
 }
 
 //contient l'état initial et l’action (permet de modifier le state.)
 export const activityModel: ActivityModel = {
-  activityInfo: null,
-  initialActivityInfo: null,
-  createActivityFormDraft: new CreateActivity(),
-
-  setActivityInfo: action((state, activityInfo) => {
-    state.activityInfo = activityInfo;
-  }),
-
-  setCreateActivityFormDraft: action((state, createActivityFormDraft) => {
-    state.createActivityFormDraft = createActivityFormDraft;
-  }),
-
   create: thunk(async (_, createActivityForm) => {
     try {
       const response = await axios.post(
-        "http://localhost:8080/activities/",
+        "http://localhost:8080/activities",
         createActivityForm, // Pas besoin de JSON.stringify, axios le fait tout seul
         {
           headers: {
@@ -56,10 +55,58 @@ export const activityModel: ActivityModel = {
           withCredentials: true, // important pour envoyer le cookie JWT
         }
       );
-
       console.log("Activité créée avec succès :", response.data); // facultatif
     } catch (error) {
       console.error("Erreur lors de la création d'activité :", error);
     }
   }),
+  activityList: [],
+  setActivityList: action((state, activityList) => {
+    state.activityList = activityList;
+  }),
+  getAllActivityList: thunk(async (actions, _payload) => {
+    try {
+      const response = await axios.get("http://localhost:8080/activities", {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true, //add the cookies if server send Set-Cookie
+      });
+      console.log(response.data);
+      actions.setActivityList(response.data);
+    } catch (error) {
+      console.log("error get activityList");
+    }
+  }),
+  deleteActivity: thunk(async (actions, id) => {
+    console.log("test", id);
+    const response = await axios.delete(
+      `http://localhost:8080/activities/${id}`,
+      { withCredentials: true }
+    );
+    actions.setCurrentActivityDetail(null);
+  }),
+  removeActivityFromList: action((state, id) => {
+    state.activityList = state.activityList.filter(
+      (activity) => activity.id !== Number(id)
+    );
+  }),
+  setCurrentActivityDetail: action((state, currentActivityModel) => {
+    state.currentActivityDetail = currentActivityModel;
+  }),
+  getCurrentActivityDetail: thunk(async (actions, id) => {
+    try {
+      const response = await axios.get(
+        `http://localhost:8080/activities/${id}`,
+        {
+          withCredentials: true, //add the cookies if server send Set-Cookie
+        }
+      );
+      console.log(response.data);
+      actions.setCurrentActivityDetail(response.data);
+    } catch (error) {
+      console.log("error get activityList");
+    }
+  }),
+  currentActivityDetail: null,
 };

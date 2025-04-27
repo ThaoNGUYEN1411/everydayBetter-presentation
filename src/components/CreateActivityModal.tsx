@@ -1,11 +1,10 @@
-import axios from "axios";
 import { FC, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
-import { ActivityModel, CreateActivity } from "../store/activity.model";
+import { CreateActivity } from "../store/activity.model";
 
 interface Props {
   show: boolean;
@@ -23,10 +22,7 @@ const CreateActivityModal: FC<Props> = ({
   const { getAllCategoryList } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.referentialData
   );
-  const { createActivityFormDraft } = useStoreState(
-    (state: any) => state.activity
-  );
-  const { setCreateActivityFormDraft, create } = useStoreActions(
+  const { create } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.activity
   );
   // Load Data on Component Mount
@@ -34,15 +30,6 @@ const CreateActivityModal: FC<Props> = ({
     getAllCategoryList();
   }, [show]);
 
-  const updateCategory = (categoryName: string) => {
-    const category = categoryList.find(
-      (category: any) => category.name === categoryName
-    );
-    setCreateActivityFormDraft({
-      ...createActivityFormDraft,
-      categoryId: category?.id ?? null,
-    });
-  };
   const {
     formState: { errors },
     handleSubmit,
@@ -51,45 +38,16 @@ const CreateActivityModal: FC<Props> = ({
     reset,
   } = useForm<CreateActivity>();
 
-  const [selectedCategories, setSelectedCategories] = useState<number[]>([]);
-
   const [loading, setLoading] = useState<boolean>(false);
-
-  // const handleCategoryChange = (
-  //   event: React.ChangeEvent<HTMLSelectElement>
-  // ) => {
-  //   const selectedValue = Number(event.target.value);
-
-  //   setSelectedCategories((prev) => {
-  //     const isAlreadySelected = prev.includes(selectedValue);
-  //     const updatedCategories = isAlreadySelected
-  //       ? prev.filter((id) => id !== selectedValue) // Supprime si déjà sélectionné
-  //       : [...prev, selectedValue]; // Ajoute sinon
-
-  //     setValue("categoryId", updatedCategories); // Met à jour React Hook Form
-  //     return updatedCategories;
-  //   });
-  // };
 
   const onSubmit: SubmitHandler<CreateActivity> = async (values) => {
     // setLoading(true); // Active loading
     console.log(values);
-    setCreateActivityFormDraft({ ...values });
+    // setCreateActivityFormDraft({ ...values });
     const response = await create(values);
-    if (response?.success) {
-      console.log("ok");
-    } else {
-      console.log("error");
-    }
-    // try {
-    //   await axios.post("http://localhost:8080/activities/", values, {
-    //     headers: {
-    //       "Content-Type": "application/json",
-    //     },
-    //   });
-    //   reset();
-    //   handleClose(); // Close modal
-    //   refreshActivities(); // Refresh list
+    reset();
+    handleClose(); // Close modal
+    refreshActivities(); // Refresh list
     //   alert(t("activity.modal_create_activity.alert.success"));
     // } catch (error) {
     //   alert(t("activity.modal_create_activity.alert.error"));
@@ -159,10 +117,14 @@ const CreateActivityModal: FC<Props> = ({
           <div>
             <Form.Check
               inline
-              label={t("activity.modal_create_activity.type.positive")}
+              id="positive-radio"
+              label={
+                <label htmlFor="positive-radio">
+                  {t("activity.modal_create_activity.type.positive")}
+                </label>
+              }
               type="radio"
               value="true"
-              // onChange={}
               {...register("positive", {
                 required: t(
                   "activity.modal_create_activity.type.errors_message"
@@ -171,7 +133,12 @@ const CreateActivityModal: FC<Props> = ({
             />
             <Form.Check
               inline
-              label={t("activity.modal_create_activity.type.negative")}
+              id="negative-radio"
+              label={
+                <label htmlFor="negative-radio">
+                  {t("activity.modal_create_activity.type.negative")}
+                </label>
+              }
               type="radio"
               value="false"
               {...register("positive", {
@@ -190,12 +157,7 @@ const CreateActivityModal: FC<Props> = ({
             <Form.Label for="category" className="mandatory">
               {t("activity.modal_create_activity.category.title")}
             </Form.Label>
-            <Form.Select
-              id="category"
-              {...register("categoryId")}
-              onChange={(e) => updateCategory(e.target.value)}
-              // value={createActivityFormDraft?.categoryName ?? ""}
-            >
+            <Form.Select id="category" {...register("categoryId")}>
               <option value="">
                 {t("activity.modal_create_activity.category.placeholder")}
               </option>
