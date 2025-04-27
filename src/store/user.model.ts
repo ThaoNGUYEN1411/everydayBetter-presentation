@@ -83,15 +83,11 @@ export const userModel: UserModel = {
       //The cookie will expire in 3600 seconds (1 hour)
       // document.cookie = `token=${response.request.token}; Path=/; Secure; Max-Age=3600`;
 
-      if (response.status === 201) {
-        actions.setAuthInfo(response.data);
-        console.log(response.data);
+      actions.setAuthInfo(response.data);
+      console.log(response.data);
 
-        actions.setCurrentUser(payload); //  Store the user
-        return { success: true, data: response.data }; // Return success response
-      } else {
-        return { success: false };
-      }
+      actions.setCurrentUser(payload); //  Store the user
+      return { success: true, data: response.data }; // Return success response
     } catch (error) {
       console.error("Error creating user:", error);
       return { success: false };

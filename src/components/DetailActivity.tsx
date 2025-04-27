@@ -1,49 +1,22 @@
-import axios from "axios";
-import { FC, useEffect, useState } from "react";
+import { Actions, useStoreActions, useStoreState } from "easy-peasy";
+import { FC, useEffect } from "react";
 import { Button, Card } from "react-bootstrap";
-import { getToken } from "../utils/Token";
-
-interface DetailActivityModel {
-  id: number;
-  name: string;
-  description: string;
-  categoriesId: string;
-}
+import { AppStoreModel } from "../store";
+import { faHandPointRight, faStar } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const DetailActivity: FC<{ id?: string }> = ({ id }) => {
-  const [activity, setActivity] = useState<DetailActivityModel>();
-  const deleteOneActivity = async (id: string) => {
-    const token = getToken();
+  const currentActivityDetail = useStoreState(
+    (state: any) => state.activity.currentActivityDetail
+  );
+  const { deleteActivity, removeActivityFromList, getCurrentActivityDetail } =
+    useStoreActions((state: Actions<AppStoreModel>) => state.activity);
 
-    const response = await axios.delete(
-      `http://localhost:8080/activities/${id}`,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          Authorization: `Bearer ${token}`,
-        },
-      }
-    );
-
-    //console.log("delete one activity");
-  };
   useEffect(() => {
     const getActivityById = async (id: string) => {
-      const token = getToken();
-
-      const response = await axios.get(
-        `http://localhost:8080/activities/${id}`,
-        {
-          headers: {
-            "Content-Type": "application/json",
-            Authorization: `Bearer ${token}`,
-          },
-        }
-      );
-      console.log(response.data);
-
-      setActivity(response.data);
+      getCurrentActivityDetail(id);
     };
+    console.log(currentActivityDetail);
 
     id && getActivityById(id);
   }, [id]);
@@ -55,21 +28,41 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
           <Card.Title className="display-6 weight-300">
             Détail de l'activité
           </Card.Title>
-
-          <h2 className="mb-2">{activity?.name}</h2>
-          <Card.Text>{activity?.description}</Card.Text>
-          <p>{activity?.categoriesId}</p>
-
+          {currentActivityDetail && (
+            <div>
+              <h2 className="mb-2">
+                <FontAwesomeIcon icon={faStar} color="green" className="me-2" />
+                {currentActivityDetail?.name}
+              </h2>
+              <Card.Text>
+                <p>
+                  <FontAwesomeIcon
+                    icon={faHandPointRight}
+                    color="green"
+                    className="me-2"
+                  />
+                  {currentActivityDetail?.description}
+                </p>
+              </Card.Text>
+              <p>
+                <span>Positive: </span>
+                {currentActivityDetail?.positive === true ? "true" : "false"}
+              </p>
+              <p>
+                <span>Category: </span>
+                {currentActivityDetail?.category.name}
+              </p>
+            </div>
+          )}
           <div>
             <Card.Link href="#">
-              {" "}
               <Button
                 variant="primary"
                 type="submit"
                 size="lg"
                 className="px-5"
                 onClick={() => {
-                  id && deleteOneActivity(id);
+                  id && deleteActivity(id) && removeActivityFromList(id);
                 }}
               >
                 Delete
