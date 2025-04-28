@@ -5,7 +5,12 @@ import { AppStoreModel } from "../store";
 import { faHandPointRight, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-const DetailActivity: FC<{ id?: string }> = ({ id }) => {
+interface Props {
+  id?: string;
+  show: boolean;
+  // isUpdate: boolean;
+}
+const DetailActivity: FC<Props> = ({ id, show }) => {
   const currentActivityDetail = useStoreState(
     (state: any) => state.activity.currentActivityDetail
   );
@@ -21,6 +26,10 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
     id && getActivityById(id);
   }, [id]);
 
+  const updateActivity = () => {
+    show = true;
+    console.log(id);
+  };
   return (
     <div className="card-detail px-5">
       <Card className="p-4">
@@ -74,6 +83,7 @@ const DetailActivity: FC<{ id?: string }> = ({ id }) => {
                 type="submit"
                 size="lg"
                 className="px-5"
+                onClick={() => updateActivity()}
               >
                 Modifier
               </Button>

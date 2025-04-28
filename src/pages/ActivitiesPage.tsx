@@ -22,7 +22,7 @@ const ActivitiesPage: FC = () => {
   );
   const handleClose = () => setShow(false);
   const handleShow = () => setShow(true);
-
+  // const isUpdate = false;
   // Load Data on Component Mount
   useEffect(() => {
     getAllActivityList();
@@ -47,6 +47,7 @@ const ActivitiesPage: FC = () => {
           show={show}
           handleClose={handleClose}
           refreshActivities={() => getAllActivityList()}
+          // isUpdate={isUpdate}
         />
       </div>
       <Row className="wh-80">
@@ -95,7 +96,7 @@ const ActivitiesPage: FC = () => {
           </Row>
         </Col>
         <Col md={4} className="xs-display-none">
-          {activityId && <DetailActivity id={activityId} />}
+          {activityId && <DetailActivity id={activityId} show={show} />}
         </Col>
       </Row>
     </div>

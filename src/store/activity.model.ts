@@ -28,6 +28,11 @@ export interface CurrentActivityDetail {
   categoryName: string;
 }
 
+export interface updateActivity {
+  id: string;
+  activity: CreateActivity;
+}
+
 //définit le type du modèle (les données + les actions).
 export interface ActivityModel {
   create: Thunk<ActivityModel, CreateActivity>;
@@ -39,6 +44,7 @@ export interface ActivityModel {
   currentActivityDetail: CurrentActivityDetail | null;
   setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
   getCurrentActivityDetail: Thunk<ActivityModel, string>;
+  updateActivity: Thunk<ActivityModel, updateActivity>;
 }
 
 //contient l'état initial et l’action (permet de modifier le state.)
@@ -109,4 +115,20 @@ export const activityModel: ActivityModel = {
     }
   }),
   currentActivityDetail: null,
+  updateActivity: thunk(async (action, payload) => {
+    try {
+      const response = await axios.put(
+        `http://localhost:8080/activities/${payload.id}`,
+        payload.activity, // Pas besoin de JSON.stringify, axios le fait tout seul
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+          withCredentials: true, // important pour envoyer le cookie JWT
+        }
+      );
+    } catch (error) {
+      console.log("update activity");
+    }
+  }),
 };

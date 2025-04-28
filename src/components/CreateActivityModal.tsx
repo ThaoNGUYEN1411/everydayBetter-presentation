@@ -10,12 +10,14 @@ interface Props {
   show: boolean;
   handleClose: () => void;
   refreshActivities: () => void;
+  // isUpdate: boolean;
 }
 
 const CreateActivityModal: FC<Props> = ({
   show,
   handleClose,
   refreshActivities,
+  // isUpdate,
 }) => {
   const { t } = useTranslation();
   const { categoryList } = useStoreState((state: any) => state.referentialData);
@@ -25,10 +27,14 @@ const CreateActivityModal: FC<Props> = ({
   const { create } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.activity
   );
+  // const { currentActivityDetail } = useStoreState(
+  //   (state: any) => state.activity
+  // );
   // Load Data on Component Mount
   useEffect(() => {
     getAllCategoryList();
   }, [show]);
+  console.log(show);
 
   const {
     formState: { errors },
@@ -56,6 +62,17 @@ const CreateActivityModal: FC<Props> = ({
     // }
     setLoading(false); // Active loading
   };
+
+  // const prefillForm = async () => {
+  //   if (currentActivityDetail) {
+  //     reset(currentActivityDetail);
+  //   }
+  // };
+
+  // if (isUpdate) {
+  //   prefillForm();
+  // }
+  console.log("show", show);
 
   return (
     <Modal show={show} onHide={handleClose} className="p-5">
