@@ -8,13 +8,14 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import CalendarTable from "../components/ActivityCalender";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
+import TrackingRecord from "../components/TrackingRecord";
 
 const ActivitiesPage: FC = () => {
   const { t } = useTranslation();
   const [activityId, setActivityId] = useState<string | null>(null);
   const [show, setShow] = useState(false);
   const { activityList } = useStoreState((state: any) => {
-    typeof state;
+    // typeof state;
     return state.activity;
   });
   const { getAllActivityList } = useStoreActions(
@@ -94,6 +95,7 @@ const ActivitiesPage: FC = () => {
               </Col>
             )}
           </Row>
+          <TrackingRecord />
         </Col>
         <Col md={4} className="xs-display-none">
           {activityId && <DetailActivity id={activityId} show={show} />}

@@ -5,7 +5,7 @@ import { I18nextProvider } from "react-i18next";
 import i18next from "./locales/i18n.ts";
 import { StoreProvider } from "easy-peasy";
 import { store } from "./store/index.ts";
-// rome-ignore lint/style/noNonNullAssertion: <explanation>
+
 createRoot(document.getElementById("root")!).render(
   <StrictMode>
     <StoreProvider store={store}>
