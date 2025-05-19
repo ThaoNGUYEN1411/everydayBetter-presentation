@@ -1,5 +1,6 @@
 import { createBrowserRouter } from "react-router-dom";
 import RootLayout from "../layouts/RootLayout";
+import Loading from "../components/Loading";
 
 const router = createBrowserRouter([
   {
@@ -32,12 +33,19 @@ const router = createBrowserRouter([
         },
       },
       {
-        path: "/users/authenticate",
+        path: "users/authenticate",
         lazy: async () => {
           const { default: UserAuthenticatePage } = await import(
             "../components/user/AuthenticateUser"
           );
           return { Component: UserAuthenticatePage };
+        },
+      },
+      {
+        path: "test",
+        lazy: async () => {
+          const { default: Test } = await import("../pages/Test");
+          return { Component: Test };
         },
       },
     ],

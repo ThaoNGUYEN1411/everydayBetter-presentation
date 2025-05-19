@@ -5,13 +5,23 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
-
+//todo: logout ne marche pas>
 const Header: FC = () => {
   const authInfo = useStoreState((state: AppStoreModel) => state.user.authInfo);
   const logout = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.user.logout
   );
+  // const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
+  // const userLogout = () => {
+  //   console.log("log out1");
+  //   localStorage.removeItem("nickname");
+  //   Cookies;
+  //   logout();
 
+  //   console.log("log out2");
+  // };
+  // console.log() document.cookie
+  useEffect(() => {}, [authInfo?.nickname]);
   return (
     <Navbar collapseOnSelect expand="lg" className="wrapper-header">
       <Container className="grid wide">
@@ -38,11 +48,13 @@ const Header: FC = () => {
               {/* <NavDropdown.Item eventKey="4.3">FQA</NavDropdown.Item> */}
             </NavDropdown>
           </Nav>
-          {authInfo ? (
+          {localStorage.getItem("nickname") ? (
             <NavDropdown
               title={
                 <span>
-                  <FontAwesomeIcon icon={faUser} /> {authInfo?.nickname}
+                  {/* <FontAwesomeIcon icon={faUser} /> {authInfo?.nickname} */}
+                  <FontAwesomeIcon icon={faUser} className="me-2" />
+                  {localStorage.getItem("nickname")}
                 </span>
               }
               id="nav-dropdown"
