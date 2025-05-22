@@ -191,10 +191,3 @@ footer {
     transform: rotate(360deg);
   }
 }
-.eye-icon {
-  top: "50%";
-  padding-inline-start: 1rem;
-  transform: "translateY(-50%)";
-  cursor: "pointer";
-  color: "green";
-}

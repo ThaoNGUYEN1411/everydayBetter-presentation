@@ -1,6 +1,4 @@
-import axios from "axios";
 import { action, Action, Thunk, thunk } from "easy-peasy";
-import { callApi } from "../services/http/http.service";
 
 type ResponseStatus = "success" | "server_error" | "error_400" | undefined;
 //interface stoke data
@@ -58,106 +56,53 @@ export const userModel: UserModel = {
   setEmailError: action((state, emailError) => {
     state.emailError = emailError;
   }),
-  create: thunk(async (actions, payload) => {
-    const result = await callApi({
-      method: "post",
-      url: "/users/create",
-      data: payload,
-    });
-    if (result.error === "server_error") {
-      actions.setResponseStatus("server_error");
-    } else if (Array.isArray(result.error)) {
-      actions.setResponseStatus("error_400");
-      result.error.forEach((e) => {
-        if (e.field === "email" && e.code === "UniqueEmail") {
-          actions.setEmailError("UniqueEmail");
-        }
-        //can add else if to handle other type error here
-      });
-    } else {
-      // Success
-      actions.setResponseStatus("success");
-      actions.setCurrentUser(payload);
-    }
-    // console.log(result);
-    // if (result.error) {
-    //   if (result.error === "server_error") {
-    //     actions.setResponseStatus("server_error");
-    //   } else {
-    //     actions.setResponseStatus("error_400");
-    //     if (
-    //       result.error?.code === "UniqueEmail" &&
-    //       result.error?.field === "email"
-    //     ) {
-    //       actions.setEmailError("UniqueEmail");
-    //     }
-    //   }
-    // } else {
-    //   actions.setCurrentUser(payload);
-    //   console.log("Success:", result.data);
-    // }
-
-    // const { api } = getStoreActions();
-    // const { data, error } = await api.callApi({
-    //   method: "post",
-    //   url: "/users/create",
-    //   data: payload,
-    //   errorMap: {
-    //     EMAIL_EXISTS: "email_exists",
-    //   },
-    // });
-    // if (error) {
-    //   api.setResponseStatus({ type: error });
-    // } else {
-    //   actions.setCurrentUser(payload);
-    //   // actions.setCurrentUser(data);
-    // }
-    // try {
-    //   await axios
-    //     .post(`${VITE_API_URL}/users/create`, payload)
-    //     .then((res) => {
-    //       actions.setCurrentUser(payload);
-    //       console.log("res :>> ", res);
-    //       // actions.setResponseStatus("success");
-    //     })
-    //     .catch((err) => {
-    //       if (err.response.status == 400) {
-    //         // actions.setResponseStatus("error_400");
-    //       }
-    //       console.log(err);
-    //     });
-    // } catch (error) {
-    //   // actions.setResponseStatus("server_error");
-    //   console.log(error);
-    // }
+  create: thunk(async (actions, payload, { injections }) => {
+    const { httpService } = injections;
+    const response: any = await httpService.post(
+      `/users/create`,
+      payload,
+      { withCredentials: true } //add the cookies
+    );
+    actions.setAuthInfo(response);
+    localStorage.setItem("nickname", response.nickname);
+    actions.setCurrentUser(payload); //  Store the user
   }),
-  authenticate: thunk(async (actions, payload) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/users/authenticate",
-        JSON.stringify(payload),
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, //add the cookies if server send Set-Cookie
-        }
-      );
-      // Sauvegarder le token uniquement si le serveur ne le met pas en cookie
-      //The cookie will expire in 3600 seconds (1 hour)
-      // document.cookie = `token=${response.request.token}; Path=/; Secure; Max-Age=3600`;
-
-      actions.setAuthInfo(response.data);
-      localStorage.setItem("nickname", response.data.nickname);
-      console.log(response.data);
-
-      actions.setCurrentUser(payload); //  Store the user
-      return { success: true, data: response.data }; // Return success response
-    } catch (error) {
-      console.error("Error creating user:", error);
-      return { success: false };
-    }
+  // create: thunk(async (actions, payload) => {
+  //   const result = await callApi({
+  //     method: "post",
+  //     url: "/users/create",
+  //     data: payload,
+  //   });
+  //   if (result.error === "server_error") {
+  //     actions.setResponseStatus("server_error");
+  //   } else if (Array.isArray(result.error)) {
+  //     actions.setResponseStatus("error_400");
+  //     result.error.forEach((e) => {
+  //       if (e.field === "email" && e.code === "UniqueEmail") {
+  //         actions.setEmailError("UniqueEmail");
+  //       }
+  //       //can add handle other type error here
+  //     });
+  //   } else {
+  //     actions.setResponseStatus("success");
+  //     actions.setCurrentUser(payload);
+  //   }
+  // }),
+  authenticate: thunk(async (actions, payload, { injections }) => {
+    const { httpService } = injections;
+    const response: AuthInfo = await httpService.post(
+      `/users/authenticate`,
+      payload,
+      { withCredentials: true } //add the cookies if server send Set-Cookie
+    );
+    actions.setAuthInfo(response);
+    localStorage.setItem("nickname", response.nickname);
+    actions.setCurrentUser(payload); //  Store the user
   }),
+
+  // Sauvegarder le token uniquement si le serveur ne le met pas en cookie
+  // The cookie will expire in 3600 seconds (1 hour)
+  // document.cookie = `token=${response.request.token}; Path=/; Secure; Max-Age=3600`;
 
   logout: thunk(async (actions, _payload) => {
     try {

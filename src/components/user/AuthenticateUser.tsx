@@ -8,7 +8,7 @@ import { AppStoreModel } from "../../store";
 import { UserData } from "../../store/user.model";
 
 const UserAuthenticate: FC = () => {
-  const [isErrorCreate, setIsErrorCreate] = useState(false);
+  const [isError, setIsError] = useState(false);
   const {
     formState: { errors },
     handleSubmit,
@@ -20,13 +20,12 @@ const UserAuthenticate: FC = () => {
     (actions: Actions<AppStoreModel>) => actions.user.authenticate
   );
   const onSubmit: SubmitHandler<UserData> = async (values) => {
-    const response = await authenticateUser(values);
-    if (response?.success) {
+    try {
+      await authenticateUser(values);
       navigate("/activities");
-    } else {
-      setIsErrorCreate(true);
+    } catch (error) {
+      setIsError(true);
     }
-    console.log(response);
   };
 
   return (
@@ -88,7 +87,7 @@ const UserAuthenticate: FC = () => {
                 </Form.Control.Feedback>
               </Col>
             </Form.Group>
-            {isErrorCreate && (
+            {isError && (
               <p className="text-danger small mt-2">
                 {t("user.userAuthenticate.alert.error")}
               </p>

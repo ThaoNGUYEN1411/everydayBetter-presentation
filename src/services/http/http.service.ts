@@ -1,112 +1,59 @@
-// import axios, { AxiosRequestConfig } from "axios";
-// import { Action, Thunk, action, thunk } from "easy-peasy";
+import axios, { AxiosRequestConfig } from "axios";
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-import axios from "axios";
+export class HttpService {
+  defaultConfig = {
+    headers: {
+      "Content-Type": "application/json",
+    },
+  };
 
-// interface ApiResponseStatus {
-//   type: string;
-// }
+  async get<T>(url: string, axiosConfig?: AxiosRequestConfig): Promise<T> {
+    return await axios
+      .get(`${VITE_API_URL}${url}`, {
+        ...this.defaultConfig,
+        ...axiosConfig,
+      })
+      .then((axiosResponse) => {
+        return axiosResponse.data as T;
+      });
+  }
 
-// export interface ApiModel {
-//   responseStatus: ApiResponseStatus | null;
-//   setResponseStatus: Action<ApiModel, ApiResponseStatus | null>;
+  async post<T>(
+    url: string,
+    body: unknown,
+    axiosConfig?: AxiosRequestConfig
+  ): Promise<T> {
+    console.log(`${VITE_API_URL}${url}`);
 
-//   callApi: Thunk<
-//     ApiModel,
-//     {
-//       method: "get" | "post" | "put" | "patch" | "delete";
-//       url: string;
-//       data?: any;
-//       config?: AxiosRequestConfig;
-//       errorMap?: Record<string, string>;
-//       onSuccess?: (res: any) => void;
-//     }
-//   >;
-// }
+    return await axios
+      .post(`${VITE_API_URL}${url}`, JSON.stringify(body), {
+        ...this.defaultConfig,
+        ...axiosConfig,
+      })
+      .then((axiosResponse) => {
+        return axiosResponse.data as T;
+      });
+  }
 
-// export const apiModel: ApiModel = {
-//   responseStatus: null,
+  async patch<T>(
+    url: string,
+    body: unknown,
+    axiosConfig?: AxiosRequestConfig
+  ): Promise<T> {
+    return await axios
+      .patch(`${VITE_API_URL}${url}`, JSON.stringify(body), {
+        ...this.defaultConfig,
+        ...axiosConfig,
+      })
+      .then((axiosResponse) => {
+        return axiosResponse.data as T;
+      });
+  }
 
-//   setResponseStatus: action((state, payload) => {
-//     state.responseStatus = payload;
-//   }),
-
-//   callApi: thunk(
-//     async (actions, { method, url, data, config, errorMap, onSuccess }) => {
-//       url = VITE_API_URL + url;
-//       try {
-//         const response = await axios({
-//           method,
-//           url,
-//           data,
-//           ...config,
-//         });
-
-//         actions.setResponseStatus({ type: "success" });
-//         if (onSuccess) onSuccess(response.data);
-//       } catch (err: any) {
-//         const code = err.response?.data?.code || "unknown";
-//         const errorType = errorMap?.[code] || "unknown";
-//         actions.setResponseStatus({ type: errorType });
-//         // console.error(`[API ERROR - ${method.toUpperCase()} ${url}]`, err);
-//       }
-//     }
-//   ),
-// };
-
-type ApiErrorDetail = {
-  code: string;
-  field?: string;
-  message: string;
-};
-
-type CallApiResult<T> = {
-  data: T | null;
-  error: ApiErrorDetail[] | "server_error" | null;
-};
-export async function callApi<T>({
-  method,
-  url,
-  data,
-}: {
-  method: "get" | "post" | "put" | "delete";
-  url: string;
-  data?: any;
-}): Promise<CallApiResult<T>> {
-  url = VITE_API_URL + url;
-  try {
-    const res = await axios({ method, url, data });
-    return { data: res.data, error: null };
-  } catch (err: any) {
-    const res = err.response;
-    if (res.status === 400 && Array.isArray(res.data?.errors)) {
-      return { data: null, error: res.data.errors };
-    }
-    return { data: null, error: "server_error" };
+  async delete<T>(url: string): Promise<T> {
+    return await axios.delete(`${VITE_API_URL}${url}`).then((axiosResponse) => {
+      return axiosResponse.data;
+    });
   }
 }
-
-// export async function callApi({
-//   method,
-//   url,
-//   data,
-// }: {
-//   method: "get" | "post" | "put" | "delete";
-//   url: string;
-//   data?: any;
-// }) {
-//   url = VITE_API_URL + url;
-//   try {
-//     const res = await axios({ method, url, data });
-//     return { data: res.data, error: null };
-//   } catch (err: any) {
-//     console.log(err);
-//     const res = err.response;
-//     if (res.status === 400 && Array.isArray(res.data?.errors)) {
-//       return { data: null, error: err.response?.data?.errors };
-//       // err.response?.data?.errors;
-//     }
-//     return { data: null, error: "server_error" };
-//   }
-// }
