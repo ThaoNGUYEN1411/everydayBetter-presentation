@@ -24,8 +24,6 @@ export class HttpService {
     body: unknown,
     axiosConfig?: AxiosRequestConfig
   ): Promise<T> {
-    console.log(`${VITE_API_URL}${url}`);
-
     return await axios
       .post(`${VITE_API_URL}${url}`, JSON.stringify(body), {
         ...this.defaultConfig,

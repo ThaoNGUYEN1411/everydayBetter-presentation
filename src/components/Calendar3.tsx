@@ -1,10 +1,8 @@
-import { useStoreState } from "easy-peasy";
 import { useState } from "react";
 import { Button, ButtonGroup, DropdownButton } from "react-bootstrap";
 //1.list activities to track
 const activities = ["Faire du sport", "Apprendre anglais"];
 
-// console.log(activityList);
 //2. define the structure of the tracking data: here’s a map of dates to a boolean indicating whether the activity was done on that date
 
 type ActivityData = {
@@ -51,7 +49,6 @@ export default function ActivityTracker() {
         [dateStr]: !prev[activity]?.[dateStr],
       },
     }));
-    // console.log(data);
     console.log(activity, dateStr, done);
   };
 

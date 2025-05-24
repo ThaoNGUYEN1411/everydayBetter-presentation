@@ -32,6 +32,11 @@ export interface updateActivity {
   id: string;
   activity: CreateActivity;
 }
+export interface TrackActivityData {
+  activityId: string;
+  trackedDate: string;
+  done: boolean | null;
+}
 
 //définit le type du modèle (les données + les actions).
 export interface ActivityModel {
@@ -45,6 +50,7 @@ export interface ActivityModel {
   setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
   getCurrentActivityDetail: Thunk<ActivityModel, string>;
   updateActivity: Thunk<ActivityModel, updateActivity>;
+  saveTrackingRecord: Thunk<ActivityModel | TrackActivityData>;
 }
 
 //contient l'état initial et l’action (permet de modifier le state.)
@@ -130,5 +136,13 @@ export const activityModel: ActivityModel = {
     } catch (error) {
       console.log("update activity");
     }
+  }),
+  saveTrackingRecord: thunk(async (action, payload, { injections }) => {
+    const { httpService } = injections;
+    const response: any = await httpService.post(
+      `/tracking-record/create`,
+      payload,
+      { withCredentials: true }
+    );
   }),
 };

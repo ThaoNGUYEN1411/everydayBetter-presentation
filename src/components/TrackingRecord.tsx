@@ -2,6 +2,10 @@ import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { FC, useEffect, useState } from "react";
 import { Button, ButtonGroup, DropdownButton, Table } from "react-bootstrap";
 import { AppStoreModel } from "../store";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faBan } from "@fortawesome/free-solid-svg-icons";
+import { format, parse } from "date-fns";
+
 //3. display the current week in the table header
 const getWeekDates = (startDate: Date): Date[] => {
   const dates: Date[] = [];
@@ -12,19 +16,21 @@ const getWeekDates = (startDate: Date): Date[] => {
   }
   return dates;
 };
-
-type ActivityData = {
-  activityId: string;
-  trackedDate: string;
-  done: boolean | null;
+const formattedDate = (value: string) => {
+  return format(new Date(value), "yyyy-MM-dd");
 };
+// type TrackActivityData = {
+//   activityId: string;
+//   trackedDate: string;
+//   done: boolean | null;
+// };
 
 const TrackingRecord: FC = () => {
-  const { activityList } = useStoreState((state: any) => {
+  const { activityList, TrackActivityData } = useStoreState((state: any) => {
     // typeof state;
     return state.activity;
   });
-  const { getAllActivityList } = useStoreActions(
+  const { getAllActivityList, saveTrackingRecord } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.activity
   );
   //todo: start monday
@@ -34,8 +40,10 @@ const TrackingRecord: FC = () => {
     d.setDate(d.getDate() - day); // Commencer au dimanche
     return d;
   });
-  const [activityData, SetActivityData] = useState<ActivityData>(() => {
-    const initialData: ActivityData = {
+  const [trackActivityData, setTrackActivityData] = useState<
+    typeof TrackActivityData
+  >(() => {
+    const initialData = {
       activityId: "",
       trackedDate: "",
       done: null,
@@ -49,16 +57,26 @@ const TrackingRecord: FC = () => {
     setStartDate(newStart);
   };
 
-  const toggle = (activityId: string, dateStr: string, done: boolean) => {
-    SetActivityData((prev) => ({
+  const toggle = async (
+    activityId: string,
+    dateStr: string,
+    done: boolean | null
+  ) => {
+    setTrackActivityData((prev: typeof TrackActivityData) => ({
       ...prev,
-      activityId: activityId,
-      trackedDate: dateStr,
+      activityId: activityId.toString(),
+      trackedDate: formattedDate(dateStr),
       done: done,
     }));
     // console.log(data);
-    console.log(activityData);
+    try {
+      await saveTrackingRecord(trackActivityData);
+      console.log("save track ok");
+    } catch (error) {
+      console.log("error track:>> ", error);
+    }
   };
+  console.log(trackActivityData);
 
   useEffect(() => {
     getAllActivityList();
@@ -101,7 +119,7 @@ const TrackingRecord: FC = () => {
                     // onClick={() => toggle(activity, dateStr)}
                   >
                     {/* {checked ? "✔" : "✘"} */}
-                    <ButtonGroup>
+                    <ButtonGroup size="lg">
                       <DropdownButton
                         as={ButtonGroup}
                         title=" "
@@ -112,18 +130,27 @@ const TrackingRecord: FC = () => {
                       >
                         <Button
                           value="true"
+                          onClick={() => toggle(activity.id, dateStr, null)}
+                          className="mx-2"
+                        >
+                          <FontAwesomeIcon icon={faBan} />
+                        </Button>
+                        <Button
+                          value="true"
                           onClick={() => toggle(activity.id, dateStr, true)}
+                          className="me-2"
                         >
                           ✔
                         </Button>
                         <Button
                           value="false"
                           onClick={() => toggle(activity.id, dateStr, true)}
+                          className="me-2"
                         >
                           ✘
                         </Button>
                       </DropdownButton>
-                    </ButtonGroup>{" "}
+                    </ButtonGroup>
                   </td>
                 );
               })}

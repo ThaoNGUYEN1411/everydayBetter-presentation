@@ -34,7 +34,7 @@ const CreateActivityModal: FC<Props> = ({
   useEffect(() => {
     getAllCategoryList();
   }, [show]);
-  console.log(show);
+  // console.log(show);
 
   const {
     formState: { errors },
@@ -48,7 +48,7 @@ const CreateActivityModal: FC<Props> = ({
 
   const onSubmit: SubmitHandler<CreateActivity> = async (values) => {
     // setLoading(true); // Active loading
-    console.log(values);
+    // console.log(values);
     // setCreateActivityFormDraft({ ...values });
     const response = await create(values);
     reset();
@@ -72,7 +72,7 @@ const CreateActivityModal: FC<Props> = ({
   // if (isUpdate) {
   //   prefillForm();
   // }
-  console.log("show", show);
+  // console.log("show", show);
 
   return (
     <Modal show={show} onHide={handleClose} className="p-5">
