@@ -27,7 +27,6 @@ export const referentialDataModel: ReferentialDataModel = {
           },
           withCredentials: true, //add the cookies if server send Set-Cookie
         });
-        console.log(response.data);
 
         actions.setCategoryList(response.data);
       } catch {

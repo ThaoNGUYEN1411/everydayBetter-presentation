@@ -5,7 +5,7 @@ import DetailActivity from "../components/DetailActivity";
 import CreateActivityModal from "../components/CreateActivityModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
-import CalendarTable from "../components/ActivityCalender";
+// import CalendarTable from "../components/ActivityCalender";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
 import TrackingRecord from "../components/TrackingRecord";
@@ -61,39 +61,46 @@ const ActivitiesPage: FC = () => {
                 <tbody>
                   {activityList.map((activity: any) => {
                     return (
-                      <div>
-                        <tr>
-                          <td className="border border-gray-300 px-4 py-2 activity-line">
-                            <div
-                              key={activity.id}
-                              onClick={() =>
-                                setActivityId(activity.id.toString())
-                              }
-                              className="w-10"
-                            >
-                              <span className="me-3 small">
-                                {activity.positive ? (
-                                  <FontAwesomeIcon icon={faCheck} />
-                                ) : (
-                                  <FontAwesomeIcon icon={faXmark} />
-                                )}
-                              </span>
-                              {activity.name}
-                            </div>
-                          </td>
-                        </tr>
-                      </div>
+                      <tr key={activity.id}>
+                        <td
+                          className="border border-gray-300 px-4 py-2 activity-line"
+                          key={activity.id}
+                        >
+                          <div
+                            key={activity.id}
+                            onClick={() =>
+                              setActivityId(activity.id.toString())
+                            }
+                            className="w-10"
+                          >
+                            <span className="me-3 small" key={activity.id}>
+                              {activity.positive ? (
+                                <FontAwesomeIcon
+                                  icon={faCheck}
+                                  key={activity.id}
+                                />
+                              ) : (
+                                <FontAwesomeIcon
+                                  icon={faXmark}
+                                  key={activity.id}
+                                />
+                              )}
+                            </span>
+                            {activity.name}
+                          </div>
+                        </td>
+                      </tr>
                     );
                   })}
                 </tbody>
               </Table>
               {/* end change here */}
             </Col>
-            {activityList?.length > 0 && (
-              <Col xs={8}>
-                <CalendarTable lineNumber={activityList?.length.toString()} />
-              </Col>
-            )}
+            {/* {activityList?.length > 0 && (
+              <Col xs={8}> */}
+            {/* <CalendarTable lineNumber={activityList?.length.toString()} /> */}
+            {/* </Col> */}
+            {/* )} */}
           </Row>
           <TrackingRecord />
         </Col>

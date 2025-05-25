@@ -191,3 +191,7 @@ footer {
     transform: rotate(360deg);
   }
 }
+.no-caret .dropdown-toggle::after {
+  display: none !important;
+  color: gray;
+}
