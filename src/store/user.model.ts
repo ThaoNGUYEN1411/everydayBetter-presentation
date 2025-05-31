@@ -61,11 +61,11 @@ export const userModel: UserModel = {
     const { httpService } = injections;
     const response: any = await httpService.post(
       `/users/create`,
-      payload,
-      { withCredentials: true } //add the cookies
+      payload
+      // { withCredentials: true } //add the cookies
     );
     actions.setAuthInfo(response);
-    localStorage.setItem("nickname", response.nickname);
+    // localStorage.setItem("nickname", response.nickname);
     actions.setCurrentUser(payload); //  Store the user
   }),
   // create: thunk(async (actions, payload) => {
@@ -106,10 +106,11 @@ export const userModel: UserModel = {
   // document.cookie = `token=${response.request.token}; Path=/; Secure; Max-Age=3600`;
 
   logout: thunk(async (actions, _payload) => {
+    localStorage.removeItem("nickname");
     try {
       const response = await axios.post(
         "http://localhost:8080/users/logout",
-        {}, // <- corps vide
+        {}, // corps vide
         {
           headers: {
             "Content-Type": "application/json",
@@ -117,16 +118,11 @@ export const userModel: UserModel = {
           withCredentials: true,
         }
       );
-      console.log(response.data);
 
-      console.log("logout");
       if (response.status === 201) {
-        console.log("logout successful");
         //Reset user data
         actions.setCurrentUser(null); // Reset currentUser
         actions.setAuthInfo(null);
-        console.log("log out3");
-        localStorage.removeItem("nickname");
         return { success: true, data: response.data };
       } else {
         return { success: false };

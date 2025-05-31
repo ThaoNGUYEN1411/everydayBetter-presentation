@@ -30,6 +30,13 @@ const DetailActivity: FC<Props> = ({ id, show }) => {
     show = true;
     console.log(id);
   };
+
+  const callDeleteActivity = async (id: any) => {
+    try {
+      await deleteActivity(id);
+      removeActivityFromList(id);
+    } catch (error) {}
+  };
   return (
     <div className="card-detail px-5">
       <Card className="p-4">
@@ -71,7 +78,7 @@ const DetailActivity: FC<Props> = ({ id, show }) => {
                 size="lg"
                 className="px-5"
                 onClick={() => {
-                  id && deleteActivity(id) && removeActivityFromList(id);
+                  callDeleteActivity(id);
                 }}
               >
                 Delete

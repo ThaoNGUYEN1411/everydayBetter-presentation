@@ -8,7 +8,7 @@ import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 // import CalendarTable from "../components/ActivityCalender";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
-import TrackingRecord from "../components/TrackingRecord";
+import TrackingRecord from "../components/TrackingLog";
 
 const ActivitiesPage: FC = () => {
   const { t } = useTranslation();
@@ -52,10 +52,9 @@ const ActivitiesPage: FC = () => {
         />
       </div>
       <Row className="wh-80">
-        <Col md={8} className="bg-light mt-4">
+        {/* <Col md={8} className="bg-light mt-4">
           <Row>
             <Col xs={4} className="mt-5">
-              {/* change here */}
               <Table className="list-activities" striped hover>
                 <thead className="text-center"></thead>
                 <tbody>
@@ -94,19 +93,14 @@ const ActivitiesPage: FC = () => {
                   })}
                 </tbody>
               </Table>
-              {/* end change here */}
             </Col>
-            {/* {activityList?.length > 0 && (
-              <Col xs={8}> */}
-            {/* <CalendarTable lineNumber={activityList?.length.toString()} /> */}
-            {/* </Col> */}
-            {/* )} */}
+        
           </Row>
-          <TrackingRecord />
-        </Col>
-        <Col md={4} className="xs-display-none">
-          {activityId && <DetailActivity id={activityId} show={show} />}
-        </Col>
+        </Col> */}
+        {/* <Col md={4} className="xs-display-none">
+          {activityId && <DetailActivity id={activityId} />}
+        </Col> */}
+        <TrackingRecord />
       </Row>
     </div>
   );
