@@ -86,7 +86,7 @@ const CreateActivityModal: FC<Props> = ({
       <Modal.Body className="mx-5 mb-5">
         <Form onSubmit={handleSubmit(onSubmit)}>
           <Form.Group className="mb-4">
-            <Form.Label for="title" className="mandatory">
+            <Form.Label htmlFor="title" className="mandatory">
               {t("activity.modal_create_activity.input_name.title")}
             </Form.Label>
             <Form.Control
@@ -111,7 +111,7 @@ const CreateActivityModal: FC<Props> = ({
           </Form.Group>
 
           <Form.Group className="mb-3">
-            <Form.Label>
+            <Form.Label htmlFor="description">
               {t("activity.modal_create_activity.description.title")}
             </Form.Label>
             <Form.Control
@@ -122,6 +122,7 @@ const CreateActivityModal: FC<Props> = ({
               )}
               {...register("description", { maxLength: 1000 })}
               isInvalid={!!errors.description}
+              id="description"
             />
             <Form.Control.Feedback>
               {errors.description?.message}
@@ -171,7 +172,7 @@ const CreateActivityModal: FC<Props> = ({
             )}
           </div>
           <Form.Group className="mb-4 mt-4">
-            <Form.Label for="category" className="mandatory">
+            <Form.Label htmlFor="category" className="mandatory">
               {t("activity.modal_create_activity.category.title")}
             </Form.Label>
             <Form.Select id="category" {...register("categoryId")}>
