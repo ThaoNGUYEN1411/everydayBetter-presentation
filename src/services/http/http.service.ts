@@ -49,6 +49,21 @@ export class HttpService {
       });
   }
 
+  async put<T>(
+    url: string,
+    body: unknown,
+    axiosConfig?: AxiosRequestConfig
+  ): Promise<T> {
+    return await axios
+      .put(`${VITE_API_URL}${url}`, JSON.stringify(body), {
+        ...this.defaultConfig,
+        ...axiosConfig,
+      })
+      .then((axiosResponse) => {
+        return axiosResponse.data as T;
+      });
+  }
+
   async delete<T>(url: string): Promise<T> {
     return await axios.delete(`${VITE_API_URL}${url}`).then((axiosResponse) => {
       return axiosResponse.data;

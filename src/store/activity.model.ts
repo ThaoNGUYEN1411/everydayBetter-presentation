@@ -29,10 +29,10 @@ export interface CurrentActivityDetail {
   categoryName: string;
 }
 
-// export interface updateActivity {
-//   id: string;
-//   activity: CreateActivity;
-// }
+export interface updateActivityData {
+  id: string;
+  activity: CreateActivity;
+}
 
 export interface TrackActivityData {
   activityId: string;
@@ -63,7 +63,7 @@ export interface ActivityModel {
   currentActivityDetail: CurrentActivityDetail | null;
   setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
   getCurrentActivityDetail: Thunk<ActivityModel, string>;
-  // updateActivity: Thunk<ActivityModel, updateActivity>;
+  updateActivity: Thunk<ActivityModel, updateActivityData, any>;
   createTrackingLog: Thunk<ActivityModel, TrackActivityData, any, any>;
   getAllActivityTrackingLog: Thunk<
     ActivityModel,
@@ -71,7 +71,6 @@ export interface ActivityModel {
   >;
   updateTrackingLog: Thunk<ActivityModel, TrackActivityData, any, any>;
   deleteTrackingLog: Thunk<ActivityModel, { id: string }, any>;
-  // handleShow: Action<ActivityModel, { show: boolean }>;
 }
 
 //contient l'état initial et l’action (permet de modifier le state.)
@@ -144,58 +143,34 @@ export const activityModel: ActivityModel = {
     }
   }),
   currentActivityDetail: null,
-  // updateActivity: thunk(async (action, payload, { injections }) => {
-  //   const { httpService } = injections;
-  //   try {
-  //     const response = await axios.put(
-  //       `http://localhost:8080/activities/${payload.id}`,
-  //       payload.activity,
-  //       {
-  //         headers: {
-  //           "Content-Type": "application/json",
-  //         },
-  //         withCredentials: true,
-  //       }
-  //     );
-  //   } catch (error) {
-  //     console.log("update activity");
-  //   }
-  // }),
-  createTrackingLog: thunk(
-    async (action, payload, { getState, injections }) => {
-      const { httpService } = injections;
+  updateActivity: thunk(async (_action, payload, { injections }) => {
+    console.log("call update");
+    console.log(payload);
+    console.log(`/activities/${payload.id}`);
+    const { httpService } = injections;
+    try {
+      const response: any = await httpService.put(
+        `/activities/${payload.id}`,
+        payload.activity,
+        {
+          withCredentials: true,
+        }
+      );
 
-      const response: any = await httpService.post(`/tracking-logs/`, payload, {
-        withCredentials: true,
-      });
+      // action.setCurrentActivityDetail(response);
+    } catch (error) {
+      console.log(error);
 
-      //   const { activityId, trackedDate, done } = response;
-
-      //   const currentList = getState().activityTrackingLogList;
-
-      //   const updatedList = currentList.map((item) => {
-      //     if (item.activityId === activityId) {
-      //       const updatedLogs = item.listTrackingLog.map((log) => {
-      //         if (log.date === trackedDate) {
-      //           return {
-      //             ...log,
-      //             done: done,
-      //           };
-      //         }
-      //         return log;
-      //       });
-
-      //       return {
-      //         ...item,
-      //         listTrackingLog: updatedLogs,
-      //       };
-      //     }
-      //     return item;
-      //   });
-
-      //   action.setActivityTrackingLogList(updatedList);
+      console.log("update activity error");
     }
-  ),
+  }),
+  createTrackingLog: thunk(async (_action, payload, { injections }) => {
+    const { httpService } = injections;
+
+    const response: any = await httpService.post(`/tracking-logs/`, payload, {
+      withCredentials: true,
+    });
+  }),
   getAllActivityTrackingLog: thunk(
     async (action, { startDate, endDate }, { injections }) => {
       const { httpService } = injections;

@@ -125,8 +125,8 @@ const TrackingLog: FC = () => {
     }
   };
   return (
-    <Row>
-      <Col md={8}>
+    <Row className="shadow-lg border-0">
+      <Col md={8} className="p-2">
         <div className="container mt-4">
           <div className="d-flex justify-content-between mt-5 mb-2">
             <button onClick={() => handleWeekChange("prev")}>⬅️</button>
@@ -292,9 +292,7 @@ const TrackingLog: FC = () => {
         </div>
       </Col>
       <Col md={4} className="xs-display-none">
-        {activityDetailId && (
-          <DetailActivity id={activityDetailId} show={false} />
-        )}
+        {activityDetailId && <DetailActivity id={activityDetailId} />}
       </Col>
     </Row>
   );

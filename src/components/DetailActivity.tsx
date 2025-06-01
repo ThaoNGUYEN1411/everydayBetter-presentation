@@ -1,75 +1,85 @@
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
-import { FC, useEffect } from "react";
-import { Button, Card } from "react-bootstrap";
+import { FC, useEffect, useState } from "react";
+import { Button, Card, Col, Row } from "react-bootstrap";
 import { AppStoreModel } from "../store";
 import { faHandPointRight, faStar } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 interface Props {
   id?: string;
-  show: boolean;
-  // isUpdate: boolean;
 }
-const DetailActivity: FC<Props> = ({ id, show }) => {
+
+const DetailActivity: FC<Props> = ({ id }) => {
   const currentActivityDetail = useStoreState(
     (state: any) => state.activity.currentActivityDetail
   );
+
   const { deleteActivity, removeActivityFromList, getCurrentActivityDetail } =
     useStoreActions((state: Actions<AppStoreModel>) => state.activity);
 
-  useEffect(() => {
-    const getActivityById = async (id: string) => {
-      getCurrentActivityDetail(id);
-    };
-    console.log(currentActivityDetail);
+  const setIsModalOpen = useStoreActions(
+    (action: Actions<AppStoreModel>) => action.ui.setIsModalOpen
+  );
+  const setModeModal = useStoreActions(
+    (action: Actions<AppStoreModel>) => action.ui.setModeModal
+  );
+  const [confirmDelete, setConfirmDelete] = useState(false);
 
-    id && getActivityById(id);
+  useEffect(() => {
+    if (id) {
+      getCurrentActivityDetail(id);
+    }
   }, [id]);
 
   const updateActivity = () => {
-    show = true;
-    console.log(id);
+    setModeModal("update");
+    setIsModalOpen(true);
   };
 
   const callDeleteActivity = async (id: any) => {
     try {
       await deleteActivity(id);
-      removeActivityFromList(id);
-    } catch (error) {}
+      // removeActivityFromList(id);
+    } catch (error) {
+      console.log("error delete activity");
+    }
   };
+
   return (
-    <div className="card-detail px-5">
-      <Card className="p-4">
-        <Card.Body>
-          <Card.Title className="display-6 weight-300">
-            Détail de l'activité
-          </Card.Title>
-          {currentActivityDetail && (
-            <div>
-              <h2 className="mb-2">
-                <FontAwesomeIcon icon={faStar} color="green" className="me-2" />
-                {currentActivityDetail?.name}
-              </h2>
-              <Card.Text>
-                <p>
-                  <FontAwesomeIcon
-                    icon={faHandPointRight}
-                    color="green"
-                    className="me-2"
-                  />
-                  {currentActivityDetail?.description}
-                </p>
-              </Card.Text>
-              <p>
-                <span>Positive: </span>
-                {currentActivityDetail?.positive === true ? "true" : "false"}
-              </p>
-              <p>
-                <span>Category: </span>
-                {currentActivityDetail?.category.name}
-              </p>
+    <Card className="p-4 card-detail mb-5">
+      <Card.Body>
+        <Card.Title className="display-6 fw-light mb-4">
+          Détail de l'activité
+        </Card.Title>
+
+        {currentActivityDetail && (
+          <div>
+            <h2 className="mb-2">
+              <FontAwesomeIcon icon={faStar} color="green" className="me-2" />
+              {currentActivityDetail?.name}
+            </h2>
+            <Card.Text>
+              <div className="mb-3">
+                <FontAwesomeIcon
+                  icon={faHandPointRight}
+                  color="green"
+                  className="me-2"
+                />
+                <strong>Description: </strong>
+                {currentActivityDetail?.description}
+              </div>
+            </Card.Text>
+            <div className="mb-2">
+              <strong>Positive: </strong>
+              {currentActivityDetail?.positive === true ? "true" : "false"}
             </div>
-          )}
+            <div className="mb-2">
+              <strong>Category: </strong>
+              {currentActivityDetail?.category.name}
+            </div>
+          </div>
+        )}
+        {!confirmDelete && (
           <div>
             <Card.Link href="#">
               <Button
@@ -77,9 +87,7 @@ const DetailActivity: FC<Props> = ({ id, show }) => {
                 type="submit"
                 size="lg"
                 className="px-5"
-                onClick={() => {
-                  callDeleteActivity(id);
-                }}
+                onClick={() => setConfirmDelete(true)}
               >
                 Delete
               </Button>
@@ -96,9 +104,43 @@ const DetailActivity: FC<Props> = ({ id, show }) => {
               </Button>
             </Card.Link>
           </div>
-        </Card.Body>
-      </Card>
-    </div>
+        )}
+      </Card.Body>
+      {confirmDelete && (
+        <>
+          <p className="text-danger mt-3">
+            Voulez-vous vraiment supprimer l'activité{" "}
+            <strong>{currentActivityDetail.name}</strong> et tous ses suivis ?
+          </p>
+          <Row>
+            <Col>
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                className="px-5"
+                onClick={() => {
+                  callDeleteActivity(id);
+                }}
+              >
+                oui
+              </Button>
+            </Col>
+            <Col>
+              <Button
+                variant="primary"
+                type="submit"
+                size="lg"
+                className="px-5"
+                onClick={() => setConfirmDelete(false)}
+              >
+                Non
+              </Button>
+            </Col>
+          </Row>
+        </>
+      )}
+    </Card>
   );
 };
 export default DetailActivity;
