@@ -3,12 +3,14 @@ import { userModel, UserModel } from "./user.model";
 import { referentialDataModel, ReferentialDataModel } from "./referentialData";
 import { activityModel, ActivityModel } from "./activity.model";
 import { HttpService } from "../services/http/http.service";
+import { UIModel, uiModel } from "./ui.model";
 
 // définit la structure globale du store
 export interface AppStoreModel {
   user: UserModel;
   referentialData: ReferentialDataModel;
   activity: ActivityModel;
+  ui: UIModel;
 }
 
 // associe chaque store avec son modèle
@@ -16,6 +18,7 @@ export const appStoreModel: AppStoreModel = {
   user: userModel,
   referentialData: referentialDataModel,
   activity: activityModel,
+  ui: uiModel,
 };
 const httpService = new HttpService();
 

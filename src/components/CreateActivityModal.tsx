@@ -10,47 +10,51 @@ interface Props {
   show: boolean;
   handleClose: () => void;
   refreshActivities: () => void;
-  // isUpdate: boolean;
 }
 
 const CreateActivityModal: FC<Props> = ({
   show,
   handleClose,
   refreshActivities,
-  // isUpdate,
 }) => {
   const { t } = useTranslation();
   const { categoryList } = useStoreState((state: any) => state.referentialData);
   const { getAllCategoryList } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.referentialData
   );
-  const { create } = useStoreActions(
+  const { create, updateActivity } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.activity
   );
-  // const { currentActivityDetail } = useStoreState(
-  //   (state: any) => state.activity
-  // );
-  // Load Data on Component Mount
+  const currentActivityDetail = useStoreState(
+    (state: any) => state.activity.currentActivityDetail
+  );
+
+  const modeModal = useStoreState((state: any) => state.ui.modeModal);
   useEffect(() => {
     getAllCategoryList();
   }, [show]);
-  // console.log(show);
 
   const {
     formState: { errors },
     handleSubmit,
     register,
-    setValue,
+    // setValue,
     reset,
   } = useForm<CreateActivity>();
 
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<CreateActivity> = async (values) => {
-    // setLoading(true); // Active loading
-    // console.log(values);
-    // setCreateActivityFormDraft({ ...values });
-    const response = await create(values);
+    if (currentActivityDetail && modeModal === "update") {
+      console.log("update");
+      try {
+        updateActivity({ id: currentActivityDetail.id, activity: values });
+      } catch (error) {
+        console.log(error);
+      }
+    } else {
+      const response = await create(values);
+    }
     reset();
     handleClose(); // Close modal
     refreshActivities(); // Refresh list
@@ -62,20 +66,13 @@ const CreateActivityModal: FC<Props> = ({
     // }
     setLoading(false); // Active loading
   };
-
-  // const prefillForm = async () => {
-  //   if (currentActivityDetail) {
-  //     reset(currentActivityDetail);
-  //   }
-  // };
-
-  // if (isUpdate) {
-  //   prefillForm();
-  // }
-  // console.log("show", show);
-
+  useEffect(() => {
+    if (modeModal === "update") {
+      reset(currentActivityDetail);
+    }
+  }, [currentActivityDetail, reset, show]);
   return (
-    <Modal show={show} onHide={handleClose} className="p-5">
+    <Modal show={show} onHide={handleClose} className="p-5" mode={modeModal}>
       <Modal.Header closeButton>
         <Modal.Title>
           <h2 className="mx-3 mt-3">

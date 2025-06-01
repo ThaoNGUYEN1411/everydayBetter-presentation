@@ -6,23 +6,37 @@ import CreateActivityModal from "../components/CreateActivityModal";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 // import CalendarTable from "../components/ActivityCalender";
-import { Actions, useStoreActions, useStoreState } from "easy-peasy";
+import { action, Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
 import TrackingRecord from "../components/TrackingLog";
 
 const ActivitiesPage: FC = () => {
   const { t } = useTranslation();
-  const [activityId, setActivityId] = useState<string | null>(null);
-  const [show, setShow] = useState(false);
+  // const [activityId, setActivityId] = useState<string | null>(null);
+  // const [show, setShow] = useState(false);
+  const isModalOpen = useStoreState((state: any) => {
+    return state.ui.isModalOpen;
+  });
+  const setIsModalOpen = useStoreActions(
+    (action: Actions<AppStoreModel>) => action.ui.setIsModalOpen
+  );
+  const setModeModal = useStoreActions(
+    (action: Actions<AppStoreModel>) => action.ui.setModeModal
+  );
   const { activityList } = useStoreState((state: any) => {
     // typeof state;
     return state.activity;
   });
-  const { getAllActivityList } = useStoreActions(
+  const { getAllActivityList, setCurrentActivityDetail } = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.activity
   );
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
+  const handleClose = () => setIsModalOpen(false);
+
+  const openModalForCreateNewActivity = () => {
+    setModeModal("create");
+    setCurrentActivityDetail(null);
+    setIsModalOpen(true);
+  };
   // const isUpdate = false;
   // Load Data on Component Mount
   useEffect(() => {
@@ -39,16 +53,16 @@ const ActivitiesPage: FC = () => {
             type="submit"
             size="lg"
             className="px-4 mt-5 btn-add me-4"
-            onClick={handleShow}
+            onClick={openModalForCreateNewActivity}
           >
             {t("activity.btn-add")}
           </Button>
         </div>
         <CreateActivityModal
-          show={show}
+          show={isModalOpen}
           handleClose={handleClose}
           refreshActivities={() => getAllActivityList()}
-          // isUpdate={isUpdate}
+          // mode={mode}
         />
       </div>
       <Row className="wh-80">
