@@ -1,68 +1,104 @@
 {
-	"activity": {
-		"btn-add": "Add",
-		"list": {
-			"title": "Activity List",
-			"title_follow": "Activity tracking by date"
-		},
-		"modal_create_activity": {
-			"title": "Create a new activity",
-			"input_name": {
-				"title": "Title",
-				"placeholder": "Add a title",
-				"errors_message": "Activity name is required"
-			},
-			"description": {
-				"title": "Description",
-				"placeholder": "Add a description",
-				"errors_message": "Description is too long"
-			},
-			"type": {
-				"title": "Choose activity type",
-				"positive": "Positive",
-				"negative": "Negative",
-				"errors_message": "You must choose an option"
-			},
-			"category": {
-				"title": "Choose activity categories",
-				"selected_categories": "Selected categories",
-				"placeholder": "Enter a tag"
-			},
-			"btn": "Create",
-			"alert.success": "Activity created successfully!",
-			"alert.error": "Failed to create activity."
-		}
-	},
-	"user": {
-		"createUser": {
-			"title": "Create an account",
-			"btn": "Create",
-			"alert.success": "Thank you! Your account has been successfully created.",
-			"alert.error": "An error occurred while creating the account. Please try again."
-		},
-		"userAuthenticate": {
-			"title": "Login",
-			"btn": "Log in",
-			"alert.success": "You have successfully logged in.",
-			"alert.error": "An error occurred while logging in. Please try again."
-		},
-		"nickname": {
-			"title": "Nickname",
-			"placeholder": "Enter your nickname",
-			"errors_message": "Nickname is required"
-		},
-		"email": {
-			"title": "Email",
-			"placeholder": "email@example.com",
-			"errors_message": "Email is required",
-			"invalid_message": "The email address is not valid. Please enter a correct address."
-		},
-		"password": {
-			"title": "Password",
-			"placeholder": "Enter your password",
-			"errors_message": "Password is required",
-			"invalid_message": "Please choose a password containing at least 8 characters, including an uppercase letter, a lowercase letter, a digit, and a special character (@$!%*?&)",
-			"incorrect": "Incorrect password"
-		}
-	}
+  "menu": {
+    "features": "Features",
+    "blog": "Blog",
+    "about": "About",
+    "learnMore": "Learn more",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "account": "Account",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout"
+  },
+  "home": {
+    "banner": {
+      "title": "Everyday Better, the app that boosts your habits.",
+      "subtitle": "Track your progress and become a better version of yourself. Try it for free!",
+      "signup": "Sign Up"
+    },
+    "features": {
+      "title": "Track anything you want",
+      "subtitle": "Everyday Better is completely flexible. You can track what's important to you and easily customize it to your needs.",
+      "card1": {
+        "title": "Reminder Notifications",
+        "text": "Notifications remind users to complete their regular tasks and help them maintain their habits."
+      },
+      "card2": {
+        "title": "Custom Goals",
+        "text": "Users can define their own activities and track the ones that matter most to them."
+      },
+      "card3": {
+        "title": "Progress Tracking",
+        "text": "A visual dashboard helps users stay motivated with clear feedback on their progress."
+      }
+    }
+  },
+  "activity": {
+    "btn-add": "Add",
+    "list": {
+      "title": "Activity List",
+      "title_follow": "Activity tracking by date"
+    },
+    "modal_create_activity": {
+      "title": "Create a new activity",
+      "input_name": {
+        "title": "Title",
+        "placeholder": "Add a title",
+        "errors_message": "Activity name is required"
+      },
+      "description": {
+        "title": "Description",
+        "placeholder": "Add a description",
+        "errors_message": "Description is too long"
+      },
+      "type": {
+        "title": "Choose activity type",
+        "positive": "Positive",
+        "negative": "Negative",
+        "errors_message": "You must choose an option"
+      },
+      "category": {
+        "title": "Choose activity categories",
+        "selected_categories": "Selected categories",
+        "placeholder": "Enter a tag"
+      },
+      "btn": "Create",
+      "alert.success": "Activity created successfully!",
+      "alert.error": "Failed to create activity."
+    }
+  },
+  "user": {
+    "createUser": {
+      "title": "Create an account",
+      "btn": "Create",
+      "alert.success": "Thank you! Your account has been successfully created.",
+      "alert.error": "An error occurred while creating the account. Please try again."
+    },
+    "userAuthenticate": {
+      "title": "Login",
+      "btn": "Log in",
+      "alert.success": "You have successfully logged in.",
+      "alert.error": "An error occurred while logging in. Please try again."
+    },
+    "nickname": {
+      "title": "Nickname",
+      "placeholder": "Enter your nickname",
+      "errors_message": "Nickname is required"
+    },
+    "email": {
+      "title": "Email",
+      "placeholder": "email@example.com",
+      "errors_message": "Email is required",
+      "invalid_message": "The email address is not valid. Please enter a correct address."
+    },
+    "password": {
+      "title": "Password",
+      "placeholder": "Enter your password",
+      "errors_message": "Password is required",
+      "invalid_message": "Please choose a password containing at least 8 characters, including an uppercase letter, a lowercase letter, a digit, and a special character (@$!%*?&)",
+      "incorrect": "Incorrect password"
+    }
+  }
 }

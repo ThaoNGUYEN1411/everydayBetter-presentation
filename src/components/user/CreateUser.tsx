@@ -98,8 +98,6 @@ const CreateUser: FC = () => {
               <Form.Label className="mandatory">
                 {t("user.password.title")}
               </Form.Label>
-
-              {/* Utilisation de flexbox pour aligner input + icône */}
               <div className="d-flex align-items-center border rounded is-invalid">
                 <Form.Control
                   className="border-0 shadow-none flex-grow-1 py-2"
@@ -127,7 +125,7 @@ const CreateUser: FC = () => {
                 </span>
               </div>
 
-              {/* Message d'erreur */}
+              {/* Message d'error */}
               {errors.password && (
                 <div className="text-danger mt-1">
                   {errors.password.message}

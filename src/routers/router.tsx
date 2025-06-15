@@ -40,13 +40,6 @@ const router = createBrowserRouter([
           return { Component: UserAuthenticatePage };
         },
       },
-      {
-        path: "test",
-        lazy: async () => {
-          const { default: Test } = await import("../pages/Test");
-          return { Component: Test };
-        },
-      },
     ],
   },
 ]);
