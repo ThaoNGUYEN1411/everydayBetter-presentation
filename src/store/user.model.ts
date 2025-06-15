@@ -22,7 +22,6 @@ export interface AuthenticateUser {
 // User model for state management
 export interface UserModel {
   currentUser: UserData | null; //store authenticated user
-  // setUsersData: Action<UserModel, UserData>;
   authInfo: AuthInfo | null;
   responseStatus: ResponseStatus;
   emailError: string | null;
@@ -37,11 +36,7 @@ export interface UserModel {
 
 //define data default and action, call back
 export const userModel: UserModel = {
-  // usersData: [],
   currentUser: null,
-  // setUsersData: action((state, user) => {
-  //   state.usersData.push(user);
-  // }),
   authInfo: null,
   responseStatus: undefined,
   emailError: null,
@@ -59,77 +54,37 @@ export const userModel: UserModel = {
   }),
   create: thunk(async (actions, payload, { injections }) => {
     const { httpService } = injections;
-    const response: any = await httpService.post(
-      `/users/create`,
-      payload
-      // { withCredentials: true } //add the cookies
-    );
+    const response: any = await httpService.post(`/users/create`, payload);
     actions.setAuthInfo(response);
-    // localStorage.setItem("nickname", response.nickname);
-    actions.setCurrentUser(payload); //  Store the user
   }),
-  // create: thunk(async (actions, payload) => {
-  //   const result = await callApi({
-  //     method: "post",
-  //     url: "/users/create",
-  //     data: payload,
-  //   });
-  //   if (result.error === "server_error") {
-  //     actions.setResponseStatus("server_error");
-  //   } else if (Array.isArray(result.error)) {
-  //     actions.setResponseStatus("error_400");
-  //     result.error.forEach((e) => {
-  //       if (e.field === "email" && e.code === "UniqueEmail") {
-  //         actions.setEmailError("UniqueEmail");
-  //       }
-  //       //can add handle other type error here
-  //     });
-  //   } else {
-  //     actions.setResponseStatus("success");
-  //     actions.setCurrentUser(payload);
-  //   }
-  // }),
   authenticate: thunk(async (actions, payload, { injections }) => {
     const { httpService } = injections;
     const response: AuthInfo = await httpService.post(
       `/users/authenticate`,
       payload,
-      { withCredentials: true } //add the cookies if server send Set-Cookie
+      { withCredentials: true } //add the cookies => server send Set-Cookie
     );
     actions.setAuthInfo(response);
     localStorage.setItem("nickname", response.nickname);
     actions.setCurrentUser(payload); //  Store the user
   }),
 
-  // Sauvegarder le token uniquement si le serveur ne le met pas en cookie
-  // The cookie will expire in 3600 seconds (1 hour)
-  // document.cookie = `token=${response.request.token}; Path=/; Secure; Max-Age=3600`;
-
-  logout: thunk(async (actions, _payload) => {
-    localStorage.removeItem("nickname");
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/users/logout",
-        {}, // corps vide
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true,
-        }
-      );
-
-      if (response.status === 201) {
-        //Reset user data
-        actions.setCurrentUser(null); // Reset currentUser
-        actions.setAuthInfo(null);
-        return { success: true, data: response.data };
-      } else {
-        return { success: false };
+  logout: thunk(async (actions, _payload, { injections }) => {
+    const { httpService } = injections;
+    const response = await httpService.post(
+      "/users/logout",
+      {}, // corps vide
+      {
+        headers: {
+          "Content-Type": "application/json",
+        },
+        withCredentials: true,
       }
-    } catch (error) {
-      console.error("Erreur de déconnexion:", error);
-      return { success: false };
+    );
+    if (response.status === 201) {
+      //Reset user data
+      actions.setCurrentUser(null); // Reset currentUser
+      actions.setAuthInfo(null);
     }
   }),
 };
