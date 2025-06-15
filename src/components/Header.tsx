@@ -1,27 +1,28 @@
-import { FC, useEffect } from "react";
+import { FC } from "react";
 import { Button, Container, Nav, Navbar, NavDropdown } from "react-bootstrap";
-import { Link, NavLink } from "react-router-dom";
+import { Link, NavLink, useNavigate } from "react-router-dom";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { Actions, useStoreActions, useStoreState } from "easy-peasy";
+import { Actions, useStoreActions } from "easy-peasy";
 import { AppStoreModel } from "../store";
-//todo: logout ne marche pas>
+
 const Header: FC = () => {
-  const authInfo = useStoreState((state: AppStoreModel) => state.user.authInfo);
   const logout = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.user.logout
   );
-  // const [cookies, setCookie, removeCookie] = useCookies(["jwt"]);
-  // const userLogout = () => {
-  //   console.log("log out1");
-  //   localStorage.removeItem("nickname");
-  //   Cookies;
-  //   logout();
 
-  //   console.log("log out2");
-  // };
-  // console.log() document.cookie
-  useEffect(() => {}, [authInfo?.nickname]);
+  const navigate = useNavigate();
+
+  const handleLogout = () => {
+    localStorage.removeItem("nickname");
+    try {
+      logout();
+      navigate("/");
+    } catch (error) {
+      console.log("error logout");
+    }
+  };
+
   return (
     <Navbar collapseOnSelect expand="lg" className="wrapper-header">
       <Container className="grid wide">
@@ -68,8 +69,7 @@ const Header: FC = () => {
                 <NavLink
                   to="/"
                   onClick={() => {
-                    //e.preventDefault(); // Empêche le rechargement immédiat
-                    logout();
+                    handleLogout();
                   }}
                   className="nav-link"
                 >
