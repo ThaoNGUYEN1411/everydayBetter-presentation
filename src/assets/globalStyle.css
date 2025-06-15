@@ -4,7 +4,6 @@
   max-width: 1600px;
   margin: 0 auto;
   padding: 0;
-  /* text-align: center; */
 }
 
 :root {
@@ -94,14 +93,8 @@ body {
   color: red;
 }
 
-/* .bg {
-  height: 500px;
-  display: flex;
-  flex-direction: row;
-} */
-
 .bloc1 {
-  height: 400px;
+  /* min-height: 400px; */
   max-width: 100%;
 }
 
@@ -114,7 +107,7 @@ body {
 .feature-block {
   padding-top: 30px;
   margin-top: 30px;
-  height: 550px;
+  min-height: 550px;
   background: #f8f8f4;
 }
 
@@ -194,4 +187,8 @@ footer {
 .no-caret .dropdown-toggle::after {
   display: none !important;
   color: gray;
+}
+
+.flag {
+  width: 20px;
 }

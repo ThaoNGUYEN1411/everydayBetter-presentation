@@ -1,88 +1,98 @@
 import { FC } from "react";
-import { Button, Card, CardGroup, Col, Row } from "react-bootstrap";
-//import { useTranslation } from "react-i18next";
+import { Button, Card, Col, Row } from "react-bootstrap";
+import { useTranslation } from "react-i18next";
+import { useNavigate } from "react-router-dom";
 
 const HomePage: FC = () => {
+  const navigate = useNavigate();
+  const { t } = useTranslation();
+
+  const inscription = () => {
+    navigate("users/create");
+  };
+
   return (
     <div className="grid wide">
-      <section className="banner">
+      <section className="banner mb-5">
         <Row>
-          <Col md={4}>
+          <Col md={4} className="mb-4 mb-md-0">
             <div className="bloc1">
-              <article className="text-banner">
-                <h1 className="d-flex flex-column">
-                  Everyday Better, l'appli qui booste vos habitudes.
-                </h1>
+              <article className="text-banner text-center text-md-start">
+                <h1 className="d-flex flex-column">{t("home.banner.title")}</h1>
                 <p className="d-block w-lg-50 my-lg-5 w-sm-100">
-                  Suivez vos progrès et devenez une meilleure version de
-                  vous-même. Essayez-la gratuitement !
+                  {t("home.banner.subtitle")}
                 </p>
-                <div>
-                  <Button variant="light" size="lg" className="px-5 bg-green">
-                    Inscription
-                  </Button>
-                </div>
+                <Button
+                  variant="light"
+                  size="lg"
+                  className="px-5 bg-green"
+                  onClick={() => inscription()}
+                >
+                  {t("home.banner.signup")}
+                </Button>
               </article>
             </div>
-          </Col>{" "}
+          </Col>
           <Col md={8}>
             <div className="bg-img">
-              <img src="/bg.png" alt="" />
+              <img src="/bg.png" alt="Banner" className="img-fluid rounded" />
             </div>
           </Col>
         </Row>
       </section>
 
-      <section className="feature-block" id="features">
+      <section className="feature-block text-center" id="features">
         <div className="text-center">
-          <h2 className="feature-title">Suivez tout ce que vous voulez</h2>
+          <h2 className="feature-title">{t("home.features.title")}</h2>
         </div>
         <div className="d-flex justify-content-center">
           <p className="w-75 feature-sub-title">
-            Everyday better est totalement flexible. Vous pouvez suivre tout ce
-            qui est important pour vous, et il est facile de le personnaliser en
-            fonction de vos besoins.
+            {t("home.features.subtitle")}
           </p>
         </div>
         <Row>
-          <Col className="d-flex justify-content-center text-center">
-            <Card style={{ width: "23rem" }}>
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-center text-center mb-5"
+          >
+            {/* <Col xs={12} md={4} className="mb-4"> */}
+            <Card className="w-75">
               <Card.Img
                 variant="top"
                 src="/feature1.jpg"
                 className="w-80 text-center"
               />
               <Card.Body>
-                <Card.Title>Notifications de rappel</Card.Title>
-                <Card.Text>
-                  Des notifications rappellent aux utilisateurs d’accomplir
-                  leurs activités régulières pour les aider à maintenir leurs
-                  habitudes.
-                </Card.Text>
+                <Card.Title>{t("home.features.card1.title")}</Card.Title>
+                <Card.Text>{t("home.features.card1.text")}</Card.Text>
               </Card.Body>
             </Card>
+            {/* </Col> */}
           </Col>
-          <Col className="d-flex justify-content-center text-center">
-            <Card style={{ width: "23rem" }}>
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-center text-center mb-5"
+          >
+            <Card className="w-75">
               <Card.Img variant="top" src="/feature2.jpg" />
               <Card.Body>
-                <Card.Title>Objectifs personnalisable</Card.Title>
-                <Card.Text>
-                  Les utilisateurs peuvent définir leurs propres activités et
-                  suivre celles qui leur tiennent à cœur.
-                </Card.Text>
+                <Card.Title>{t("home.features.card2.title")}</Card.Title>
+                <Card.Text>{t("home.features.card2.text")}</Card.Text>
               </Card.Body>
             </Card>
           </Col>
-          <Col className="d-flex justify-content-center text-center">
-            <Card style={{ width: "23rem" }}>
+          <Col
+            xs={12}
+            md={4}
+            className="d-flex justify-content-center text-center mb-5"
+          >
+            <Card className="w-75">
               <Card.Img variant="top" src="/feature3.jpg" />
               <Card.Body>
-                <Card.Title>Suivi des progrès</Card.Title>
-                <Card.Text>
-                  Un tableau de bord visuel permet aux utilisateurs de rester
-                  motivés grâce à un retour clair sur leur progression.
-                </Card.Text>
+                <Card.Title>{t("home.features.card3.title")}</Card.Title>
+                <Card.Text>{t("home.features.card3.text")}</Card.Text>
               </Card.Body>
             </Card>
           </Col>

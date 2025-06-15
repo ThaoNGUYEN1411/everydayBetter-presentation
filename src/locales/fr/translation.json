@@ -1,70 +1,106 @@
 {
-	"activity": {
-		"btn-add": "Ajouter une nouvelle activité",
-		"list": {
-			"title": "List activités",
-			"title_follow": "Suivi des activités selon la date"
-		},
-		"modal_create_activity": {
-			"title": "Créer une nouvelle activité",
-			"input_name": {
-				"title": "Title",
-				"placeholder": "Ajouter un titre",
-				"errors_message": "Nom d'activité est requis"
-			},
-			"description": {
-				"title": "Description",
-				"placeholder": "Ajouter une description",
-				"errors_message": "Description trop longue"
-			},
-			"type": {
-				"title": "Choisir le type d'activité",
-				"positive": "Positif",
-				"negative": "Négatif",
-				"errors_message": "Vous devez choisir une option"
-			},
-			"category": {
-				"title": "Choisissez des catégories d'activité",
-				"selected_categories": "Catégories sélectionnées",
-				"placeholder": "Entrez une étiquette"
-			},
+  "menu": {
+    "features": "Fonctionnalités",
+    "blog": "Blog",
+    "about": "À propos",
+    "learnMore": "En savoir plus",
+    "testimonials": "Témoignages",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "account": "Compte",
+    "login": "Se connecter",
+    "register": "S'inscrire",
+    "logout": "Déconnexion"
+  },
+  "home": {
+    "banner": {
+      "title": "Everyday Better, l'appli qui booste vos habitudes.",
+      "subtitle": "Suivez vos progrès et devenez une meilleure version de vous-même. Essayez-la gratuitement !",
+      "signup": "Inscription"
+    },
+    "features": {
+      "title": "Suivez tout ce que vous voulez",
+      "subtitle": "Everyday better est totalement flexible. Vous pouvez suivre tout ce qui est important pour vous, et il est facile de le personnaliser en fonction de vos besoins.",
+      "card1": {
+        "title": "Notifications de rappel",
+        "text": "Des notifications rappellent aux utilisateurs d’accomplir leurs activités régulières pour les aider à maintenir leurs habitudes."
+      },
+      "card2": {
+        "title": "Objectifs personnalisables",
+        "text": "Les utilisateurs peuvent définir leurs propres activités et suivre celles qui leur tiennent à cœur."
+      },
+      "card3": {
+        "title": "Suivi des progrès",
+        "text": "Un tableau de bord visuel permet aux utilisateurs de rester motivés grâce à un retour clair sur leur progression."
+      }
+    }
+  },
+  "activity": {
+    "btn-add": "Ajouter une nouvelle activité",
+    "list": {
+      "title": "List activités",
+      "title_follow": "Suivi des activités selon la date"
+    },
+    "modal_create_activity": {
+      "title": "Créer une nouvelle activité",
+      "input_name": {
+        "title": "Title",
+        "placeholder": "Ajouter un titre",
+        "errors_message": "Nom d'activité est requis"
+      },
+      "description": {
+        "title": "Description",
+        "placeholder": "Ajouter une description",
+        "errors_message": "Description trop longue"
+      },
+      "type": {
+        "title": "Choisir le type d'activité",
+        "positive": "Positif",
+        "negative": "Négatif",
+        "errors_message": "Vous devez choisir une option"
+      },
+      "category": {
+        "title": "Choisissez des catégories d'activité",
+        "selected_categories": "Catégories sélectionnées",
+        "placeholder": "Entrez une étiquette"
+      },
 
-			"btn": "Créer",
-			"alert.success": "Activité créée avec succès !",
-			"alert.error": "Impossible de créer l’activité ! Vérifiez si elle existe déjà."
-		}
-	},
-	"user": {
-		"createUser": {
-			"title": "Créer un compte",
-			"btn": "Créer",
-			"alert.success": "Merci! Votre compte a été créé avec succès",
-			"server.error": "Une erreur est survenue. Veuillez réessayer plus tard.",
-			"email_already_exists": "Cette adresse e-mail est déjà utilisée!"
-		},
-		"userAuthenticate": {
-			"title": "Connexion",
-			"btn": "Se connecter",
-			"alert.success": "Vous êtes connecté avec succès.",
-			"alert.error": "Une erreur est survenue lors de la connexion. Veuillez réessayer."
-		},
-		"nickname": {
-			"title": "Pseudonyme",
-			"placeholder": "Entrez votre pseudonyme",
-			"errors_message": "Le pseudonyme est requis"
-		},
-		"email": {
-			"title": "E-mail",
-			"placeholder": "email@example.com",
-			"errors_message": "L'email est requis",
-			"invalid_message": "L'adresse email n'est pas valide. Veuillez entrer une adresse correcte."
-		},
-		"password": {
-			"title": "Mot de passe",
-			"placeholder": "Entrez votre mot de passe",
-			"errors_message": "Le mot de passe est requis",
-			"invalid_message": "Veuillez choisir un mot de passe contenant au moins 8 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&).",
-			"incorrect": "Mot de passe incorrect"
-		}
-	}
+      "btn": "Créer",
+      "alert.success": "Activité créée avec succès !",
+      "alert.error": "Impossible de créer l’activité ! Vérifiez si elle existe déjà."
+    }
+  },
+  "user": {
+    "createUser": {
+      "title": "Créer un compte",
+      "btn": "Créer",
+      "alert.success": "Merci! Votre compte a été créé avec succès",
+      "server.error": "Une erreur est survenue. Veuillez réessayer plus tard.",
+      "email_already_exists": "Cette adresse e-mail est déjà utilisée!"
+    },
+    "userAuthenticate": {
+      "title": "Connexion",
+      "btn": "Se connecter",
+      "alert.success": "Vous êtes connecté avec succès.",
+      "alert.error": "Une erreur est survenue lors de la connexion. Veuillez réessayer."
+    },
+    "nickname": {
+      "title": "Pseudonyme",
+      "placeholder": "Entrez votre pseudonyme",
+      "errors_message": "Le pseudonyme est requis"
+    },
+    "email": {
+      "title": "E-mail",
+      "placeholder": "email@example.com",
+      "errors_message": "L'email est requis",
+      "invalid_message": "L'adresse email n'est pas valide. Veuillez entrer une adresse correcte."
+    },
+    "password": {
+      "title": "Mot de passe",
+      "placeholder": "Entrez votre mot de passe",
+      "errors_message": "Le mot de passe est requis",
+      "invalid_message": "Veuillez choisir un mot de passe contenant au moins 8 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&).",
+      "incorrect": "Mot de passe incorrect"
+    }
+  }
 }

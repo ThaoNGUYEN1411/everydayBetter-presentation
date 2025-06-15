@@ -58,12 +58,6 @@ const CreateActivityModal: FC<Props> = ({
     reset();
     handleClose(); // Close modal
     refreshActivities(); // Refresh list
-    //   alert(t("activity.modal_create_activity.alert.success"));
-    // } catch (error) {
-    //   alert(t("activity.modal_create_activity.alert.error"));
-    // } finally {
-    //   setLoading(false); // Disable loading mode
-    // }
     setLoading(false); // Active loading
   };
   useEffect(() => {
@@ -71,6 +65,7 @@ const CreateActivityModal: FC<Props> = ({
       reset(currentActivityDetail);
     }
   }, [currentActivityDetail, reset, show]);
+
   return (
     <Modal show={show} onHide={handleClose} className="p-5" mode={modeModal}>
       <Modal.Header closeButton>

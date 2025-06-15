@@ -5,12 +5,14 @@ import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Actions, useStoreActions } from "easy-peasy";
 import { AppStoreModel } from "../store";
+import LanguageSwitcher from "./LanguageSwitcher";
+import { useTranslation } from "react-i18next";
 
 const Header: FC = () => {
   const logout = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.user.logout
   );
-
+  const { t } = useTranslation();
   const navigate = useNavigate();
 
   const handleLogout = () => {
@@ -36,19 +38,30 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            {/* <p>{userData[0]?.nickname}</p> */}
             <NavLink to="/" className="nav-link">
-              Fonctionnalités
+              {t("menu.features")}
             </NavLink>
             <NavLink to="/" className="nav-link">
-              Blog
+              {t("menu.blog")}
             </NavLink>
-            <NavDropdown title="En savoir plus" id="nav-dropdown">
-              <NavDropdown.Item eventKey="4.1">Témoignages</NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.2">Contact</NavDropdown.Item>
-              {/* <NavDropdown.Item eventKey="4.3">FQA</NavDropdown.Item> */}
+            <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
+              <NavDropdown.Item eventKey="4.1">
+                {t("menu.about")}
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="4.2">
+                {t("menu.testimonials")}
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="4.3">
+                {t("menu.contact")}
+              </NavDropdown.Item>
+              <NavDropdown.Item eventKey="4.4">
+                {t("menu.faq")}
+              </NavDropdown.Item>
             </NavDropdown>
           </Nav>
+          <div>
+            <LanguageSwitcher />
+          </div>
           {localStorage.getItem("nickname") ? (
             <NavDropdown
               title={
@@ -62,7 +75,7 @@ const Header: FC = () => {
             >
               <NavDropdown.Item eventKey="4.1">
                 <NavLink to="/activities" className="nav-link">
-                  Compte
+                  {t("menu.account")}
                 </NavLink>
               </NavDropdown.Item>
               <NavDropdown.Item eventKey="4.2">
@@ -73,7 +86,7 @@ const Header: FC = () => {
                   }}
                   className="nav-link"
                 >
-                  Logout
+                  {t("menu.logout")}
                 </NavLink>
               </NavDropdown.Item>
             </NavDropdown>
@@ -81,12 +94,12 @@ const Header: FC = () => {
             <Nav className="d-lg-flex justify-content-end">
               <Link to={"/users/authenticate"}>
                 <Button variant="light" size="lg" className="mx-4 px-5 bg-btn">
-                  Se connecter
+                  {t("menu.login")}
                 </Button>
               </Link>
               <Link to={"/users/create"}>
                 <Button variant="light" size="lg" className="px-5 bg-green">
-                  S'inscrire
+                  {t("menu.register")}
                 </Button>
               </Link>
             </Nav>
