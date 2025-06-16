@@ -8,9 +8,13 @@ export class HttpService {
     },
   };
 
-  async get<T>(url: string, axiosConfig?: AxiosRequestConfig): Promise<T> {
+  async post<T>(
+    url: string,
+    body: unknown,
+    axiosConfig?: AxiosRequestConfig
+  ): Promise<T> {
     return await axios
-      .get(`${VITE_API_URL}${url}`, {
+      .post(`${VITE_API_URL}${url}`, JSON.stringify(body), {
         ...this.defaultConfig,
         ...axiosConfig,
       })
@@ -19,13 +23,9 @@ export class HttpService {
       });
   }
 
-  async post<T>(
-    url: string,
-    body: unknown,
-    axiosConfig?: AxiosRequestConfig
-  ): Promise<T> {
+  async get<T>(url: string, axiosConfig?: AxiosRequestConfig): Promise<T> {
     return await axios
-      .post(`${VITE_API_URL}${url}`, JSON.stringify(body), {
+      .get(`${VITE_API_URL}${url}`, {
         ...this.defaultConfig,
         ...axiosConfig,
       })

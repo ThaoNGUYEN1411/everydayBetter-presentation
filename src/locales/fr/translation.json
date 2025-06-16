@@ -46,7 +46,8 @@
       "input_name": {
         "title": "Title",
         "placeholder": "Ajouter un titre",
-        "errors_message": "Nom d'activité est requis"
+        "errors_message": "Nom d'activité est requis",
+        "error_maxLength": "Le nom de l'activité ne doit pas dépasser 200 caractères"
       },
       "description": {
         "title": "Description",
@@ -93,14 +94,16 @@
       "title": "E-mail",
       "placeholder": "email@example.com",
       "errors_message": "L'email est requis",
-      "invalid_message": "L'adresse email n'est pas valide. Veuillez entrer une adresse correcte."
+      "invalid_message": "L'adresse email n'est pas valide. Veuillez entrer une adresse correcte.",
+      "maxLength_message": "L’adresse email ne doit pas dépasser 340 caractères."
     },
     "password": {
       "title": "Mot de passe",
       "placeholder": "Entrez votre mot de passe",
       "errors_message": "Le mot de passe est requis",
       "invalid_message": "Veuillez choisir un mot de passe contenant au moins 8 caractères, dont une majuscule, une minuscule, un chiffre et un caractère spécial (@$!%*?&).",
-      "incorrect": "Mot de passe incorrect"
+      "incorrect": "Mot de passe incorrect",
+      "maxLength_message": "Password ne doit pas dépasser 255 caractèr"
     }
   }
 }

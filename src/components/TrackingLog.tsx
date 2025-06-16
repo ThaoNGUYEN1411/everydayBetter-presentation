@@ -15,12 +15,6 @@ import { faBan, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import DetailActivity from "./DetailActivity";
 
-// export interface TrackActivityData {
-//   activityId: string;
-//   trackedDate: string;
-//   done: boolean | null;
-// }
-
 //1. display the current week in the table header
 //startDate: the date we base our week on start this date
 const getWeekDates = (startDate: Date): Date[] => {
@@ -161,8 +155,6 @@ const TrackingLog: FC = () => {
                   </td>
                   {weekDates.map((date, i) => {
                     const formatted = formatDate(date);
-                    // const doneValue =
-                    //   trackingAct?.trackingByDay?.[formatted] ?? null;
                     const log = trackingAct?.listTrackingLog?.find(
                       (item: any) => item.date === formatted
                     );

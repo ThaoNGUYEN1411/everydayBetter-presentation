@@ -33,12 +33,8 @@ const CreateUser: FC = () => {
       await createUser(values);
       reset();
       navigate("/users/authenticate");
-    } catch (error) {
-      console.log(error);
-
-      // if(res.status === 400 && Array.isArray(res.data?.errors)){
-
-      // }
+    } catch {
+      console.log("error authenticate");
     }
 
     setIsErrorEmail(
@@ -81,6 +77,10 @@ const CreateUser: FC = () => {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                       message: t("user.email.invalid_message"),
                     },
+                    maxLength: {
+                      value: 340,
+                      message: t("user.email.maxLength_message"),
+                    },
                   })}
                   isInvalid={!!errors.email}
                 />
@@ -113,14 +113,14 @@ const CreateUser: FC = () => {
                         /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                       message: t("user.password.invalid_message"),
                     },
+                    maxLength: {
+                      value: 255,
+                      message: t("user.password.maxLength_message"),
+                    },
                   })}
                   isInvalid={!!errors.password}
                 />
-                <span
-                  className="px-3 cursor-pointer"
-                  onClick={handleToggle}
-                  // style={{ lineHeight: 0 }}
-                >
+                <span className="px-3 cursor-pointer" onClick={handleToggle}>
                   <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                 </span>
               </div>

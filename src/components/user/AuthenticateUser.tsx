@@ -52,6 +52,10 @@ const UserAuthenticate: FC = () => {
                       value: /^[^\s@]+@[^\s@]+\.[^\s@]+$/,
                       message: t("user.email.invalid_message"),
                     },
+                    maxLength: {
+                      value: 340,
+                      message: t("user.email.maxLength_message"),
+                    },
                   })}
                   isInvalid={!!errors.email}
                 />
@@ -78,6 +82,10 @@ const UserAuthenticate: FC = () => {
                       value:
                         /^(?=.*[A-Z])(?=.*[a-z])(?=.*\d)(?=.*[@$!%*?&])[A-Za-z\d@$!%*?&]{8,}$/,
                       message: t("user.password.incorrect"),
+                    },
+                    maxLength: {
+                      value: 255,
+                      message: t("user.password.maxLength_message"),
                     },
                   })}
                   isInvalid={!!errors.password}

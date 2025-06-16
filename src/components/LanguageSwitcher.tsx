@@ -16,18 +16,10 @@ const LanguageSwitcher: React.FC = () => {
         variant="light"
         className="me-1"
       >
-        <img
-          src={`../../public/france_icon.png`}
-          alt="flag France"
-          className="flag"
-        />
+        <img src={`/france_icon.png`} alt="flag France" className="flag" />
       </Button>
       <Button onClick={() => changeLanguage("en")} variant="light">
-        <img
-          src={`../../public/english_icon.png`}
-          alt="flag France"
-          className="flag"
-        />
+        <img src={`/english_icon.png`} alt="flag France" className="flag" />
       </Button>
     </div>
   );

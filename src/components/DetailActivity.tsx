@@ -14,8 +14,9 @@ const DetailActivity: FC<Props> = ({ id }) => {
     (state: any) => state.activity.currentActivityDetail
   );
 
-  const { deleteActivity, removeActivityFromList, getCurrentActivityDetail } =
-    useStoreActions((state: Actions<AppStoreModel>) => state.activity);
+  const { deleteActivity, getCurrentActivityDetail } = useStoreActions(
+    (state: Actions<AppStoreModel>) => state.activity
+  );
 
   const setIsModalOpen = useStoreActions(
     (action: Actions<AppStoreModel>) => action.ui.setIsModalOpen
@@ -40,7 +41,7 @@ const DetailActivity: FC<Props> = ({ id }) => {
     try {
       await deleteActivity(id);
       // removeActivityFromList(id);
-    } catch (error) {
+    } catch {
       console.log("error delete activity");
     }
   };
