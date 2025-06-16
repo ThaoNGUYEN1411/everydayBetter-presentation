@@ -6,7 +6,6 @@ const Footer = () => {
       <Container>
         <Row>
           <Col>
-            {" "}
             <img
               src="/logo4-removebg.png"
               alt="Everyday Better"

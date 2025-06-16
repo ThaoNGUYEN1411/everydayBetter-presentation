@@ -125,7 +125,7 @@ footer {
   background: #f8f8f4;
 }
 .page {
-  min-height: 430px;
+  min-height: 600px;
   width: auto;
 }
 
@@ -187,6 +187,10 @@ footer {
 .no-caret .dropdown-toggle::after {
   display: none !important;
   color: gray;
+}
+
+.height-page {
+  height: 75%;
 }
 
 .flag {

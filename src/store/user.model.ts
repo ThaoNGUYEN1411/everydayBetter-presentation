@@ -1,4 +1,3 @@
-import axios from "axios";
 import { action, Action, Thunk, thunk } from "easy-peasy";
 
 type ResponseStatus = "success" | "server_error" | "error_400" | undefined;

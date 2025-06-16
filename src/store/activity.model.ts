@@ -1,18 +1,13 @@
-import axios from "axios";
 import { action, Action, thunk, Thunk } from "easy-peasy";
 import TrackingLog from "../components/TrackingLog";
+import axios from "axios";
 
-export class CreateActivity {
-  categoryId: number | null;
-  name: string | null;
+const VITE_API_URL = import.meta.env.VITE_API_URL;
+export interface CreateActivity {
+  categoryId: number;
+  name: string;
   description: string | null;
-  positive: boolean | null;
-  constructor() {
-    this.categoryId = null;
-    this.name = null;
-    this.description = null;
-    this.positive = null;
-  }
+  positive: boolean;
 }
 
 export interface ActivityDto {
@@ -39,6 +34,7 @@ export interface TrackActivityData {
   trackedDate: string;
   done: boolean | null;
 }
+
 export interface TrackingLog {
   id: string;
   date: string;
@@ -50,18 +46,18 @@ export interface ActivityTrackingLog {
   activityName: string;
   listTrackingLog: TrackingLog[];
 }
-//définit le type du modèle (les données + les actions).
+//define le type du model (data+ action)
 export interface ActivityModel {
-  create: Thunk<ActivityModel, CreateActivity>;
   activityList: ActivityDto[];
   activityTrackingLogList: ActivityTrackingLog[];
+  currentActivityDetail: CurrentActivityDetail | null;
   setActivityList: Action<ActivityModel, ActivityDto[]>;
   setActivityTrackingLogList: Action<ActivityModel, ActivityTrackingLog[]>;
+  removeActivityFromList: Action<ActivityModel, string>;
+  setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
+  create: Thunk<ActivityModel, CreateActivity>;
   getAllActivityList: Thunk<ActivityModel>;
   deleteActivity: Thunk<ActivityModel, string>;
-  removeActivityFromList: Action<ActivityModel, string>;
-  currentActivityDetail: CurrentActivityDetail | null;
-  setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
   getCurrentActivityDetail: Thunk<ActivityModel, string>;
   updateActivity: Thunk<ActivityModel, updateActivityData, any>;
   createTrackingLog: Thunk<ActivityModel, TrackActivityData, any, any>;
@@ -73,35 +69,38 @@ export interface ActivityModel {
   deleteTrackingLog: Thunk<ActivityModel, { id: string }, any>;
 }
 
-//contient l'état initial et l’action (permet de modifier le state.)
+//state initial et l’action
 export const activityModel: ActivityModel = {
-  create: thunk(async (_, createActivityForm) => {
-    try {
-      const response = await axios.post(
-        "http://localhost:8080/activities",
-        createActivityForm, // Pas besoin de JSON.stringify, axios le fait tout seul
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-          withCredentials: true, // important pour envoyer le cookie JWT
-        }
-      );
-    } catch (error) {
-      console.error("Erreur lors de la création d'activité :", error);
-    }
-  }),
   activityList: [],
   activityTrackingLogList: [],
+  currentActivityDetail: null,
   setActivityList: action((state, activityList) => {
     state.activityList = activityList;
   }),
   setActivityTrackingLogList: action((state, activityTrackingLogList) => {
     state.activityTrackingLogList = activityTrackingLogList;
   }),
+  removeActivityFromList: action((state, id) => {
+    state.activityList = state.activityList.filter(
+      (activity) => activity.id !== Number(id)
+    );
+  }),
+  setCurrentActivityDetail: action((state, currentActivityModel) => {
+    state.currentActivityDetail = currentActivityModel;
+  }),
+  create: thunk(async (_, createActivity, { injections }) => {
+    const { httpService } = injections;
+    try {
+      await httpService.post("/activities", createActivity, {
+        withCredentials: true, // send cookie JWT
+      });
+    } catch {
+      console.error("Error create activity");
+    }
+  }),
   getAllActivityList: thunk(async (actions, _payload) => {
     try {
-      const response = await axios.get("http://localhost:8080/activities", {
+      const response = await axios.get(`${VITE_API_URL}/activities`, {
         headers: {
           "Content-Type": "application/json",
         },
@@ -114,39 +113,23 @@ export const activityModel: ActivityModel = {
   }),
   deleteActivity: thunk(async (actions, id, { injections }) => {
     const { httpService } = injections;
-    console.log(id);
-
     const response = await httpService.delete(`/activities/${id}`, {
       withCredentials: true,
     });
     actions.setCurrentActivityDetail(null);
   }),
-  removeActivityFromList: action((state, id) => {
-    state.activityList = state.activityList.filter(
-      (activity) => activity.id !== Number(id)
-    );
-  }),
-  setCurrentActivityDetail: action((state, currentActivityModel) => {
-    state.currentActivityDetail = currentActivityModel;
-  }),
+
   getCurrentActivityDetail: thunk(async (actions, id) => {
     try {
-      const response = await axios.get(
-        `http://localhost:8080/activities/${id}`,
-        {
-          withCredentials: true, //add the cookies if server send Set-Cookie
-        }
-      );
+      const response = await axios.get(`${VITE_API_URL}/activities/${id}`, {
+        withCredentials: true, //add the cookies if server send Set-Cookie
+      });
       actions.setCurrentActivityDetail(response.data);
-    } catch (error) {
+    } catch {
       console.log("error get activityList");
     }
   }),
-  currentActivityDetail: null,
   updateActivity: thunk(async (_action, payload, { injections }) => {
-    console.log("call update");
-    console.log(payload);
-    console.log(`/activities/${payload.id}`);
     const { httpService } = injections;
     try {
       const response: any = await httpService.put(
@@ -156,11 +139,7 @@ export const activityModel: ActivityModel = {
           withCredentials: true,
         }
       );
-
-      // action.setCurrentActivityDetail(response);
-    } catch (error) {
-      console.log(error);
-
+    } catch {
       console.log("update activity error");
     }
   }),
@@ -180,8 +159,8 @@ export const activityModel: ActivityModel = {
           { withCredentials: true }
         );
         action.setActivityTrackingLogList(response);
-      } catch (error) {
-        console.error("Erreur lors de saveTrackingRecord :", error);
+      } catch {
+        console.error("Error saveTrackingRecord");
       }
     }
   ),

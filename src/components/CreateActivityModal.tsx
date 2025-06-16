@@ -31,34 +31,39 @@ const CreateActivityModal: FC<Props> = ({
 
   const modeModal = useStoreState((state: any) => state.ui.modeModal);
   useEffect(() => {
-    getAllCategoryList();
+    if (show) {
+      getAllCategoryList();
+    }
   }, [show]);
 
   const {
     formState: { errors },
     handleSubmit,
     register,
-    // setValue,
     reset,
   } = useForm<CreateActivity>();
 
   const [loading, setLoading] = useState<boolean>(false);
 
   const onSubmit: SubmitHandler<CreateActivity> = async (values) => {
-    if (currentActivityDetail && modeModal === "update") {
-      console.log("update");
-      try {
-        updateActivity({ id: currentActivityDetail.id, activity: values });
-      } catch (error) {
-        console.log(error);
+    setLoading(true);
+    try {
+      if (currentActivityDetail && modeModal === "update") {
+        await updateActivity({
+          id: currentActivityDetail.id,
+          activity: values,
+        });
+      } else {
+        await create(values);
       }
-    } else {
-      const response = await create(values);
+      reset();
+      handleClose(); // Close modal
+      refreshActivities(); // Refresh list
+    } catch {
+      console.log("error create or update activity");
+    } finally {
+      setLoading(false);
     }
-    reset();
-    handleClose(); // Close modal
-    refreshActivities(); // Refresh list
-    setLoading(false); // Active loading
   };
   useEffect(() => {
     if (modeModal === "update") {
@@ -94,6 +99,12 @@ const CreateActivityModal: FC<Props> = ({
                     "activity.modal_create_activity.input_name.errors_message"
                   ),
                 },
+                maxLength: {
+                  value: 200,
+                  message: t(
+                    "activity.modal_create_activity.input_name.error_maxLength"
+                  ),
+                },
               })}
               isInvalid={!!errors.name}
             />
@@ -112,7 +123,7 @@ const CreateActivityModal: FC<Props> = ({
               placeholder={t(
                 "activity.modal_create_activity.description.placeholder"
               )}
-              {...register("description", { maxLength: 1000 })}
+              {...register("description", { maxLength: 2000 })}
               isInvalid={!!errors.description}
               id="description"
             />
@@ -171,7 +182,7 @@ const CreateActivityModal: FC<Props> = ({
               <option value="">
                 {t("activity.modal_create_activity.category.placeholder")}
               </option>
-              {categoryList.map((category: any) => (
+              {categoryList?.map((category: any) => (
                 <option key={category.id} value={category.id}>
                   {category.name}
                 </option>
@@ -184,7 +195,7 @@ const CreateActivityModal: FC<Props> = ({
               type="submit"
               size="lg"
               className="px-5"
-              // disabled={loading}
+              disabled={loading}
             >
               {t("activity.modal_create_activity.btn")}
             </Button>

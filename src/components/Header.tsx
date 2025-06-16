@@ -66,7 +66,6 @@ const Header: FC = () => {
             <NavDropdown
               title={
                 <span>
-                  {/* <FontAwesomeIcon icon={faUser} /> {authInfo?.nickname} */}
                   <FontAwesomeIcon icon={faUser} className="me-2" />
                   {localStorage.getItem("nickname")}
                 </span>
@@ -93,7 +92,11 @@ const Header: FC = () => {
           ) : (
             <Nav className="d-lg-flex justify-content-end">
               <Link to={"/users/authenticate"}>
-                <Button variant="light" size="lg" className="mx-4 px-5 bg-btn">
+                <Button
+                  variant="light"
+                  size="lg"
+                  className="mx-lg-4 px-5 bg-btn"
+                >
                   {t("menu.login")}
                 </Button>
               </Link>
