@@ -22,14 +22,16 @@ const HomePage: FC = () => {
                 <p className="d-block w-lg-50 my-lg-5 w-sm-100">
                   {t("home.banner.subtitle")}
                 </p>
-                <Button
-                  variant="light"
-                  size="lg"
-                  className="px-5 bg-green"
-                  onClick={() => inscription()}
-                >
-                  {t("home.banner.signup")}
-                </Button>
+                {!localStorage.getItem("nickname") && (
+                  <Button
+                    variant="light"
+                    size="lg"
+                    className="px-5 bg-green"
+                    onClick={() => inscription()}
+                  >
+                    {t("home.banner.signup")}
+                  </Button>
+                )}
               </article>
             </div>
           </Col>
@@ -56,7 +58,6 @@ const HomePage: FC = () => {
             md={4}
             className="d-flex justify-content-center text-center mb-5"
           >
-            {/* <Col xs={12} md={4} className="mb-4"> */}
             <Card className="w-75">
               <Card.Img
                 variant="top"
@@ -68,7 +69,6 @@ const HomePage: FC = () => {
                 <Card.Text>{t("home.features.card1.text")}</Card.Text>
               </Card.Body>
             </Card>
-            {/* </Col> */}
           </Col>
           <Col
             xs={12}
