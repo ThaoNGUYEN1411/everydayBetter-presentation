@@ -4,11 +4,11 @@ import { Link, NavLink, useNavigate } from "react-router-dom";
 import { faUser } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Actions, useStoreActions } from "easy-peasy";
-import { AppStoreModel } from "../store";
-import LanguageSwitcher from "./LanguageSwitcher";
-import { useTranslation } from "react-i18next";
 
-const Header: FC = () => {
+import { useTranslation } from "react-i18next";
+import { AppStoreModel } from "../../store";
+
+const AdminHeader: FC = () => {
   const logout = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.user.logout
   );
@@ -20,7 +20,6 @@ const Header: FC = () => {
     navigate("/");
   };
   const nickname = localStorage.getItem("nickname");
-  const roles = localStorage.getItem("roles");
 
   return (
     <Navbar collapseOnSelect expand="lg" className="wrapper-header">
@@ -31,33 +30,18 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            <NavLink to="/" className="nav-link">
-              {t("menu.blog")}
+            <NavLink to="/user" className="nav-link">
+              {t("menu.admin.user")}
             </NavLink>
-            <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
-              <NavDropdown.Item eventKey="4.1">
-                {t("menu.about")}
-              </NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.2">
-                {t("menu.testimonials")}
-              </NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.3">
-                {t("menu.contact")}
-              </NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.4">
-                {t("menu.faq")}
-              </NavDropdown.Item>
-            </NavDropdown>
-            {nickname &&
-              (!roles?.includes("ROLE_ADMIN") ? (
-                <NavLink to="activities" className="nav-link">
-                  {t("menu.activities")}
-                </NavLink>
-              ) : (
-                <NavLink to="admin" className="nav-link">
-                  {t("menu.admin")}
-                </NavLink>
-              ))}
+            <NavLink to="/category" className="nav-link">
+              {t("menu.admin.categories")}
+            </NavLink>
+            <NavLink to="/articles" className="nav-link">
+              {t("menu.admin.articles")}
+            </NavLink>
+            <NavLink to="/user-contact" className="nav-link">
+              {t("menu.admin.user-contact")}
+            </NavLink>
           </Nav>
           {nickname ? (
             <NavDropdown
@@ -105,10 +89,9 @@ const Header: FC = () => {
             </Nav>
           )}
         </Navbar.Collapse>
-        <LanguageSwitcher />
       </Container>
     </Navbar>
   );
 };
 
-export default Header;
+export default AdminHeader;

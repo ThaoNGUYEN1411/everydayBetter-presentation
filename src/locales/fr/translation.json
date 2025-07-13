@@ -1,6 +1,6 @@
 {
   "menu": {
-    "features": "Fonctionnalités",
+    "activities": "Activités",
     "blog": "Blog",
     "about": "À propos",
     "learnMore": "En savoir plus",
@@ -10,7 +10,14 @@
     "account": "Compte",
     "login": "Se connecter",
     "register": "S'inscrire",
-    "logout": "Déconnexion"
+    "logout": "Déconnexion",
+    "admin": {
+      "nav": "Administration",
+      "user": "user",
+      "categories": "Catégories",
+      "articles": "Articles",
+      "user-contact": "User-contact"
+    }
   },
   "home": {
     "banner": {
@@ -105,5 +112,9 @@
       "incorrect": "Mot de passe incorrect",
       "maxLength_message": "Password ne doit pas dépasser 255 caractèr"
     }
+  },
+  "notFoundPage": {
+    "title": "404 - Page introuvable",
+    "content": "La page que vous recherchez n'existe pas."
   }
 }

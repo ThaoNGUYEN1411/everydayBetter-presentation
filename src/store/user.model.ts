@@ -1,6 +1,8 @@
 import { action, Action, Thunk, thunk } from "easy-peasy";
 
 type ResponseStatus = "success" | "server_error" | "error_400" | undefined;
+export type Role = "ROLE_USER" | "ROLE_ADMIN" | "ROLE_ANONYMOUS";
+
 //interface stoke data
 export interface UserData {
   nickname: string | null;
@@ -9,7 +11,7 @@ export interface UserData {
 }
 export interface AuthInfo {
   nickname: string;
-  roles: [];
+  roles: Role[];
 }
 
 // Interface for authentication payload
@@ -54,7 +56,6 @@ export const userModel: UserModel = {
   create: thunk(async (actions, payload, { injections }) => {
     const { httpService } = injections;
     const response: any = await httpService.post(`/users/create`, payload);
-    actions.setAuthInfo(response);
   }),
   authenticate: thunk(async (actions, payload, { injections }) => {
     const { httpService } = injections;
@@ -65,11 +66,15 @@ export const userModel: UserModel = {
     );
     actions.setAuthInfo(response);
     localStorage.setItem("nickname", response.nickname);
+    localStorage.setItem("roles", response.roles[0]);
+
     actions.setCurrentUser(payload); //  Store the user
   }),
 
   logout: thunk(async (actions, _payload, { injections }) => {
     const { httpService } = injections;
+    localStorage.removeItem("nickname");
+    localStorage.removeItem("roles");
     const response = await httpService.post(
       "/users/logout",
       {}, // corps vide
@@ -80,11 +85,9 @@ export const userModel: UserModel = {
         withCredentials: true,
       }
     );
-    if (response.status === 201) {
-      //Reset user data
-      actions.setCurrentUser(null); // Reset currentUser
-      actions.setAuthInfo(null);
-    }
+
+    actions.setCurrentUser(null); // Reset currentUser
+    actions.setAuthInfo(null);
   }),
 };
 
