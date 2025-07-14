@@ -69,21 +69,17 @@ const Header: FC = () => {
               }
               id="nav-dropdown"
             >
-              <NavDropdown.Item eventKey="4.1">
-                <NavLink to="/activities" className="nav-link">
-                  {t("menu.account")}
-                </NavLink>
+              <NavDropdown.Item as={Link} to="/activities">
+                {t("menu.account")}
               </NavDropdown.Item>
-              <NavDropdown.Item eventKey="4.2">
-                <NavLink
-                  to="/"
-                  onClick={() => {
-                    handleLogout();
-                  }}
-                  className="nav-link"
-                >
-                  {t("menu.logout")}
-                </NavLink>
+              <NavDropdown.Item
+                as={Link}
+                to="/"
+                onClick={() => {
+                  handleLogout();
+                }}
+              >
+                {t("menu.logout")}
               </NavDropdown.Item>
             </NavDropdown>
           ) : (

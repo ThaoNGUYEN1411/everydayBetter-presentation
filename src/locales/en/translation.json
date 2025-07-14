@@ -81,8 +81,9 @@
     "createUser": {
       "title": "Create an account",
       "btn": "Create",
-      "alert.success": "Thank you! Your account has been successfully created.",
-      "alert.error": "An error occurred while creating the account. Please try again."
+      "success": "Thank you! Your account has been successfully created!",
+      "alert.error": "An error occurred while creating the account. Please try again.",
+      "email_already_exists": "This email address is already in use!"
     },
     "userAuthenticate": {
       "title": "Login",

@@ -82,7 +82,7 @@
     "createUser": {
       "title": "Créer un compte",
       "btn": "Créer",
-      "alert.success": "Merci! Votre compte a été créé avec succès",
+      "success": "Merci! Votre compte a été créé avec succès!",
       "server.error": "Une erreur est survenue. Veuillez réessayer plus tard.",
       "email_already_exists": "Cette adresse e-mail est déjà utilisée!"
     },

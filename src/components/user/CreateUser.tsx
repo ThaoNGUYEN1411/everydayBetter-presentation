@@ -1,5 +1,5 @@
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
@@ -12,8 +12,12 @@ import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 const CreateUser: FC = () => {
   const { t } = useTranslation();
   const navigate = useNavigate();
+
   const { responseStatus, emailError } = useStoreState(
     (state: AppStoreModel) => state.user
+  );
+  const createUser = useStoreActions(
+    (actions: Actions<AppStoreModel>) => actions.user.create
   );
   const [isErrorEmail, setIsErrorEmail] = useState(false);
   const [showPassword, setShowPassword] = useState(false);
@@ -24,24 +28,23 @@ const CreateUser: FC = () => {
     register,
     reset,
   } = useForm<UserData>();
-  const createUser = useStoreActions(
-    (actions: Actions<AppStoreModel>) => actions.user.create
-  );
 
   const onSubmit: SubmitHandler<UserData> = async (values) => {
-    try {
-      await createUser(values);
-      reset();
-      navigate("/users/authenticate");
-    } catch {
-      console.log("error authenticate");
-    }
-
-    setIsErrorEmail(
-      responseStatus == "error_400" && emailError === "UniqueEmail"
-    );
+    await createUser(values);
   };
-  const handleToggle = () => setShowPassword((prev) => !prev);
+
+  useEffect(() => {
+    if (responseStatus == "success") {
+      navigate("/users/authenticate", {
+        state: { successMessage: t("user.createUser.success") },
+      });
+      reset();
+    } else if (responseStatus == "error_400") {
+      setIsErrorEmail(emailError === "UniqueEmail");
+    }
+  }, [responseStatus, emailError, navigate, reset]); //useEffect est déclenché quand responseStatus change
+
+  const handleToggle = () => setShowPassword(!showPassword);
   return (
     <div className="page d-flex justify-content-center mt-5">
       <div className="p-5 my-5 shadow col-5">
@@ -124,8 +127,6 @@ const CreateUser: FC = () => {
                   <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
                 </span>
               </div>
-
-              {/* Message d'error */}
               {errors.password && (
                 <div className="text-danger mt-1">
                   {errors.password.message}

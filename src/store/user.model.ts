@@ -5,7 +5,7 @@ export type Role = "ROLE_USER" | "ROLE_ADMIN" | "ROLE_ANONYMOUS";
 
 //interface stoke data
 export interface UserData {
-  nickname: string | null;
+  nickname: string;
   email: string;
   password: string;
 }
@@ -53,10 +53,27 @@ export const userModel: UserModel = {
   setEmailError: action((state, emailError) => {
     state.emailError = emailError;
   }),
+
   create: thunk(async (actions, payload, { injections }) => {
     const { httpService } = injections;
-    const response: any = await httpService.post(`/users/create`, payload);
+    try {
+      await httpService.post(`/users/create`, payload);
+      actions.setResponseStatus("success");
+    } catch (error: any) {
+      const errorData = error.response;
+      if (errorData.status === 400) {
+        actions.setResponseStatus("error_400");
+        if (
+          errorData.data.errors?.some((err: any) => err.code == "UniqueEmail")
+        ) {
+          actions.setEmailError("UniqueEmail");
+        }
+      } else {
+        actions.setResponseStatus("server_error");
+      }
+    }
   }),
+
   authenticate: thunk(async (actions, payload, { injections }) => {
     const { httpService } = injections;
     const response: AuthInfo = await httpService.post(

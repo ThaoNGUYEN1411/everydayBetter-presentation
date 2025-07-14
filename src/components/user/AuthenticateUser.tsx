@@ -3,11 +3,13 @@ import { FC, useState } from "react";
 import { Button, Col, Form } from "react-bootstrap";
 import { SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
-import { useNavigate } from "react-router-dom";
+import { useLocation, useNavigate } from "react-router-dom";
 import { AppStoreModel } from "../../store";
 import { UserData } from "../../store/user.model";
 
 const UserAuthenticate: FC = () => {
+  const location = useLocation();
+  const successMessage = location.state?.successMessage;
   const [isError, setIsError] = useState(false);
   const {
     formState: { errors },
@@ -31,6 +33,9 @@ const UserAuthenticate: FC = () => {
   return (
     <div className="page d-flex justify-content-center mt-5">
       <div className="p-5 my-5 shadow col-5">
+        {successMessage && (
+          <p className="text-success text-center">{successMessage}</p>
+        )}
         <h1 className="mb-4 text-center">{t("user.userAuthenticate.title")}</h1>
         <div className="d-flex justify-content-center">
           <Form onSubmit={handleSubmit(onSubmit)} className="w-75">
