@@ -74,6 +74,7 @@ const TrackingLog: FC = () => {
     newStart.setDate(startDate.getDate() + (direction === "next" ? 7 : -7));
     setStartDate(newStart);
   };
+
   const toggle = async (
     activityId: string,
     dateStr: string,
@@ -91,6 +92,7 @@ const TrackingLog: FC = () => {
       console.error("Error create tracking log ");
     }
   };
+
   const update = async (
     activityId: string,
     dateStr: string,

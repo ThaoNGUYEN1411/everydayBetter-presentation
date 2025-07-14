@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import CreateActivityModal from "../components/CreateActivityModal";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
-import TrackingRecord from "../components/TrackingLog";
+import TrackingLog from "../components/TrackingLog";
 import { PieChart } from "@mui/x-charts";
 
 const ActivitiesPage: FC = () => {
@@ -58,7 +58,7 @@ const ActivitiesPage: FC = () => {
         />
       </div>
       <Row className="wh-80">
-        <TrackingRecord />
+        <TrackingLog />
       </Row>
     </div>
   );

@@ -176,8 +176,15 @@ export const activityModel: ActivityModel = {
   }),
   deleteTrackingLog: thunk(async (_action, id, { injections }) => {
     const { httpService } = injections;
-    const response: any = await httpService.delete(`/tracking-logs/?id=${id}`, {
-      withCredentials: true,
-    });
+    try {
+      const response: any = await httpService.delete(
+        `/tracking-logs/?id=${id}`,
+        {
+          withCredentials: true,
+        }
+      );
+    } catch (error) {
+      console.log("error delete tracking log");
+    }
   }),
 };
