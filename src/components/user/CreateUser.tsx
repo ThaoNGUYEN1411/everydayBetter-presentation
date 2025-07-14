@@ -103,7 +103,7 @@ const CreateUser: FC = () => {
               </Form.Label>
               <div className="d-flex align-items-center border rounded is-invalid">
                 <Form.Control
-                  className="border-0 shadow-none flex-grow-1 py-2"
+                  className="border-0 flex-grow-1 py-2"
                   type={showPassword ? "text" : "password"}
                   placeholder={t("user.password.placeholder")}
                   {...register("password", {
@@ -124,7 +124,7 @@ const CreateUser: FC = () => {
                   isInvalid={!!errors.password}
                 />
                 <span className="px-3 cursor-pointer" onClick={handleToggle}>
-                  <FontAwesomeIcon icon={showPassword ? faEyeSlash : faEye} />
+                  <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
                 </span>
               </div>
               {errors.password && (

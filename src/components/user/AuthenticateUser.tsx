@@ -6,11 +6,16 @@ import { useTranslation } from "react-i18next";
 import { useLocation, useNavigate } from "react-router-dom";
 import { AppStoreModel } from "../../store";
 import { UserData } from "../../store/user.model";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
 
 const UserAuthenticate: FC = () => {
   const location = useLocation();
   const successMessage = location.state?.successMessage;
   const [isError, setIsError] = useState(false);
+  const [showPassword, setShowPassword] = useState(false);
+  const handleToggle = () => setShowPassword(!showPassword);
+
   const {
     formState: { errors },
     handleSubmit,
@@ -73,10 +78,10 @@ const UserAuthenticate: FC = () => {
               <Form.Label className="mandatory">
                 {t("user.password.title")}
               </Form.Label>
-              <Col>
+              <div className="d-flex align-items-center border rounded is-invalid">
                 <Form.Control
-                  className="px-4 py-2"
-                  type="password"
+                  className="border-0 px-4 py-2"
+                  type={showPassword ? "text" : "password"}
                   placeholder={t("user.password.placeholder")}
                   {...register("password", {
                     required: {
@@ -95,10 +100,13 @@ const UserAuthenticate: FC = () => {
                   })}
                   isInvalid={!!errors.password}
                 />
-                <Form.Control.Feedback className="small" type="invalid">
-                  {errors.password?.message}
-                </Form.Control.Feedback>
-              </Col>
+                <span className="px-3 cursor-pointer" onClick={handleToggle}>
+                  <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                </span>
+              </div>
+              <Form.Control.Feedback className="small" type="invalid">
+                {errors.password?.message}
+              </Form.Control.Feedback>
             </Form.Group>
             {isError && (
               <p className="text-danger small mt-2">
