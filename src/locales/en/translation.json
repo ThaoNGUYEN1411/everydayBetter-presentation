@@ -115,5 +115,13 @@
   "notFoundPage": {
     "title": "404 - Page Not Found",
     "content": "The page you are looking for does not exist."
+  },
+  "charts": {
+    "title": "Analysis charts",
+    "form": {
+      "start_date": "Start Date",
+      "end_date": "End Date",
+      "button": "Analyst"
+    }
   }
 }

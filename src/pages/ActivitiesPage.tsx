@@ -5,7 +5,7 @@ import CreateActivityModal from "../components/CreateActivityModal";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
 import TrackingLog from "../components/TrackingLog";
-import { PieChart } from "@mui/x-charts";
+import Charts from "../components/Charts";
 
 const ActivitiesPage: FC = () => {
   const { t } = useTranslation();
@@ -60,6 +60,7 @@ const ActivitiesPage: FC = () => {
       <Row className="wh-80">
         <TrackingLog />
       </Row>
+      <Charts />
     </div>
   );
 };

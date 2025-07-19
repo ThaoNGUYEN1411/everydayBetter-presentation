@@ -116,5 +116,13 @@
   "notFoundPage": {
     "title": "404 - Page introuvable",
     "content": "La page que vous recherchez n'existe pas."
+  },
+  "charts": {
+    "title": "Graphiques d'analyse",
+    "form": {
+      "start_date": "Date de début",
+      "end_date": "Date de fin",
+      "button": "Afficher les graphiques"
+    }
   }
 }

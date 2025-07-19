@@ -46,15 +46,31 @@ export interface ActivityTrackingLog {
   activityName: string;
   listTrackingLog: TrackingLog[];
 }
+export interface ProgressAnalytics {
+  activityId: string;
+  activityName: string;
+  progress: Progress;
+}
+
+export interface Progress {
+  done: number;
+  missed: number;
+  untracked: number;
+}
+
 //define le type du model (data+ action)
 export interface ActivityModel {
   activityList: ActivityDto[];
   activityTrackingLogList: ActivityTrackingLog[];
   currentActivityDetail: CurrentActivityDetail | null;
+  progressAnalytics: ProgressAnalytics[] | null;
+
   setActivityList: Action<ActivityModel, ActivityDto[]>;
   setActivityTrackingLogList: Action<ActivityModel, ActivityTrackingLog[]>;
   removeActivityFromList: Action<ActivityModel, string>;
   setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
+  setProgressAnalytics: Action<ActivityModel, ProgressAnalytics[] | null>;
+
   create: Thunk<ActivityModel, CreateActivity>;
   getAllActivityList: Thunk<ActivityModel>;
   deleteActivity: Thunk<ActivityModel, string>;
@@ -67,6 +83,11 @@ export interface ActivityModel {
   >;
   updateTrackingLog: Thunk<ActivityModel, TrackActivityData, any, any>;
   deleteTrackingLog: Thunk<ActivityModel, { id: string }, any>;
+
+  getActivitiesProgressAnalytics: Thunk<
+    ActivityModel,
+    { startDate: string; endDate: string }
+  >;
 }
 
 //state initial et l’action
@@ -74,6 +95,8 @@ export const activityModel: ActivityModel = {
   activityList: [],
   activityTrackingLogList: [],
   currentActivityDetail: null,
+  progressAnalytics: null,
+
   setActivityList: action((state, activityList) => {
     state.activityList = activityList;
   }),
@@ -88,6 +111,10 @@ export const activityModel: ActivityModel = {
   setCurrentActivityDetail: action((state, currentActivityModel) => {
     state.currentActivityDetail = currentActivityModel;
   }),
+  setProgressAnalytics: action((state, progressAnalytics) => {
+    state.progressAnalytics = progressAnalytics;
+  }),
+
   create: thunk(async (_, createActivity, { injections }) => {
     const { httpService } = injections;
     try {
@@ -187,4 +214,20 @@ export const activityModel: ActivityModel = {
       console.log("error delete tracking log");
     }
   }),
+
+  getActivitiesProgressAnalytics: thunk(
+    async (action, { startDate, endDate }, { injections }) => {
+      const { httpService } = injections;
+      try {
+        const response: any = await httpService.get(
+          `/tracking-logs/progress-summary?start-date=${startDate}&end-date=${endDate}`,
+          { withCredentials: true }
+        );
+        action.setProgressAnalytics(response);
+        console.log(response);
+      } catch {
+        console.log("Error get progress analytics");
+      }
+    }
+  ),
 };
