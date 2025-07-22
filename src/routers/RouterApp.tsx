@@ -11,6 +11,7 @@ import Guard from "./Guard";
 import RootLayout from "../layouts/RootLayout";
 import NotFoundPage from "../pages/NotFoundPage";
 import AdminLayout from "../layouts/AdminLayout";
+import ArticlesPage from "../pages/ArticlesPage";
 
 const RouterApp = () => {
   return (
@@ -23,7 +24,8 @@ const RouterApp = () => {
               <Route path="create" element={<CreateUserPage />} />
               <Route path="authenticate" element={<AuthenticateUserPage />} />
             </Route>
-
+            <Route path="/blog" element={<ArticlesPage />} />
+            {/* todo: add la<y loading blog or articles? */}
             <Route
               path="activities"
               element={

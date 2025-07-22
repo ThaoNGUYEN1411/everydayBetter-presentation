@@ -31,7 +31,7 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            <NavLink to="/" className="nav-link">
+            <NavLink to="/blog" className="nav-link">
               {t("menu.blog")}
             </NavLink>
             <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
