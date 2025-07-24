@@ -123,5 +123,35 @@
       "end_date": "End Date",
       "button": "Analyst"
     }
+  },
+  "privacy": {
+    "title": "Privacy Policy – Everyday Better",
+    "lastUpdate": "Last updated: 24/07/2025",
+    "intro": "The Everyday Better app respects your privacy.",
+    "cookies.title": "1. Use of Cookies",
+    "cookies.text": "We only use cookies that are strictly necessary for the proper functioning of the application, especially for authentication and session security.",
+    "data.title": "2. Data Collected",
+    "data.text": "The app may collect certain personal data only as part of registration and habit tracking.",
+    "security.title": "3. Security",
+    "security.text": "Data is stored securely. The authentication token is stored in a secure cookie.",
+    "contact.title": "Contact",
+    "contact.text": "If you have any questions, you can contact us at: contact@everydaybetter.app"
+  },
+
+  "footer": {
+    "logoAlt": "Everyday Better Logo",
+    "about": {
+      "title": "About Us"
+    },
+    "social": {
+      "title": "Social",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram"
+    },
+    "contact": {
+      "title": "Contact",
+      "privacyPolicy": "Privacy Policy"
+    }
   }
 }

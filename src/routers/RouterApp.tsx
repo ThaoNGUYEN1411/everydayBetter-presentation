@@ -12,6 +12,7 @@ import RootLayout from "../layouts/RootLayout";
 import NotFoundPage from "../pages/NotFoundPage";
 import AdminLayout from "../layouts/AdminLayout";
 import ArticlesPage from "../pages/ArticlesPage";
+import PrivacyPolicy from "../pages/PrivacyPolicy";
 
 const RouterApp = () => {
   return (
@@ -20,6 +21,7 @@ const RouterApp = () => {
         <Routes>
           <Route path="/" element={<RootLayout />}>
             <Route index element={<HomePage />} />
+            <Route path="privacy-policy" element={<PrivacyPolicy />} />
             <Route path="users/">
               <Route path="create" element={<CreateUserPage />} />
               <Route path="authenticate" element={<AuthenticateUserPage />} />
