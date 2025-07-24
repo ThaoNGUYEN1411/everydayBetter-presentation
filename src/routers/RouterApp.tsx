@@ -13,7 +13,10 @@ import NotFoundPage from "../pages/NotFoundPage";
 import AdminLayout from "../layouts/AdminLayout";
 import ArticlesPage from "../pages/ArticlesPage";
 import PrivacyPolicy from "../pages/PrivacyPolicy";
-
+import AboutPage from "../pages/AboutPage";
+import FAQPage from "../pages/FAQPage";
+import ContactPage from "../pages/ContactPage";
+//todo: add page in lazy loading et test
 const RouterApp = () => {
   return (
     <BrowserRouter>
@@ -22,6 +25,9 @@ const RouterApp = () => {
           <Route path="/" element={<RootLayout />}>
             <Route index element={<HomePage />} />
             <Route path="privacy-policy" element={<PrivacyPolicy />} />
+            <Route path="about" element={<AboutPage />} />
+            <Route path="faq" element={<FAQPage />} />
+            <Route path="contact" element={<ContactPage />} />
             <Route path="users/">
               <Route path="create" element={<CreateUserPage />} />
               <Route path="authenticate" element={<AuthenticateUserPage />} />

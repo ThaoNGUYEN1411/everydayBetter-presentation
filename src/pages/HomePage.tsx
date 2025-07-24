@@ -2,6 +2,7 @@ import { FC } from "react";
 import { Button, Card, Col, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { useNavigate } from "react-router-dom";
+import Testimonials from "../components/Testimonials";
 
 const HomePage: FC = () => {
   const navigate = useNavigate();
@@ -98,6 +99,7 @@ const HomePage: FC = () => {
           </Col>
         </Row>
       </section>
+      <Testimonials />
     </div>
   );
 };

@@ -35,10 +35,21 @@ const Header: FC = () => {
               {t("menu.blog")}
             </NavLink>
             <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
-              <NavDropdown.Item>{t("menu.about")}</NavDropdown.Item>
-              <NavDropdown.Item>{t("menu.testimonials")}</NavDropdown.Item>
-              <NavDropdown.Item>{t("menu.contact")}</NavDropdown.Item>
-              <NavDropdown.Item>{t("menu.faq")}</NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink to="/about" className="nav-link">
+                  {t("menu.about")}
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink to="/contact" className="nav-link">
+                  {t("menu.contact")}
+                </NavLink>
+              </NavDropdown.Item>
+              <NavDropdown.Item>
+                <NavLink to="/faq" className="nav-link">
+                  {t("menu.faq")}
+                </NavLink>
+              </NavDropdown.Item>
             </NavDropdown>
             {nickname &&
               (!roles?.includes("ROLE_ADMIN") ? (

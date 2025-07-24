@@ -153,5 +153,75 @@
       "title": "Contact",
       "privacyPolicy": "Politique de confidentialité"
     }
+  },
+  "about": {
+    "title": "À propos de Everyday Better",
+    "section": {
+      "presentation": {
+        "title": "Présentation",
+        "text": "Everyday Better est une application mobile et web conçue pour vous aider à créer de bonnes habitudes et à progresser chaque jour. Elle s'adresse à toute personne souhaitant améliorer son quotidien, que ce soit sur le plan personnel, professionnel, physique ou mental."
+      },
+      "mission": {
+        "title": "Notre mission",
+        "text": "Encourager les utilisateurs à adopter des routines positives de manière progressive, simple et motivante."
+      },
+      "vision": {
+        "title": "Notre vision",
+        "text": "Offrir un outil intelligent et accessible pour que chacun puisse devenir une meilleure version de lui-même."
+      },
+      "values": {
+        "title": "Nos valeurs",
+        "value1": "Simplicité d’utilisation",
+        "value2": "Respect de la vie privée",
+        "value3": "Évolution personnelle continue"
+      },
+      "howItWorks": {
+        "title": "Comment fonctionne Everyday Better ?",
+        "text": "Vous définissez vos propres habitudes, suivez votre progression, recevez des rappels et consultez un tableau de bord clair pour visualiser vos efforts. L’application vous accompagne sans juger, à votre rythme."
+      }
+    }
+  },
+  "faq": {
+    "title": "Foire aux questions",
+    "questions": [
+      {
+        "question": "Comment fonctionne Everyday Better ?",
+        "answer": "Everyday Better vous aide à suivre vos habitudes quotidiennes et à rester motivé."
+      },
+      {
+        "question": "Est-ce que l'application est gratuite ?",
+        "answer": "Oui, l'application propose une version gratuite avec des fonctionnalités de base."
+      },
+      {
+        "question": "Comment puis-je contacter l'assistance ?",
+        "answer": "Vous pouvez nous contacter via la page Contact ou par e-mail à support@everydaybetter.com."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Témoignages",
+    "list": [
+      {
+        "name": "Alice",
+        "message": "Grâce à Everyday Better, j’ai réussi à me lever plus tôt et être plus productive."
+      },
+      {
+        "name": "Thomas",
+        "message": "L’application m’aide à suivre mes habitudes de santé. C’est simple et motivant."
+      },
+      {
+        "name": "Sophie",
+        "message": "J’adore les rappels et le tableau de bord clair. Bravo à l’équipe !"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contactez-nous",
+    "name": "Nom",
+    "email": "Adresse e-mail",
+    "subject": "Sujet",
+    "message": "Message",
+    "send": "Envoyer",
+    "success": "Votre message a été envoyé avec succès. Merci !"
   }
 }

@@ -153,5 +153,75 @@
       "title": "Contact",
       "privacyPolicy": "Privacy Policy"
     }
+  },
+  "about": {
+    "title": "About Everyday Better",
+    "section": {
+      "presentation": {
+        "title": "Presentation",
+        "text": "Everyday Better is a mobile and web app designed to help you build good habits and grow every day. It is intended for anyone who wants to improve their daily life — personally, professionally, physically or mentally."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "text": "Encourage users to adopt positive routines in a simple, gradual and motivating way."
+      },
+      "vision": {
+        "title": "Our Vision",
+        "text": "Provide a smart and accessible tool so everyone can become a better version of themselves."
+      },
+      "values": {
+        "title": "Our Values",
+        "value1": "Ease of use",
+        "value2": "Privacy first",
+        "value3": "Continuous personal growth"
+      },
+      "howItWorks": {
+        "title": "How does Everyday Better work?",
+        "text": "You define your own habits, track your progress, receive reminders, and view your efforts on a clear dashboard. The app supports you without judgment, at your own pace."
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": [
+      {
+        "question": "How does Everyday Better work?",
+        "answer": "Everyday Better helps you track your daily habits and stay motivated."
+      },
+      {
+        "question": "Is the app free?",
+        "answer": "Yes, the app offers a free version with basic features."
+      },
+      {
+        "question": "How can I contact support?",
+        "answer": "You can contact us through the Contact page or by email at support@everydaybetter.com."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "list": [
+      {
+        "name": "Alice",
+        "message": "Thanks to Everyday Better, I now wake up earlier and feel more productive."
+      },
+      {
+        "name": "Thomas",
+        "message": "The app helps me keep track of my health habits. It's simple and motivating."
+      },
+      {
+        "name": "Sophie",
+        "message": "I love the reminders and the clean dashboard. Well done to the team!"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "success": "Your message has been sent successfully. Thank you!"
   }
 }
