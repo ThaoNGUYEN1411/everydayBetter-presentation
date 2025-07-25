@@ -79,7 +79,7 @@ const ContactPage: FC = () => {
               />
             </Form.Group>
 
-            <Button type="submit" variant="primary">
+            <Button type="submit" variant="primary" className="btn-add">
               {t("contact.send")}
             </Button>
           </Form>

@@ -13,8 +13,9 @@ const Charts: FC = () => {
   const progressAnalytics = useStoreState(
     (state: any) => state.activity.progressAnalytics
   );
-  const { setProgressAnalytics, getActivitiesProgressAnalytics } =
-    useStoreActions((state: Actions<AppStoreModel>) => state.activity);
+  const { getActivitiesProgressAnalytics } = useStoreActions(
+    (state: Actions<AppStoreModel>) => state.activity
+  );
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
@@ -67,7 +68,7 @@ const Charts: FC = () => {
         </Row>
       </Form>
       {progressAnalytics && (
-        <Row className="mt-5 mb-5">
+        <Row className="mt-5 mb-5 pb-5">
           {progressAnalytics?.map((progressAnalytic: any) => {
             const { activityId, activityName, progress } = progressAnalytic;
             const { done, missed, untracked } = progress;
@@ -89,8 +90,9 @@ const Charts: FC = () => {
                   width={200}
                   height={200}
                   key={activityId}
+                  className="mb-2"
                 />
-                <div className="text-center" key={activityId}>
+                <div className="text-center mb-5 pe-5 me-5" key={activityId}>
                   <p key={activityId}>{activityName}</p>
                 </div>
               </Col>

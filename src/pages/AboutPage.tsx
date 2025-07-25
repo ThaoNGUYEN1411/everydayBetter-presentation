@@ -5,7 +5,7 @@ const AboutPage = () => {
   const { t } = useTranslation();
 
   return (
-    <Container className="mt-5 mb-5">
+    <Container className="mt-5 mb-5 px-5">
       <h1 className="mb-4">{t("about.title")}</h1>
 
       <Row className="mb-4">

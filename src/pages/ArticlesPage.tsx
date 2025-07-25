@@ -1,4 +1,4 @@
-import { FC, useRef, useState } from "react";
+import { FC, useState } from "react";
 import { Button, Col, Container, Form, InputGroup, Row } from "react-bootstrap";
 import ArticleCard from "../components/ArticleCard";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
@@ -10,24 +10,28 @@ import {
 const ArticlesPage: FC = () => {
   const articles = [
     {
+      id: 1,
       title: "Adopter la méthode GTD sans stress",
       description: "Pour adopter la méthode GTD sans stress...",
       imageUrl: "/feature3.jpg",
       link: "/articles/gtd",
     },
     {
+      id: 2,
       title: "L’auto-réflexologie : un geste simple",
       description: "Bienvenue sur Habitudes Zen ! ...",
       imageUrl: "/feature3.jpg",
       link: "/articles/reflexologie",
     },
     {
+      id: 3,
       title: "Adopter la méthode GTD sans stress",
       description: "Pour adopter la méthode GTD sans stress...",
       imageUrl: "/feature3.jpg",
       link: "/articles/gtd",
     },
     {
+      id: 4,
       title: "L’auto-réflexologie : un geste simple",
       description: "Bienvenue sur Habitudes Zen ! ...",
       imageUrl: "/feature3.jpg",
@@ -44,33 +48,9 @@ const ArticlesPage: FC = () => {
   };
   return (
     <Container className="my-5">
-      <h5>Rechercher</h5>
-
-      {/* <Row className="text-center">
-        <div className="search">
-          <Form.Control
-            type="text"
-            placeholder="Rechercher un article..." //i18n
-            value={searchValue}
-            size="lg"
-            spellCheck={false}
-            onChange={(e) => {
-              setSearchValue(e.target.value);
-            }}
-            className="mb-3 search-input"
-          />
-          {!!searchValue && (
-            <button onClick={handleClear} className="clear">
-              <FontAwesomeIcon icon={faCircleXmark} />
-            </button>
-          )}
-          <button className="search-btn">
-            <FontAwesomeIcon icon={faMagnifyingGlass} />
-          </button>
-        </div>
-      </Row> */}
-      <Row className="justify-content-center align-items-center">
+      <Row className="justify-content-center align-items-center mb-5">
         <Col xs="auto">
+          <Form.Label className="ms-4">Rechercher</Form.Label>
           <InputGroup
             className="rounded-pill bg-light border px-3"
             style={{ width: "360px", height: "42px" }}

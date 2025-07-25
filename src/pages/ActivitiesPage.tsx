@@ -45,7 +45,7 @@ const ActivitiesPage: FC = () => {
             variant="primary"
             type="submit"
             size="lg"
-            className="px-4 mt-5 btn-add me-4"
+            className="px-4 mt-5 mb-5 btn-add me-4"
             onClick={openModalForCreateNewActivity}
           >
             {t("activity.btn-add")}
