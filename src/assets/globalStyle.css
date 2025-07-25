@@ -239,15 +239,3 @@ footer {
 .search-input:not(:placeholder-shown) ~ .search-btn {
   color: rgba(4, 5, 7, 0.75);
 }
-/* .avt {
-  max-width: 60px;
-}
-.img-avatar {
-  width: "60px";
-  height: "auto";
-  border-radius: "50%";
-  object-fit: "cover";
-  margin-right: "1rem";
-  object-position: center;
-  flex-shrink: 0;
-} */
