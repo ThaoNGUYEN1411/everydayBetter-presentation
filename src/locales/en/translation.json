@@ -1,0 +1,227 @@
+{
+  "menu": {
+    "activities": "Activities",
+    "blog": "Blog",
+    "about": "About",
+    "learnMore": "Learn more",
+    "testimonials": "Testimonials",
+    "contact": "Contact",
+    "faq": "FAQ",
+    "account": "Account",
+    "login": "Login",
+    "register": "Register",
+    "logout": "Logout",
+    "admin": {
+      "nav": "Admin",
+      "user": "User",
+      "categories": "Categories",
+      "articles": "Articles",
+      "user-contact": "User-contact"
+    }
+  },
+  "home": {
+    "banner": {
+      "title": "Everyday Better, the app that boosts your habits.",
+      "subtitle": "Track your progress and become a better version of yourself. Try it for free!",
+      "signup": "Sign Up"
+    },
+    "features": {
+      "title": "Track anything you want",
+      "subtitle": "Everyday Better is completely flexible. You can track what's important to you and easily customize it to your needs.",
+      "card1": {
+        "title": "Reminder Notifications",
+        "text": "Notifications remind users to complete their regular tasks and help them maintain their habits."
+      },
+      "card2": {
+        "title": "Custom Goals",
+        "text": "Users can define their own activities and track the ones that matter most to them."
+      },
+      "card3": {
+        "title": "Progress Tracking",
+        "text": "A visual dashboard helps users stay motivated with clear feedback on their progress."
+      }
+    }
+  },
+  "activity": {
+    "btn-add": "Add",
+    "list": {
+      "title": "Activity List",
+      "title_follow": "Activity tracking by date"
+    },
+    "modal_create_activity": {
+      "title": "Create a new activity",
+      "input_name": {
+        "title": "Title",
+        "placeholder": "Add a title",
+        "errors_message": "Activity name is required",
+        "error_maxLength": "Activity name must not exceed 200 characters"
+      },
+      "description": {
+        "title": "Description",
+        "placeholder": "Add a description",
+        "errors_message": "Description is too long"
+      },
+      "type": {
+        "title": "Choose activity type",
+        "positive": "Positive",
+        "negative": "Negative",
+        "errors_message": "You must choose an option"
+      },
+      "category": {
+        "title": "Choose activity categories",
+        "selected_categories": "Selected categories",
+        "placeholder": "Enter a tag"
+      },
+      "btn": "Create",
+      "alert.success": "Activity created successfully!",
+      "alert.error": "Failed to create activity."
+    }
+  },
+  "user": {
+    "createUser": {
+      "title": "Create an account",
+      "btn": "Create",
+      "success": "Thank you! Your account has been successfully created!",
+      "alert.error": "An error occurred while creating the account. Please try again.",
+      "email_already_exists": "This email address is already in use!"
+    },
+    "userAuthenticate": {
+      "title": "Login",
+      "btn": "Log in",
+      "alert.success": "You have successfully logged in.",
+      "alert.error": "An error occurred while logging in. Please try again."
+    },
+    "nickname": {
+      "title": "Nickname",
+      "placeholder": "Enter your nickname",
+      "errors_message": "Nickname is required"
+    },
+    "email": {
+      "title": "Email",
+      "placeholder": "email@example.com",
+      "errors_message": "Email is required",
+      "invalid_message": "The email address is not valid. Please enter a correct address.",
+      "maxLength_message": "Email address must not exceed 340 characters."
+    },
+    "password": {
+      "title": "Password",
+      "placeholder": "Enter your password",
+      "errors_message": "Password is required",
+      "invalid_message": "Please choose a password containing at least 8 characters, including an uppercase letter, a lowercase letter, a digit, and a special character (@$!%*?&)",
+      "incorrect": "Incorrect password",
+      "maxLength_message": "Password must not exceed 255 characters."
+    }
+  },
+  "notFoundPage": {
+    "title": "404 - Page Not Found",
+    "content": "The page you are looking for does not exist."
+  },
+  "charts": {
+    "title": "Analysis charts",
+    "form": {
+      "start_date": "Start Date",
+      "end_date": "End Date",
+      "button": "Analyst"
+    }
+  },
+  "privacy": {
+    "title": "Privacy Policy – Everyday Better",
+    "lastUpdate": "Last updated: 24/07/2025",
+    "intro": "The Everyday Better app respects your privacy.",
+    "cookies.title": "1. Use of Cookies",
+    "cookies.text": "We only use cookies that are strictly necessary for the proper functioning of the application, especially for authentication and session security.",
+    "data.title": "2. Data Collected",
+    "data.text": "The app may collect certain personal data only as part of registration and habit tracking.",
+    "security.title": "3. Security",
+    "security.text": "Data is stored securely. The authentication token is stored in a secure cookie.",
+    "contact.title": "Contact",
+    "contact.text": "If you have any questions, you can contact us at: contact@everydaybetter.app"
+  },
+
+  "footer": {
+    "logoAlt": "Everyday Better Logo",
+    "about": {
+      "title": "About Us"
+    },
+    "social": {
+      "title": "Social",
+      "facebook": "Facebook",
+      "twitter": "Twitter",
+      "instagram": "Instagram"
+    },
+    "contact": {
+      "title": "Contact",
+      "privacyPolicy": "Privacy Policy"
+    }
+  },
+  "about": {
+    "title": "About Everyday Better",
+    "section": {
+      "presentation": {
+        "title": "Presentation",
+        "text": "Everyday Better is a mobile and web app designed to help you build good habits and grow every day. It is intended for anyone who wants to improve their daily life — personally, professionally, physically or mentally."
+      },
+      "mission": {
+        "title": "Our Mission",
+        "text": "Encourage users to adopt positive routines in a simple, gradual and motivating way."
+      },
+      "vision": {
+        "title": "Our Vision",
+        "text": "Provide a smart and accessible tool so everyone can become a better version of themselves."
+      },
+      "values": {
+        "title": "Our Values",
+        "value1": "Ease of use",
+        "value2": "Privacy first",
+        "value3": "Continuous personal growth"
+      },
+      "howItWorks": {
+        "title": "How does Everyday Better work?",
+        "text": "You define your own habits, track your progress, receive reminders, and view your efforts on a clear dashboard. The app supports you without judgment, at your own pace."
+      }
+    }
+  },
+  "faq": {
+    "title": "Frequently Asked Questions",
+    "questions": [
+      {
+        "question": "How does Everyday Better work?",
+        "answer": "Everyday Better helps you track your daily habits and stay motivated."
+      },
+      {
+        "question": "Is the app free?",
+        "answer": "Yes, the app offers a free version with basic features."
+      },
+      {
+        "question": "How can I contact support?",
+        "answer": "You can contact us through the Contact page or by email at support@everydaybetter.com."
+      }
+    ]
+  },
+  "testimonials": {
+    "title": "Testimonials",
+    "list": [
+      {
+        "name": "Alice",
+        "message": "Thanks to Everyday Better, I now wake up earlier and feel more productive."
+      },
+      {
+        "name": "Thomas",
+        "message": "The app helps me keep track of my health habits. It's simple and motivating."
+      },
+      {
+        "name": "Sophie",
+        "message": "I love the reminders and the clean dashboard. Well done to the team!"
+      }
+    ]
+  },
+  "contact": {
+    "title": "Contact Us",
+    "name": "Name",
+    "email": "Email address",
+    "subject": "Subject",
+    "message": "Message",
+    "send": "Send",
+    "success": "Your message has been sent successfully. Thank you!"
+  }
+}

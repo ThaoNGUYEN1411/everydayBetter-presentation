@@ -8,7 +8,7 @@ pnpm-debug.log*
 lerna-debug.log*
 
 node_modules
-dist
+dist/
 dist-ssr
 *.local
 build/
@@ -23,3 +23,5 @@ build/
 *.njsproj
 *.sln
 *.sw?
+.env
+.env.development
