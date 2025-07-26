@@ -7,4 +7,3 @@ createRoot(document.getElementById("root")!).render(
     <App />
   </StrictMode>
 );
-//partage le store dans toute l’appli.Tous les composants enfants (comme <App />) peuvent accéder au store via Easy Peasy.

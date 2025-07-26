@@ -140,7 +140,7 @@ export const activityModel: ActivityModel = {
   }),
   deleteActivity: thunk(async (actions, id, { injections }) => {
     const { httpService } = injections;
-    const response = await httpService.delete(`/activities/${id}`, {
+    await httpService.delete(`/activities/${id}`, {
       withCredentials: true,
     });
     actions.setCurrentActivityDetail(null);
@@ -159,13 +159,9 @@ export const activityModel: ActivityModel = {
   updateActivity: thunk(async (_action, payload, { injections }) => {
     const { httpService } = injections;
     try {
-      const response: any = await httpService.put(
-        `/activities/${payload.id}`,
-        payload.activity,
-        {
-          withCredentials: true,
-        }
-      );
+      await httpService.put(`/activities/${payload.id}`, payload.activity, {
+        withCredentials: true,
+      });
     } catch {
       console.log("update activity error");
     }
@@ -173,7 +169,7 @@ export const activityModel: ActivityModel = {
   createTrackingLog: thunk(async (_action, payload, { injections }) => {
     const { httpService } = injections;
 
-    const response: any = await httpService.post(`/tracking-logs/`, payload, {
+    await httpService.post(`/tracking-logs/`, payload, {
       withCredentials: true,
     });
   }),
@@ -193,23 +189,16 @@ export const activityModel: ActivityModel = {
   ),
   updateTrackingLog: thunk(async (_action, payload, { injections }) => {
     const { httpService } = injections;
-    const response: any = await httpService.patch(
-      `/tracking-logs/update`,
-      payload,
-      {
-        withCredentials: true,
-      }
-    );
+    await httpService.patch(`/tracking-logs/update`, payload, {
+      withCredentials: true,
+    });
   }),
   deleteTrackingLog: thunk(async (_action, id, { injections }) => {
     const { httpService } = injections;
     try {
-      const response: any = await httpService.delete(
-        `/tracking-logs/?id=${id}`,
-        {
-          withCredentials: true,
-        }
-      );
+      await httpService.delete(`/tracking-logs/?id=${id}`, {
+        withCredentials: true,
+      });
     } catch (error) {
       console.log("error delete tracking log");
     }
@@ -224,7 +213,6 @@ export const activityModel: ActivityModel = {
           { withCredentials: true }
         );
         action.setProgressAnalytics(response);
-        console.log(response);
       } catch {
         console.log("Error get progress analytics");
       }

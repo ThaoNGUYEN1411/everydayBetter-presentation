@@ -107,12 +107,3 @@ export const userModel: UserModel = {
     actions.setAuthInfo(null);
   }),
 };
-
-/*
-If your app only needs to create an account, authenticate a user, and log out, then you don’t need an array (usersData: UserData[]). Instead, you should store just a single object for the currently authenticated user.
-you should store users in an array (usersData: UserData[]) only if your app manages multiple users at the same time. Here are the common cases where you need an array
-  When to Use an Array (UserData[])?
- Admin Dashboard → If your app allows an admin to view or manage multiple users.
- A user list for an admin panel
-  You need getAllUsers, deleteUser, updateUser, etc.
-*/

@@ -1,6 +1,6 @@
 import { PieChart } from "@mui/x-charts";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
-import { FC, useEffect, useState } from "react";
+import { FC, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { AppStoreModel } from "../store";
