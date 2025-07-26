@@ -92,7 +92,7 @@ export const userModel: UserModel = {
     const { httpService } = injections;
     localStorage.removeItem("nickname");
     localStorage.removeItem("roles");
-    const response = await httpService.post(
+    await httpService.post(
       "/users/logout",
       {}, // corps vide
       {
