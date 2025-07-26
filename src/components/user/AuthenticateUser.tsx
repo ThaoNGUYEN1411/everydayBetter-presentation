@@ -131,16 +131,3 @@ const UserAuthenticate: FC = () => {
 };
 
 export default UserAuthenticate;
-
-//   // Sauvegarder le token uniquement si le serveur ne le met pas en cookie
-//   //The cookie will expire in 3600 seconds (1 hour)
-//   document.cookie = `token=${data.token}; Path=/; Secure; Max-Age=3600`;
-//   window.alert(t("user.userAuthenticate.alert.success"));
-//   navigate("/activities");
-// } catch (error) {
-//   window.alert(t("user.userAuthenticate.alert.error"));
-// }
-//useStoreState : hook Easy Peasy pour lire des données depuis le store.
-// useStoreActions : hook Easy Peasy pour appeler une action.
-
-// actions.counter.increase : va chercher l’action increase dans le module counter.

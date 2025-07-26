@@ -206,24 +206,3 @@ const CreateActivityModal: FC<Props> = ({
   );
 };
 export default CreateActivityModal;
-// !! (Double Bang):
-// It ensures a value is explicitly converted to a boolean.
-// Example:
-// !!null;  // false
-// !!"text"; // true
-// This ensures isInvalid receives a proper true or false value.
-
-//const categoryIds = watch("categoryIds", []); =>   // Watch categoryIds to keep form state in sync
-
-//setValue in react form: function used to manually update the value of a form field
-//setValue(name: string, value: any, options?: Object)
-// name: The name of the form field you want to update.
-// value: The new value to assign to the field.
-// options (optional): Can include { shouldValidate: boolean, shouldDirty: boolean, shouldTouch: boolean } to control validation and form state updates.
-// When to Use setValue?
-// - need to update form fields programmatically
-// - When you're loading initial data into a form.
-// - When handling dynamic form inputs (e.g., checkboxes, dropdowns).
-//!!!!! for="category" id: important for input=> not validate if not know that
-//?? what is differente Actions<AppStoreModel> and Action
-// error: () => qqch or ()=>{return qqch}
