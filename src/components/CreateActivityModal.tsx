@@ -1,6 +1,6 @@
 import { FC, useEffect, useState } from "react";
 import { Button, Form, Modal } from "react-bootstrap";
-import { SubmitHandler, useForm } from "react-hook-form";
+import { Controller, SubmitHandler, useForm } from "react-hook-form";
 import { useTranslation } from "react-i18next";
 import { Actions, useStoreActions, useStoreState } from "easy-peasy";
 import { AppStoreModel } from "../store";
@@ -41,6 +41,7 @@ const CreateActivityModal: FC<Props> = ({
     handleSubmit,
     register,
     reset,
+    control,
   } = useForm<CreateActivity>();
 
   const [loading, setLoading] = useState<boolean>(false);
@@ -67,7 +68,12 @@ const CreateActivityModal: FC<Props> = ({
   };
   useEffect(() => {
     if (modeModal === "update") {
-      reset(currentActivityDetail);
+      reset({
+        name: currentActivityDetail.name,
+        description: currentActivityDetail.description,
+        positive: currentActivityDetail.positive,
+        categoryId: currentActivityDetail.category.id,
+      });
     }
   }, [currentActivityDetail, reset, show]);
 
@@ -75,9 +81,15 @@ const CreateActivityModal: FC<Props> = ({
     <Modal show={show} onHide={handleClose} className="p-5" mode={modeModal}>
       <Modal.Header closeButton>
         <Modal.Title>
-          <h2 className="mx-3 mt-3">
-            {t("activity.modal_create_activity.title")}
-          </h2>
+          {modeModal === "create" ? (
+            <h2 className="mx-3 mt-3">
+              {t("activity.modal_create_activity.title")}
+            </h2>
+          ) : (
+            <h2 className="mx-3 mt-3">
+              {t("activity.modal_create_activity.title_update")}
+            </h2>
+          )}
         </Modal.Title>
       </Modal.Header>
       <Modal.Body className="mx-5 mb-5">
@@ -131,64 +143,59 @@ const CreateActivityModal: FC<Props> = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </Form.Group>
-
-          <Form.Label className="mb-4 mandatory">
-            {t("activity.modal_create_activity.type.title")}
-          </Form.Label>
-          <div>
-            <Form.Check
-              inline
-              id="positive-radio"
-              label={
-                <label htmlFor="positive-radio">
-                  {t("activity.modal_create_activity.type.positive")}
-                </label>
-              }
-              type="radio"
-              value="true"
-              {...register("positive", {
-                required: t(
-                  "activity.modal_create_activity.type.errors_message"
-                ),
-              })}
-            />
-            <Form.Check
-              inline
-              id="negative-radio"
-              label={
-                <label htmlFor="negative-radio">
-                  {t("activity.modal_create_activity.type.negative")}
-                </label>
-              }
-              type="radio"
-              value="false"
-              {...register("positive", {
-                required: t(
-                  "activity.modal_create_activity.type.errors_message"
-                ),
-              })}
-            />
-            {errors.positive && (
-              <Form.Text className="text-danger">
-                {t("activity.modal_create_activity.type.errors_message")}
-              </Form.Text>
+          <Controller
+            name="positive"
+            control={control}
+            rules={{
+              required: t("activity.modal_create_activity.type.errors_message"),
+            }}
+            render={({ field }) => (
+              <>
+                <Form.Check
+                  inline
+                  type="radio"
+                  label={t("activity.modal_create_activity.type.positive")}
+                  value="true"
+                  checked={field.value === true}
+                  onChange={(e) => field.onChange(e.target.value === "true")}
+                />
+                <Form.Check
+                  inline
+                  type="radio"
+                  label={t("activity.modal_create_activity.type.negative")}
+                  value="false"
+                  checked={field.value === false}
+                  onChange={(e) =>
+                    field.onChange(e.target.value === "true" ? true : false)
+                  }
+                />
+              </>
             )}
-          </div>
+          />
+
           <Form.Group className="mb-4 mt-4">
             <Form.Label htmlFor="category" className="mandatory">
               {t("activity.modal_create_activity.category.title")}
             </Form.Label>
-            <Form.Select id="category" {...register("categoryId")}>
-              <option value="">
-                {t("activity.modal_create_activity.category.placeholder")}
-              </option>
-              {categoryList?.map((category: any) => (
-                <option key={category.id} value={category.id}>
-                  {category.name}
-                </option>
-              ))}
-            </Form.Select>
+            <Controller
+              name="categoryId"
+              control={control}
+              defaultValue={currentActivityDetail?.category?.id || ""}
+              render={({ field }) => (
+                <Form.Select {...field}>
+                  <option value="">
+                    {t("activity.modal_create_activity.category.placeholder")}
+                  </option>
+                  {categoryList?.map((category: any) => (
+                    <option key={category.id} value={category.id}>
+                      {category.name}
+                    </option>
+                  ))}
+                </Form.Select>
+              )}
+            />
           </Form.Group>
+
           <div className="text-center">
             <Button
               variant="primary"

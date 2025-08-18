@@ -40,14 +40,14 @@ const DetailActivity: FC<Props> = ({ id }) => {
   const callDeleteActivity = async (id: any) => {
     try {
       await deleteActivity(id);
-      // removeActivityFromList(id);
+      window.location.reload();
     } catch {
       console.log("error delete activity");
     }
   };
 
   return (
-    <Card className="p-4 card-detail mb-5">
+    <Card className="p-4 mb-5 mt-5">
       <Card.Body>
         <Card.Title className="display-6 fw-light mb-4">
           Détail de l'activité
@@ -81,24 +81,24 @@ const DetailActivity: FC<Props> = ({ id }) => {
           </div>
         )}
         {!confirmDelete && (
-          <div>
-            <Card.Link href="#">
+          <div className="mt-4">
+            <Card.Link>
               <Button
                 variant="primary"
                 type="submit"
                 size="lg"
-                className="px-5"
+                className="px-5 btn-add"
                 onClick={() => setConfirmDelete(true)}
               >
                 Delete
               </Button>
             </Card.Link>
-            <Card.Link href="#">
+            <Card.Link>
               <Button
                 variant="primary"
                 type="submit"
                 size="lg"
-                className="px-5"
+                className="px-5 btn-add"
                 onClick={() => updateActivity()}
               >
                 Modifier
@@ -119,7 +119,7 @@ const DetailActivity: FC<Props> = ({ id }) => {
                 variant="primary"
                 type="submit"
                 size="lg"
-                className="px-5"
+                className="px-5 btn-add"
                 onClick={() => {
                   callDeleteActivity(id);
                 }}
@@ -132,7 +132,7 @@ const DetailActivity: FC<Props> = ({ id }) => {
                 variant="primary"
                 type="submit"
                 size="lg"
-                className="px-5"
+                className="px-5 btn-add"
                 onClick={() => setConfirmDelete(false)}
               >
                 Non

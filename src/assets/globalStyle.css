@@ -138,10 +138,6 @@ footer {
   width: 300px;
 }
 
-.card-detail {
-  margin-top: 71px;
-}
-
 .btn-add {
   background-color: #1a8f73;
 }
@@ -238,4 +234,8 @@ footer {
 }
 .search-input:not(:placeholder-shown) ~ .search-btn {
   color: rgba(4, 5, 7, 0.75);
+}
+
+.text-hover-blue:hover {
+  color: #347df2 !important;
 }

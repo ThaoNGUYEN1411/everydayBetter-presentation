@@ -23,7 +23,7 @@ const Header: FC = () => {
   const roles = localStorage.getItem("roles");
 
   return (
-    <Navbar collapseOnSelect expand="lg" className="wrapper-header">
+    <Navbar collapseOnSelect expand="lg" className="wrapper-header mb-5">
       <Container className="grid wide">
         <Link to={"/"}>
           <img src="/logo.png" alt="Everyday Better logo" className="logo" />
@@ -31,33 +31,33 @@ const Header: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            <NavLink to="/blog" className="nav-link">
-              {t("menu.blog")}
+            <NavLink to="/advice" className="nav-link text-hover-blue">
+              {t("menu.advice")}
             </NavLink>
             <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
               <NavDropdown.Item>
-                <NavLink to="/about" className="nav-link">
+                <NavLink to="/about" className="nav-link text-hover-blue">
                   {t("menu.about")}
                 </NavLink>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <NavLink to="/contact" className="nav-link">
+                <NavLink to="/contact" className="nav-link text-hover-blue">
                   {t("menu.contact")}
                 </NavLink>
               </NavDropdown.Item>
               <NavDropdown.Item>
-                <NavLink to="/faq" className="nav-link">
+                <NavLink to="/faq" className="nav-link text-hover-blue">
                   {t("menu.faq")}
                 </NavLink>
               </NavDropdown.Item>
             </NavDropdown>
             {nickname &&
               (!roles?.includes("ROLE_ADMIN") ? (
-                <NavLink to="activities" className="nav-link">
+                <NavLink to="activities" className="nav-link text-hover-blue">
                   {t("menu.activities")}
                 </NavLink>
               ) : (
-                <NavLink to="admin" className="nav-link">
+                <NavLink to="admin" className="nav-link text-hover-blue">
                   {t("menu.admin")}
                 </NavLink>
               ))}

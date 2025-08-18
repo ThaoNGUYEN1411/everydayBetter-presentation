@@ -1,7 +1,7 @@
 {
   "menu": {
     "activities": "Activities",
-    "blog": "Blog",
+    "advice": "Advices",
     "about": "About",
     "learnMore": "Learn more",
     "testimonials": "Testimonials",
@@ -43,13 +43,14 @@
     }
   },
   "activity": {
-    "btn-add": "Add",
+    "btn-add": "Add a new activity",
     "list": {
       "title": "Activity List",
       "title_follow": "Activity tracking by date"
     },
     "modal_create_activity": {
       "title": "Create a new activity",
+      "title_update": "Update an activity",
       "input_name": {
         "title": "Title",
         "placeholder": "Add a title",
@@ -202,16 +203,22 @@
     "title": "Testimonials",
     "list": [
       {
-        "name": "Alice",
-        "message": "Thanks to Everyday Better, I now wake up earlier and feel more productive."
-      },
-      {
         "name": "Thomas",
-        "message": "The app helps me keep track of my health habits. It's simple and motivating."
+        "message": "Thanks to Everyday Better, I now wake up earlier and feel more productive.",
+        "avatar": "thomas",
+        "numberStar": 4
       },
       {
-        "name": "Sophie",
-        "message": "I love the reminders and the clean dashboard. Well done to the team!"
+        "name": "Alice",
+        "message": "The app helps me keep track of my health habits. It's simple and motivating.",
+        "avatar": "alice",
+        "numberStar": 5
+      },
+      {
+        "name": "Antoine",
+        "message": "I love the reminders and the clean dashboard. Well done to the team!",
+        "avatar": "antoine",
+        "numberStar": 5
       }
     ]
   },

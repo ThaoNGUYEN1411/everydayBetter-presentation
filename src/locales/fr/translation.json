@@ -1,7 +1,7 @@
 {
   "menu": {
     "activities": "Activités",
-    "blog": "Blog",
+    "advice": "Conseils",
     "about": "À propos",
     "learnMore": "En savoir plus",
     "testimonials": "Témoignages",
@@ -50,6 +50,7 @@
     },
     "modal_create_activity": {
       "title": "Créer une nouvelle activité",
+      "title_update": "Mise à jour d’une activité",
       "input_name": {
         "title": "Title",
         "placeholder": "Ajouter un titre",
@@ -203,15 +204,18 @@
     "list": [
       {
         "name": "Alice",
-        "message": "Grâce à Everyday Better, j’ai réussi à me lever plus tôt et être plus productive."
+        "message": "Grâce à Everyday Better, j’ai réussi à me lever plus tôt et être plus productive.",
+        "avatar": "thomas"
       },
       {
         "name": "Thomas",
-        "message": "L’application m’aide à suivre mes habitudes de santé. C’est simple et motivant."
+        "message": "L’application m’aide à suivre mes habitudes de santé. C’est simple et motivant.",
+        "avatar": "alice"
       },
       {
         "name": "Sophie",
-        "message": "J’adore les rappels et le tableau de bord clair. Bravo à l’équipe !"
+        "message": "J’adore les rappels et le tableau de bord clair. Bravo à l’équipe !",
+        "avatar": "antoine"
       }
     ]
   },
