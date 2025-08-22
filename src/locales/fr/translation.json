@@ -77,6 +77,15 @@
       "btn": "Créer",
       "alert.success": "Activité créée avec succès !",
       "alert.error": "Impossible de créer l’activité ! Vérifiez si elle existe déjà."
+    },
+    "detail": {
+      "title": "Détail de l'activité",
+      "description": "Description",
+      "positive": "Positive",
+      "category": "Catégorie",
+      "confirmDelete": "Voulez-vous vraiment supprimer l'activité {{name}} et tous ses suivis ?",
+      "yes": "Oui",
+      "no": "Non"
     }
   },
   "user": {

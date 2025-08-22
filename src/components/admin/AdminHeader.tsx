@@ -7,7 +7,9 @@ import { Actions, useStoreActions } from "easy-peasy";
 
 import { useTranslation } from "react-i18next";
 import { AppStoreModel } from "../../store";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
+const faUserIcon: IconProp = faUser;
 const AdminHeader: FC = () => {
   const logout = useStoreActions(
     (actions: Actions<AppStoreModel>) => actions.user.logout
@@ -47,7 +49,7 @@ const AdminHeader: FC = () => {
             <NavDropdown
               title={
                 <span>
-                  <FontAwesomeIcon icon={faUser} className="me-2" />
+                  <FontAwesomeIcon icon={faUserIcon} className="me-2" />
                   {nickname}
                 </span>
               }

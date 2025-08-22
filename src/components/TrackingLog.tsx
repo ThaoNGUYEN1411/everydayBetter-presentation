@@ -15,6 +15,11 @@ import { faBan, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import DetailActivity from "./DetailActivity";
 import { t } from "i18next";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+const faCheckIcon: IconProp = faCheck;
+const faXmarkIcon: IconProp = faXmark;
+const faBanIcon: IconProp = faBan;
 
 //1. display the current week in the table header
 //startDate: the date we base our week on start this date
@@ -174,13 +179,13 @@ const TrackingLog: FC = () => {
                             title={
                               doneValue === true ? (
                                 <FontAwesomeIcon
-                                  icon={faCheck}
+                                  icon={faCheckIcon}
                                   size="lg"
                                   className="text-success"
                                 />
                               ) : doneValue === false ? (
                                 <FontAwesomeIcon
-                                  icon={faXmark}
+                                  icon={faXmarkIcon}
                                   size="lg"
                                   className="text-danger"
                                 />
@@ -210,7 +215,7 @@ const TrackingLog: FC = () => {
                                 variant="white"
                               >
                                 <FontAwesomeIcon
-                                  icon={faBan}
+                                  icon={faBanIcon}
                                   size="lg"
                                   className="text-black"
                                 />
@@ -241,7 +246,7 @@ const TrackingLog: FC = () => {
                                 variant="white"
                               >
                                 <FontAwesomeIcon
-                                  icon={faCheck}
+                                  icon={faCheckIcon}
                                   size="xl"
                                   className="text-success"
                                 />
@@ -272,7 +277,7 @@ const TrackingLog: FC = () => {
                                 variant="white"
                               >
                                 <FontAwesomeIcon
-                                  icon={faXmark}
+                                  icon={faXmarkIcon}
                                   size="xl"
                                   className="text-danger"
                                 />
