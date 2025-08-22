@@ -7,8 +7,12 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
 
-//to do: add content necessary
+const faFacebookIcon: IconProp = faFacebook;
+const faTwitterIcon: IconProp = faTwitter;
+const faInstagramIcon: IconProp = faInstagram;
+
 const Footer = () => {
   const { t } = useTranslation();
 
@@ -34,20 +38,28 @@ const Footer = () => {
                 to={"/"}
                 className="text-decoration-none text-dark text-hover-blue"
               >
-                <FontAwesomeIcon icon={faFacebook} className="me-4" size="lg" />
-              </Link>
-              <Link
-                to={"/"}
-                className="text-decoration-none text-dark text-hover-blue"
-              >
-                <FontAwesomeIcon icon={faTwitter} className="me-4" size="lg" />
+                <FontAwesomeIcon
+                  icon={faFacebookIcon}
+                  className="me-4"
+                  size="lg"
+                />
               </Link>
               <Link
                 to={"/"}
                 className="text-decoration-none text-dark text-hover-blue"
               >
                 <FontAwesomeIcon
-                  icon={faInstagram}
+                  icon={faTwitterIcon}
+                  className="me-4"
+                  size="lg"
+                />
+              </Link>
+              <Link
+                to={"/"}
+                className="text-decoration-none text-dark text-hover-blue"
+              >
+                <FontAwesomeIcon
+                  icon={faInstagramIcon}
                   className="me-4"
                   size="lg"
                 />

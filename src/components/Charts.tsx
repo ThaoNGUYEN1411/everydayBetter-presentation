@@ -63,7 +63,9 @@ const Charts: FC = () => {
             </Form.Group>
           </Col>
           <Col className="text-center">
-            <Button type="submit">{t("charts.form.button")}</Button>
+            <Button type="submit" className="btn-add">
+              {t("charts.form.button")}
+            </Button>
           </Col>
         </Row>
       </Form>

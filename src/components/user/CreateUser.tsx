@@ -8,6 +8,10 @@ import { UserData } from "../../store/user.model";
 import { AppStoreModel } from "../../store";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faEye, faEyeSlash } from "@fortawesome/free-solid-svg-icons";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+const faEyeIcon: IconProp = faEye;
+const faEyeSlashIcon: IconProp = faEyeSlash;
 
 const CreateUser: FC = () => {
   const { t } = useTranslation();
@@ -124,7 +128,9 @@ const CreateUser: FC = () => {
                   isInvalid={!!errors.password}
                 />
                 <span className="px-3 cursor-pointer" onClick={handleToggle}>
-                  <FontAwesomeIcon icon={showPassword ? faEye : faEyeSlash} />
+                  <FontAwesomeIcon
+                    icon={showPassword ? faEyeIcon : faEyeSlashIcon}
+                  />
                 </span>
               </div>
               {errors.password && (

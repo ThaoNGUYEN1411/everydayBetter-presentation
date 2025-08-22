@@ -3,6 +3,9 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { Avatar } from "@mui/material";
 import { Card, Col, Container, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+
+const faStarIcon: IconProp = faStar;
 
 const Testimonials: React.FC = () => {
   const { t } = useTranslation();
@@ -36,10 +39,10 @@ const Testimonials: React.FC = () => {
                   </Col>
                 </Row>
                 <span key={index}>
-                  <FontAwesomeIcon icon={faStar} color="orange" />
-                  <FontAwesomeIcon icon={faStar} color="orange" />
-                  <FontAwesomeIcon icon={faStar} color="orange" />
-                  <FontAwesomeIcon icon={faStar} color="orange" />
+                  <FontAwesomeIcon icon={faStarIcon} color="orange" />
+                  <FontAwesomeIcon icon={faStarIcon} color="orange" />
+                  <FontAwesomeIcon icon={faStarIcon} color="orange" />
+                  <FontAwesomeIcon icon={faStarIcon} color="orange" />
                 </span>
               </Card.Body>
             </Card>

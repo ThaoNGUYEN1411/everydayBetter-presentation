@@ -76,6 +76,15 @@
       "btn": "Create",
       "alert.success": "Activity created successfully!",
       "alert.error": "Failed to create activity."
+    },
+    "detail": {
+      "title": "Activity Details",
+      "description": "Description",
+      "positive": "Positive",
+      "category": "Category",
+      "confirmDelete": "Do you really want to delete the activity {{name}} and all its logs?",
+      "yes": "Yes",
+      "no": "No"
     }
   },
   "user": {

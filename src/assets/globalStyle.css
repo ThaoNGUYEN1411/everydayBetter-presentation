@@ -141,6 +141,11 @@ footer {
 .btn-add {
   background-color: #1a8f73;
 }
+
+.btn-delete {
+  margin-right: 10px;
+  background-color: #e53935;
+}
 /* ------------------- */
 .table-activity {
   border-collapse: "collapse";
