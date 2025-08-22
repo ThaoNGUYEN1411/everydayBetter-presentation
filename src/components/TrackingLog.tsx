@@ -14,6 +14,7 @@ import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { faBan, faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
 import moment from "moment";
 import DetailActivity from "./DetailActivity";
+import { t } from "i18next";
 
 //1. display the current week in the table header
 //startDate: the date we base our week on start this date
@@ -136,7 +137,7 @@ const TrackingLog: FC = () => {
           <Table striped bordered hover>
             <thead>
               <tr>
-                <th>Activités</th>
+                <th>{t("menu.activities")}</th>
                 {weekDates.map((date, i) => (
                   <th key={i}>
                     {date.toLocaleDateString("fr-FR", {
@@ -161,12 +162,15 @@ const TrackingLog: FC = () => {
                       (item: any) => item.date === formatted
                     );
                     const doneValue = log?.done ?? null;
+                    const today = new Date();
+                    const futureDateDisabled = date.getTime() > today.getTime();
                     return (
                       <td key={i} className="track-btn">
                         <ButtonGroup size="lg">
                           <DropdownButton
                             vertical={true}
                             as={ButtonGroup}
+                            disabled={futureDateDisabled}
                             title={
                               doneValue === true ? (
                                 <FontAwesomeIcon

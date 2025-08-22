@@ -20,6 +20,7 @@ export interface CurrentActivityDetail {
   id: number;
   name: string;
   description: string;
+  positive: boolean;
   categoryId: number;
   categoryName: string;
 }
