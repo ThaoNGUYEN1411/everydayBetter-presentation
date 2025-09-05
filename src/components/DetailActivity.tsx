@@ -94,8 +94,8 @@ const DetailActivity: FC<Props> = ({ id }) => {
               />
               {currentActivityDetail?.name}
             </h2>
-            <Card.Text>
-              <div className="mb-3">
+            <div className="mb-3">
+              <Card.Text>
                 <FontAwesomeIcon
                   icon={faHandPointRightIcon}
                   color="green"
@@ -103,11 +103,16 @@ const DetailActivity: FC<Props> = ({ id }) => {
                 />
                 <strong>{t("activity.detail.description")}:</strong>{" "}
                 {currentActivityDetail?.description}
-              </div>
-            </Card.Text>
+              </Card.Text>
+            </div>
+
             <div className="mb-2">
               <strong>{t("activity.detail.positive")}:</strong>{" "}
-              {currentActivityDetail?.positive ? "true" : "false"}
+              {currentActivityDetail?.positive ? (
+                <span> {t("activity.detail.yes")}</span>
+              ) : (
+                <span> {t("activity.detail.no")}</span>
+              )}
             </div>
             <div className="mb-2">
               <strong>{t("activity.detail.category")}:</strong>{" "}

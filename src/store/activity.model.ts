@@ -45,6 +45,7 @@ export interface TrackingLog {
 export interface ActivityTrackingLog {
   activityId: string;
   activityName: string;
+  positive: Boolean;
   listTrackingLog: TrackingLog[];
 }
 export interface ProgressAnalytics {
@@ -169,11 +170,13 @@ export const activityModel: ActivityModel = {
   }),
   createTrackingLog: thunk(async (_action, payload, { injections }) => {
     const { httpService } = injections;
+    console.log(payload);
 
     await httpService.post(`/tracking-logs/`, payload, {
       withCredentials: true,
     });
   }),
+
   getAllActivityTrackingLog: thunk(
     async (action, { startDate, endDate }, { injections }) => {
       const { httpService } = injections;

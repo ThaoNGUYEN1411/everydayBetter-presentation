@@ -42,7 +42,11 @@ const CreateActivityModal: FC<Props> = ({
     register,
     reset,
     control,
-  } = useForm<CreateActivity>();
+  } = useForm<CreateActivity>({
+    defaultValues: {
+      positive: true, // par défaut positive, sinon false
+    },
+  });
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -143,35 +147,33 @@ const CreateActivityModal: FC<Props> = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </Form.Group>
-          <Controller
-            name="positive"
-            control={control}
-            rules={{
-              required: t("activity.modal_create_activity.type.errors_message"),
-            }}
-            render={({ field }) => (
-              <>
-                <Form.Check
-                  inline
-                  type="radio"
-                  label={t("activity.modal_create_activity.type.positive")}
-                  value="true"
-                  checked={field.value === true}
-                  onChange={(e) => field.onChange(e.target.value === "true")}
-                />
-                <Form.Check
-                  inline
-                  type="radio"
-                  label={t("activity.modal_create_activity.type.negative")}
-                  value="false"
-                  checked={field.value === false}
-                  onChange={(e) =>
-                    field.onChange(e.target.value === "true" ? true : false)
-                  }
-                />
-              </>
-            )}
-          />
+          <Form.Group className="mb-3">
+            <Form.Label className="d-block">
+              {t("activity.modal_create_activity.type.title")}
+            </Form.Label>
+            <Controller
+              name="positive"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label={t("activity.modal_create_activity.type.positive")}
+                    checked={field.value === true}
+                    onChange={() => field.onChange(true)}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label={t("activity.modal_create_activity.type.negative")}
+                    checked={field.value === false}
+                    onChange={() => field.onChange(false)}
+                  />
+                </>
+              )}
+            />
+          </Form.Group>
 
           <Form.Group className="mb-4 mt-4">
             <Form.Label htmlFor="category" className="mandatory">
