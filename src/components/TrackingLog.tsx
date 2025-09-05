@@ -159,6 +159,21 @@ const TrackingLog: FC = () => {
                   <td
                     onClick={() => setActivityDetailId(trackingAct.activityId)}
                   >
+                    <span>
+                      {trackingAct.positive ? (
+                        <FontAwesomeIcon
+                          icon={faCheckIcon}
+                          size="sm"
+                          className="text-success"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faXmarkIcon}
+                          size="sm"
+                          className="text-danger"
+                        />
+                      )}{" "}
+                    </span>
                     {trackingAct.activityName}
                   </td>
                   {weekDates.map((date, i) => {
@@ -211,12 +226,11 @@ const TrackingLog: FC = () => {
                                     deleteLog(log?.id);
                                   }
                                 }}
-                                className="mx-1"
                                 variant="white"
                               >
                                 <FontAwesomeIcon
                                   icon={faBanIcon}
-                                  size="lg"
+                                  size="sm"
                                   className="text-black"
                                 />
                               </Button>
@@ -242,12 +256,11 @@ const TrackingLog: FC = () => {
                                     );
                                   }
                                 }}
-                                className="me-1"
                                 variant="white"
                               >
                                 <FontAwesomeIcon
                                   icon={faCheckIcon}
-                                  size="xl"
+                                  size="lg"
                                   className="text-success"
                                 />
                               </Button>
@@ -278,7 +291,7 @@ const TrackingLog: FC = () => {
                               >
                                 <FontAwesomeIcon
                                   icon={faXmarkIcon}
-                                  size="xl"
+                                  size="lg"
                                   className="text-danger"
                                 />
                               </Button>
