@@ -23,10 +23,6 @@ const Charts: FC = () => {
     getActivitiesProgressAnalytics({ startDate, endDate });
   };
 
-  // useEffect(() => {
-  //   getActivitiesProgressAnalytics({ startDate: null, endDate: null });
-  // }, []);
-
   return (
     <div className="my-5 pt-5">
       <Form onSubmit={handleSubmit}>

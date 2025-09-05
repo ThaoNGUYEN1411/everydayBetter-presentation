@@ -57,7 +57,7 @@ body {
 }
 /* layout centre ecran */
 .grid.wide {
-  max-width: 1024px;
+  max-width: 1200px;
   margin: 0 auto;
 }
 
@@ -243,4 +243,8 @@ footer {
 
 .text-hover-blue:hover {
   color: #347df2 !important;
+}
+
+.height-article {
+  height: 200px;
 }
