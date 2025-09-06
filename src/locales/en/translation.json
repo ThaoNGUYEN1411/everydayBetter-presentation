@@ -45,8 +45,8 @@
   "activity": {
     "btn-add": "Add a new activity",
     "list": {
-      "title": "Activity List",
-      "title_follow": "Activity tracking by date"
+      "title": "✨ Track Your Activities",
+      "sub_title": "Every small step brings you closer to your goals. Record your progress today 🎉"
     },
     "modal_create_activity": {
       "title": "Create a new activity",
@@ -71,11 +71,13 @@
       "category": {
         "title": "Choose activity categories",
         "selected_categories": "Selected categories",
-        "placeholder": "Enter a tag"
+        "placeholder": "Enter a tag",
+        "errors_message": "You must choose an option"
       },
       "btn": "Create",
       "alert.success": "Activity created successfully!",
-      "alert.error": "Failed to create activity."
+      "alert.error": "Failed to create activity.",
+      "error_unique_activity": "This activity already exists!"
     },
     "detail": {
       "title": "Activity Details",
@@ -85,6 +87,10 @@
       "confirmDelete": "Do you really want to delete the activity {{name}} and all its logs?",
       "yes": "Yes",
       "no": "No"
+    },
+    "tracking_log": {
+      "week_of": "Week of",
+      "to": "to"
     }
   },
   "user": {
@@ -127,7 +133,9 @@
     "content": "The page you are looking for does not exist."
   },
   "charts": {
-    "title": "Analysis charts",
+    "title": "📊 Analysis charts",
+    "sub_title": "Visualize your progress and your activities.",
+    "text": "* You can see results for one month if you don’t choose a date.",
     "form": {
       "start_date": "Start Date",
       "end_date": "End Date",
