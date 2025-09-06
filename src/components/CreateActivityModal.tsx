@@ -17,6 +17,7 @@ const CreateActivityModal: FC<Props> = ({
   handleClose,
   refreshActivities,
 }) => {
+  const [isActivityCreateUnique, setIsActivityCreateUnique] = useState(false);
   const { t } = useTranslation();
   const { categoryList } = useStoreState((state: any) => state.referentialData);
   const { getAllCategoryList } = useStoreActions(
@@ -54,16 +55,29 @@ const CreateActivityModal: FC<Props> = ({
     setLoading(true);
     try {
       if (currentActivityDetail && modeModal === "update") {
-        await updateActivity({
+        const response = await updateActivity({
           id: currentActivityDetail.id,
           activity: values,
         });
+        if (response === "success") {
+          reset();
+          handleClose(); // Close modal
+          refreshActivities(); // Refresh list
+        } else if (response === "ActivityUpdateUnique") {
+          setIsActivityCreateUnique(true);
+          setTimeout(() => setIsActivityCreateUnique(false), 3000);
+        }
       } else {
-        await create(values);
+        const response = await create(values);
+        if (response === "success") {
+          reset();
+          handleClose();
+          refreshActivities();
+        } else if (response === "ActivityCreateUnique") {
+          setIsActivityCreateUnique(true);
+          setTimeout(() => setIsActivityCreateUnique(false), 3000); //3s
+        }
       }
-      reset();
-      handleClose(); // Close modal
-      refreshActivities(); // Refresh list
     } catch {
       console.log("error create or update activity");
     } finally {
@@ -79,7 +93,7 @@ const CreateActivityModal: FC<Props> = ({
         categoryId: currentActivityDetail.category.id,
       });
     }
-  }, [currentActivityDetail, reset, show]);
+  }, [currentActivityDetail, reset, show, isActivityCreateUnique]);
 
   return (
     <Modal show={show} onHide={handleClose} className="p-5" mode={modeModal}>
@@ -183,6 +197,11 @@ const CreateActivityModal: FC<Props> = ({
               name="categoryId"
               control={control}
               defaultValue={currentActivityDetail?.category?.id || ""}
+              rules={{
+                required: t(
+                  "activity.modal_create_activity.category.errors_message"
+                ),
+              }}
               render={({ field }) => (
                 <Form.Select {...field}>
                   <option value="">
@@ -197,7 +216,11 @@ const CreateActivityModal: FC<Props> = ({
               )}
             />
           </Form.Group>
-
+          {isActivityCreateUnique && (
+            <p className="small text-danger">
+              {t("activity.modal_create_activity.error_unique_activity")}
+            </p>
+          )}
           <div className="text-center">
             <Button
               variant="primary"

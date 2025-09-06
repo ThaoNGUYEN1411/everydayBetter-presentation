@@ -39,7 +39,10 @@ const ActivitiesPage: FC = () => {
   return (
     <div className="grid wide page height-page">
       <div className="d-flex justify-content-between w-100 height-page">
-        <h1 className="mt-5 mb-3">{t("activity.list.title")}</h1>
+        <div className="mt-5 mb-5 text-center">
+          <h1>{t("activity.list.title")}</h1>
+          <h3>{t("activity.list.sub_title")}</h3>
+        </div>
         <div>
           <Button
             variant="primary"
