@@ -4,11 +4,16 @@ import { FC, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
 import { useTranslation } from "react-i18next";
 import { AppStoreModel } from "../store";
+import { IconProp } from "@fortawesome/fontawesome-svg-core";
+import { faCheck, faXmark } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 const Charts: FC = () => {
   const { t } = useTranslation();
   const [startDate, setStartDate] = useState<string>("");
   const [endDate, setEndDate] = useState<string>("");
+  const faCheckIcon: IconProp = faCheck;
+  const faXmarkIcon: IconProp = faXmark;
 
   const progressAnalytics = useStoreState(
     (state: any) => state.activity.progressAnalytics
@@ -26,7 +31,11 @@ const Charts: FC = () => {
   return (
     <div className="my-5 pt-5">
       <Form onSubmit={handleSubmit}>
-        <h2 className="text-center py-4">{t("charts.title")}</h2>
+        <div className="text-center py-4 mb-5">
+          <h2>{t("charts.title")}</h2>
+          <h3>{t("charts.sub_title")}</h3>
+        </div>
+
         <Row>
           <Col>
             <Form.Group className="mb-4">
@@ -59,18 +68,19 @@ const Charts: FC = () => {
             </Form.Group>
           </Col>
           <Col className="text-center">
-            <Button type="submit" className="btn-add">
+            <Button type="submit" className="btn-add" size="lg">
               {t("charts.form.button")}
             </Button>
           </Col>
+          <p className="small text-end">{t("charts.text")}</p>
         </Row>
       </Form>
       {progressAnalytics && (
         <Row className="mt-5 mb-5 pb-5">
           {progressAnalytics?.map((progressAnalytic: any) => {
-            const { activityId, activityName, progress } = progressAnalytic;
+            const { activityId, activityName, positive, progress } =
+              progressAnalytic;
             const { done, missed, untracked } = progress;
-
             const pieData = [
               { id: 0, value: done, label: "Done" },
               { id: 1, value: missed, label: "Missed" },
@@ -79,7 +89,11 @@ const Charts: FC = () => {
             return (
               <Col sm={6} key={activityId}>
                 <PieChart
-                  // colors={["green", "red", "orange"]}
+                  colors={
+                    positive
+                      ? ["#2DA673", "#f25555ff", "#f1df56ff"]
+                      : ["#f25555ff", "#2DA673", "#f1df56ff"]
+                  }
                   series={[
                     {
                       data: pieData,
@@ -91,7 +105,24 @@ const Charts: FC = () => {
                   className="mb-2"
                 />
                 <div className="text-center mb-5 pe-5 me-5" key={activityId}>
-                  <p key={activityId}>{activityName}</p>
+                  <p key={activityId}>
+                    <span>
+                      {positive ? (
+                        <FontAwesomeIcon
+                          icon={faCheckIcon}
+                          size="sm"
+                          className="text-success"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faXmarkIcon}
+                          size="sm"
+                          className="text-danger"
+                        />
+                      )}{" "}
+                    </span>
+                    {activityName}
+                  </p>
                 </div>
               </Col>
             );

@@ -2,6 +2,12 @@ import { action, Action, thunk, Thunk } from "easy-peasy";
 import TrackingLog from "../components/TrackingLog";
 import axios from "axios";
 
+type ResponseStatus =
+  | "success"
+  | "server_error"
+  | "error_400"
+  | "ActivityCreateUnique"
+  | undefined;
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 export interface CreateActivity {
   categoryId: number;
@@ -51,6 +57,7 @@ export interface ActivityTrackingLog {
 export interface ProgressAnalytics {
   activityId: string;
   activityName: string;
+  positive: true;
   progress: Progress;
 }
 
@@ -66,12 +73,14 @@ export interface ActivityModel {
   activityTrackingLogList: ActivityTrackingLog[];
   currentActivityDetail: CurrentActivityDetail | null;
   progressAnalytics: ProgressAnalytics[] | null;
+  // responseStatus: ResponseStatus;
 
   setActivityList: Action<ActivityModel, ActivityDto[]>;
   setActivityTrackingLogList: Action<ActivityModel, ActivityTrackingLog[]>;
   removeActivityFromList: Action<ActivityModel, string>;
   setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
   setProgressAnalytics: Action<ActivityModel, ProgressAnalytics[] | null>;
+  // setResponseStatus: Action<ActivityModel, ResponseStatus>;
 
   create: Thunk<ActivityModel, CreateActivity>;
   getAllActivityList: Thunk<ActivityModel>;
@@ -98,6 +107,7 @@ export const activityModel: ActivityModel = {
   activityTrackingLogList: [],
   currentActivityDetail: null,
   progressAnalytics: null,
+  // responseStatus: undefined,
 
   setActivityList: action((state, activityList) => {
     state.activityList = activityList;
@@ -116,6 +126,9 @@ export const activityModel: ActivityModel = {
   setProgressAnalytics: action((state, progressAnalytics) => {
     state.progressAnalytics = progressAnalytics;
   }),
+  // setResponseStatus: action((state, responseStatus) => {
+  //   state.responseStatus = responseStatus;
+  // }),
 
   create: thunk(async (_, createActivity, { injections }) => {
     const { httpService } = injections;
@@ -123,8 +136,20 @@ export const activityModel: ActivityModel = {
       await httpService.post("/activities", createActivity, {
         withCredentials: true, // send cookie JWT
       });
-    } catch {
-      console.error("Error create activity");
+      return "success";
+    } catch (error: any) {
+      const errorData = error.response;
+      if (errorData.status === 400) {
+        if (
+          errorData.data.errors?.some(
+            (err: any) => err.code == "ActivityCreateUnique"
+          )
+        ) {
+          return "ActivityCreateUnique";
+        }
+      } else {
+        return "server_error";
+      }
     }
   }),
   getAllActivityList: thunk(async (actions, _payload) => {
@@ -164,8 +189,20 @@ export const activityModel: ActivityModel = {
       await httpService.put(`/activities/${payload.id}`, payload.activity, {
         withCredentials: true,
       });
-    } catch {
-      console.log("update activity error");
+      return "success";
+    } catch (error: any) {
+      const errorData = error.response;
+      if (errorData.status === 400) {
+        if (
+          errorData.data.errors?.some(
+            (err: any) => err.code == "ActivityUpdateUnique"
+          )
+        ) {
+          return "ActivityUpdateUnique";
+        }
+      } else {
+        return "serveur_error";
+      }
     }
   }),
   createTrackingLog: thunk(async (_action, payload, { injections }) => {
