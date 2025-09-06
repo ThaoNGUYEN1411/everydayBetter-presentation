@@ -202,13 +202,11 @@ const TrackingLog: FC = () => {
                                       ? "text-success"
                                       : "text-danger"
                                   }
-                                  // className="text-success"
                                 />
                               ) : doneValue === false ? (
                                 <FontAwesomeIcon
                                   icon={faXmarkIcon}
                                   size="lg"
-                                  // className="text-danger"
                                   className={
                                     trackingAct.positive
                                       ? "text-danger"
