@@ -2,12 +2,6 @@ import { action, Action, thunk, Thunk } from "easy-peasy";
 import TrackingLog from "../components/TrackingLog";
 import axios from "axios";
 
-type ResponseStatus =
-  | "success"
-  | "server_error"
-  | "error_400"
-  | "ActivityCreateUnique"
-  | undefined;
 const VITE_API_URL = import.meta.env.VITE_API_URL;
 export interface CreateActivity {
   categoryId: number;
@@ -73,14 +67,12 @@ export interface ActivityModel {
   activityTrackingLogList: ActivityTrackingLog[];
   currentActivityDetail: CurrentActivityDetail | null;
   progressAnalytics: ProgressAnalytics[] | null;
-  // responseStatus: ResponseStatus;
 
   setActivityList: Action<ActivityModel, ActivityDto[]>;
   setActivityTrackingLogList: Action<ActivityModel, ActivityTrackingLog[]>;
   removeActivityFromList: Action<ActivityModel, string>;
   setCurrentActivityDetail: Action<ActivityModel, CurrentActivityDetail | null>;
   setProgressAnalytics: Action<ActivityModel, ProgressAnalytics[] | null>;
-  // setResponseStatus: Action<ActivityModel, ResponseStatus>;
 
   create: Thunk<ActivityModel, CreateActivity>;
   getAllActivityList: Thunk<ActivityModel>;
@@ -107,7 +99,6 @@ export const activityModel: ActivityModel = {
   activityTrackingLogList: [],
   currentActivityDetail: null,
   progressAnalytics: null,
-  // responseStatus: undefined,
 
   setActivityList: action((state, activityList) => {
     state.activityList = activityList;
@@ -126,9 +117,6 @@ export const activityModel: ActivityModel = {
   setProgressAnalytics: action((state, progressAnalytics) => {
     state.progressAnalytics = progressAnalytics;
   }),
-  // setResponseStatus: action((state, responseStatus) => {
-  //   state.responseStatus = responseStatus;
-  // }),
 
   create: thunk(async (_, createActivity, { injections }) => {
     const { httpService } = injections;
