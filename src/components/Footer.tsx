@@ -20,10 +20,10 @@ const Footer = () => {
     <footer className="d-block mt-5 pt-4 bg-light pb-4">
       <Container>
         <Row>
-          <Col xs={12} className="mb-2 ms-2">
+          <Col lg={2} xs={12} className="mb-2 ms-2">
             <img src="/logo.png" alt={t("footer.logoAlt")} className="logo" />
           </Col>
-          <Col xs={12} className="mb-2 ms-2">
+          <Col lg={3} xs={12} className="mb-2 ms-2">
             <Link
               to={"/about"}
               className="text-decoration-none text-dark text-hover-blue"
@@ -31,7 +31,7 @@ const Footer = () => {
               <h3>{t("footer.about.title")}</h3>
             </Link>
           </Col>
-          <Col xs={12} className="mb-2 ms-2">
+          <Col lg={3} xs={12} className="mb-2 ms-2">
             <h3>{t("footer.social.title")}</h3>
             <span className="mt-4 d-block pe-2">
               <Link
@@ -66,7 +66,7 @@ const Footer = () => {
               </Link>
             </span>
           </Col>
-          <Col xs={12} className="mb-2 ms-2">
+          <Col lg={3} xs={12} className="mb-2 ms-2">
             <h3>{t("footer.contact.title")}</h3>
             <Link
               to="/privacy-policy"
