@@ -62,7 +62,7 @@ export const articleModel: ArticleModel = {
   }),
   getArticleById: thunk(async (actions, id) => {
     try {
-      const response = await axios.get(`${VITE_API_URL}/articles/${id}`);
+      const response = await axios.get(`${VITE_API_URL}/articles/detail/${id}`);
       actions.setSelectedArticle(response.data);
     } catch (error) {
       console.error("Error fetching article details:", error);

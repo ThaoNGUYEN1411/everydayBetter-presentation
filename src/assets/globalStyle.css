@@ -57,7 +57,7 @@ body {
 }
 /* layout centre ecran */
 .grid.wide {
-  max-width: 1200px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 
@@ -94,7 +94,6 @@ body {
 }
 
 .bloc1 {
-  /* min-height: 400px; */
   max-width: 100%;
 }
 
@@ -247,4 +246,7 @@ footer {
 
 .height-article {
   height: 200px;
+}
+.white-space {
+  white-space: "pre-line";
 }

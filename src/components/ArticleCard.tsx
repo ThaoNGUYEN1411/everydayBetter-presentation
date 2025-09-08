@@ -1,4 +1,5 @@
 import { Card } from "react-bootstrap";
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
 type ArticleProps = {
   title: string;
@@ -23,7 +24,7 @@ const ArticleCard = ({
     <Card className="h-100 shadow-sm">
       <Card.Img
         variant="top"
-        src="/public/articles/yoga_debutant_thumb.jpg"
+        src={`${VITE_API_URL}/articles-images/${thumbnailImage}`}
         // src={thumbnailImage}
         alt={title}
         style={{ height: "180px", objectFit: "cover" }}
@@ -36,7 +37,7 @@ const ArticleCard = ({
         <Card.Text>
           <strong>{subTitle}</strong>
           <br />
-          {introduction}
+          {/* {introduction} */}
         </Card.Text>
       </Card.Body>
       <Card.Footer>
