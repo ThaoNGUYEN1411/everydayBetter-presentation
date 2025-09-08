@@ -17,6 +17,7 @@ const CreateActivityModal: FC<Props> = ({
   handleClose,
   refreshActivities,
 }) => {
+  const [isActivityCreateUnique, setIsActivityCreateUnique] = useState(false);
   const { t } = useTranslation();
   const { categoryList } = useStoreState((state: any) => state.referentialData);
   const { getAllCategoryList } = useStoreActions(
@@ -42,7 +43,11 @@ const CreateActivityModal: FC<Props> = ({
     register,
     reset,
     control,
-  } = useForm<CreateActivity>();
+  } = useForm<CreateActivity>({
+    defaultValues: {
+      positive: true, // par défaut positive, sinon false
+    },
+  });
 
   const [loading, setLoading] = useState<boolean>(false);
 
@@ -50,16 +55,29 @@ const CreateActivityModal: FC<Props> = ({
     setLoading(true);
     try {
       if (currentActivityDetail && modeModal === "update") {
-        await updateActivity({
+        const response = await updateActivity({
           id: currentActivityDetail.id,
           activity: values,
         });
+        if (response === "success") {
+          reset();
+          handleClose(); // Close modal
+          refreshActivities(); // Refresh list
+        } else if (response === "ActivityUpdateUnique") {
+          setIsActivityCreateUnique(true);
+          setTimeout(() => setIsActivityCreateUnique(false), 3000);
+        }
       } else {
-        await create(values);
+        const response = await create(values);
+        if (response === "success") {
+          reset();
+          handleClose();
+          refreshActivities();
+        } else if (response === "ActivityCreateUnique") {
+          setIsActivityCreateUnique(true);
+          setTimeout(() => setIsActivityCreateUnique(false), 3000); //3s
+        }
       }
-      reset();
-      handleClose(); // Close modal
-      refreshActivities(); // Refresh list
     } catch {
       console.log("error create or update activity");
     } finally {
@@ -75,7 +93,7 @@ const CreateActivityModal: FC<Props> = ({
         categoryId: currentActivityDetail.category.id,
       });
     }
-  }, [currentActivityDetail, reset, show]);
+  }, [currentActivityDetail, reset, show, isActivityCreateUnique]);
 
   return (
     <Modal show={show} onHide={handleClose} className="p-5" mode={modeModal}>
@@ -143,35 +161,33 @@ const CreateActivityModal: FC<Props> = ({
               {errors.description?.message}
             </Form.Control.Feedback>
           </Form.Group>
-          <Controller
-            name="positive"
-            control={control}
-            rules={{
-              required: t("activity.modal_create_activity.type.errors_message"),
-            }}
-            render={({ field }) => (
-              <>
-                <Form.Check
-                  inline
-                  type="radio"
-                  label={t("activity.modal_create_activity.type.positive")}
-                  value="true"
-                  checked={field.value === true}
-                  onChange={(e) => field.onChange(e.target.value === "true")}
-                />
-                <Form.Check
-                  inline
-                  type="radio"
-                  label={t("activity.modal_create_activity.type.negative")}
-                  value="false"
-                  checked={field.value === false}
-                  onChange={(e) =>
-                    field.onChange(e.target.value === "true" ? true : false)
-                  }
-                />
-              </>
-            )}
-          />
+          <Form.Group className="mb-3">
+            <Form.Label className="d-block">
+              {t("activity.modal_create_activity.type.title")}
+            </Form.Label>
+            <Controller
+              name="positive"
+              control={control}
+              render={({ field }) => (
+                <>
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label={t("activity.modal_create_activity.type.positive")}
+                    checked={field.value === true}
+                    onChange={() => field.onChange(true)}
+                  />
+                  <Form.Check
+                    inline
+                    type="radio"
+                    label={t("activity.modal_create_activity.type.negative")}
+                    checked={field.value === false}
+                    onChange={() => field.onChange(false)}
+                  />
+                </>
+              )}
+            />
+          </Form.Group>
 
           <Form.Group className="mb-4 mt-4">
             <Form.Label htmlFor="category" className="mandatory">
@@ -181,6 +197,11 @@ const CreateActivityModal: FC<Props> = ({
               name="categoryId"
               control={control}
               defaultValue={currentActivityDetail?.category?.id || ""}
+              rules={{
+                required: t(
+                  "activity.modal_create_activity.category.errors_message"
+                ),
+              }}
               render={({ field }) => (
                 <Form.Select {...field}>
                   <option value="">
@@ -195,7 +216,11 @@ const CreateActivityModal: FC<Props> = ({
               )}
             />
           </Form.Group>
-
+          {isActivityCreateUnique && (
+            <p className="small text-danger">
+              {t("activity.modal_create_activity.error_unique_activity")}
+            </p>
+          )}
           <div className="text-center">
             <Button
               variant="primary"

@@ -45,8 +45,8 @@
   "activity": {
     "btn-add": "Ajouter une nouvelle activité",
     "list": {
-      "title": "List activités",
-      "title_follow": "Suivi des activités selon la date"
+      "title": "✨ Suivi de tes activités",
+      "sub_title": "Chaque petit pas compte vers tes objectifs. Note tes progrès dès aujourd’hui 🎉"
     },
     "modal_create_activity": {
       "title": "Créer une nouvelle activité",
@@ -71,12 +71,13 @@
       "category": {
         "title": "Choisissez des catégories d'activité",
         "selected_categories": "Catégories sélectionnées",
-        "placeholder": "Entrez une étiquette"
+        "placeholder": "Entrez une étiquette",
+        "errors_message": "Vous devez choisir une option"
       },
-
       "btn": "Créer",
       "alert.success": "Activité créée avec succès !",
-      "alert.error": "Impossible de créer l’activité ! Vérifiez si elle existe déjà."
+      "alert.error": "Impossible de créer l’activité ! Vérifiez si elle existe déjà.",
+      "error_unique_activity": "Cette activité existe déjà!"
     },
     "detail": {
       "title": "Détail de l'activité",
@@ -86,6 +87,10 @@
       "confirmDelete": "Voulez-vous vraiment supprimer l'activité {{name}} et tous ses suivis ?",
       "yes": "Oui",
       "no": "Non"
+    },
+    "tracking_log": {
+      "week_of": "Semaine du",
+      "to": "au"
     }
   },
   "user": {
@@ -128,7 +133,9 @@
     "content": "La page que vous recherchez n'existe pas."
   },
   "charts": {
-    "title": "Graphiques d'analyse",
+    "title": "📊 Graphiques d'analyse",
+    "sub_title": "Visualisez vos progrès et vos activités.",
+    "text": "* Vous pouvez voir les résultats pour un mois si vous ne choisissez pas de date.",
     "form": {
       "start_date": "Date de début",
       "end_date": "Date de fin",

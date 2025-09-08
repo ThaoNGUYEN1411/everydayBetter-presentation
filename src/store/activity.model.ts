@@ -45,11 +45,13 @@ export interface TrackingLog {
 export interface ActivityTrackingLog {
   activityId: string;
   activityName: string;
+  positive: Boolean;
   listTrackingLog: TrackingLog[];
 }
 export interface ProgressAnalytics {
   activityId: string;
   activityName: string;
+  positive: true;
   progress: Progress;
 }
 
@@ -122,8 +124,20 @@ export const activityModel: ActivityModel = {
       await httpService.post("/activities", createActivity, {
         withCredentials: true, // send cookie JWT
       });
-    } catch {
-      console.error("Error create activity");
+      return "success";
+    } catch (error: any) {
+      const errorData = error.response;
+      if (errorData.status === 400) {
+        if (
+          errorData.data.errors?.some(
+            (err: any) => err.code == "ActivityCreateUnique"
+          )
+        ) {
+          return "ActivityCreateUnique";
+        }
+      } else {
+        return "server_error";
+      }
     }
   }),
   getAllActivityList: thunk(async (actions, _payload) => {
@@ -163,17 +177,31 @@ export const activityModel: ActivityModel = {
       await httpService.put(`/activities/${payload.id}`, payload.activity, {
         withCredentials: true,
       });
-    } catch {
-      console.log("update activity error");
+      return "success";
+    } catch (error: any) {
+      const errorData = error.response;
+      if (errorData.status === 400) {
+        if (
+          errorData.data.errors?.some(
+            (err: any) => err.code == "ActivityUpdateUnique"
+          )
+        ) {
+          return "ActivityUpdateUnique";
+        }
+      } else {
+        return "serveur_error";
+      }
     }
   }),
   createTrackingLog: thunk(async (_action, payload, { injections }) => {
     const { httpService } = injections;
+    console.log(payload);
 
     await httpService.post(`/tracking-logs/`, payload, {
       withCredentials: true,
     });
   }),
+
   getAllActivityTrackingLog: thunk(
     async (action, { startDate, endDate }, { injections }) => {
       const { httpService } = injections;

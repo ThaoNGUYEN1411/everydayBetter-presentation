@@ -133,8 +133,9 @@ const TrackingLog: FC = () => {
           <div className="d-flex justify-content-between mt-5 mb-2">
             <button onClick={() => handleWeekChange("prev")}>⬅️</button>
             <h3 className="mb-3">
-              Semaine du {weekDates[0].toLocaleDateString("fr-FR")}
-              <span> au </span>
+              <span> {t("activity.tracking_log.week_of")} </span>
+              {weekDates[0].toLocaleDateString("fr-FR")}
+              <span> {t("activity.tracking_log.to")} </span>
               {weekDates[6].toLocaleDateString("fr-FR")}
             </h3>
             <button onClick={() => handleWeekChange("next")}>➡️</button>
@@ -159,6 +160,21 @@ const TrackingLog: FC = () => {
                   <td
                     onClick={() => setActivityDetailId(trackingAct.activityId)}
                   >
+                    <span>
+                      {trackingAct.positive ? (
+                        <FontAwesomeIcon
+                          icon={faCheckIcon}
+                          size="sm"
+                          className="text-success"
+                        />
+                      ) : (
+                        <FontAwesomeIcon
+                          icon={faXmarkIcon}
+                          size="sm"
+                          className="text-danger"
+                        />
+                      )}{" "}
+                    </span>
                     {trackingAct.activityName}
                   </td>
                   {weekDates.map((date, i) => {
@@ -181,13 +197,21 @@ const TrackingLog: FC = () => {
                                 <FontAwesomeIcon
                                   icon={faCheckIcon}
                                   size="lg"
-                                  className="text-success"
+                                  className={
+                                    trackingAct.positive
+                                      ? "text-success"
+                                      : "text-danger"
+                                  }
                                 />
                               ) : doneValue === false ? (
                                 <FontAwesomeIcon
                                   icon={faXmarkIcon}
                                   size="lg"
-                                  className="text-danger"
+                                  className={
+                                    trackingAct.positive
+                                      ? "text-danger"
+                                      : "text-success"
+                                  }
                                 />
                               ) : (
                                 " "
@@ -211,12 +235,11 @@ const TrackingLog: FC = () => {
                                     deleteLog(log?.id);
                                   }
                                 }}
-                                className="mx-1"
                                 variant="white"
                               >
                                 <FontAwesomeIcon
                                   icon={faBanIcon}
-                                  size="lg"
+                                  size="sm"
                                   className="text-black"
                                 />
                               </Button>
@@ -242,13 +265,17 @@ const TrackingLog: FC = () => {
                                     );
                                   }
                                 }}
-                                className="me-1"
                                 variant="white"
                               >
                                 <FontAwesomeIcon
                                   icon={faCheckIcon}
-                                  size="xl"
-                                  className="text-success"
+                                  size="lg"
+                                  // className="text-success"
+                                  className={
+                                    trackingAct.positive
+                                      ? "text-success"
+                                      : "text-danger"
+                                  }
                                 />
                               </Button>
                             </Dropdown.Item>
@@ -278,8 +305,13 @@ const TrackingLog: FC = () => {
                               >
                                 <FontAwesomeIcon
                                   icon={faXmarkIcon}
-                                  size="xl"
-                                  className="text-danger"
+                                  size="lg"
+                                  // className="text-danger"
+                                  className={
+                                    trackingAct.positive
+                                      ? "text-danger"
+                                      : "text-success"
+                                  }
                                 />
                               </Button>
                             </Dropdown.Item>
