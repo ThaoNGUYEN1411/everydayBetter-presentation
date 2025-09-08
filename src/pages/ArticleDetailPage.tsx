@@ -39,7 +39,7 @@ export default function ArticleDetailPage() {
         <Row>
           <Col xs={8} className="mx-auto mt-4">
             <img
-              src={`${import.meta.env.VITE_API_URL}/articles-images/${selectedArticle.image}`}
+              src={`uploads/articles-images/${selectedArticle.image}`}
               alt={selectedArticle.title}
               className="img-fluid mb-4 rounded w-80"
             />
