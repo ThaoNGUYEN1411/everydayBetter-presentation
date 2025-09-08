@@ -24,8 +24,7 @@ const ArticleCard = ({
     <Card className="h-100 shadow-sm">
       <Card.Img
         variant="top"
-        src={`${VITE_API_URL}/articles-images/${thumbnailImage}`}
-        // src={thumbnailImage}
+        src={`/uploads/articles-images/${thumbnailImage}`}
         alt={title}
         style={{ height: "180px", objectFit: "cover" }}
       />
