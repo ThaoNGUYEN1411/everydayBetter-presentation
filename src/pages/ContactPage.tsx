@@ -21,8 +21,6 @@ const ContactPage: FC = () => {
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
-    // Logique d’envoi (ex: appel API)
-    console.log("Form submitted:", formData);
     setSubmitted(true);
   };
 

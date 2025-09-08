@@ -24,7 +24,6 @@ const Charts: FC = () => {
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log(startDate, endDate);
     getActivitiesProgressAnalytics({ startDate, endDate });
   };
 
