@@ -57,7 +57,7 @@ body {
 }
 /* layout centre ecran */
 .grid.wide {
-  max-width: 1024px;
+  max-width: 1180px;
   margin: 0 auto;
 }
 
@@ -94,7 +94,6 @@ body {
 }
 
 .bloc1 {
-  /* min-height: 400px; */
   max-width: 100%;
 }
 
@@ -243,4 +242,11 @@ footer {
 
 .text-hover-blue:hover {
   color: #347df2 !important;
+}
+
+.height-article {
+  height: 200px;
+}
+.white-space {
+  white-space: "pre-line";
 }
