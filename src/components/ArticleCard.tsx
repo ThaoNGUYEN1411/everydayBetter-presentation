@@ -1,29 +1,50 @@
-import { FC } from "react";
 import { Card } from "react-bootstrap";
+const VITE_API_URL = import.meta.env.VITE_API_URL;
 
-interface ArticleCardProps {
+type ArticleProps = {
   title: string;
-  description: string;
-  imageUrl: string;
-  link: string;
-}
+  subTitle: string;
+  introduction: string;
+  thumbnailImage: string;
+  publishedDate: string;
+  authorName: string;
+  categoryName: string;
+};
 
-const ArticleCard: FC<ArticleCardProps> = ({
+const ArticleCard = ({
   title,
-  description,
-  imageUrl,
-  link,
-}) => {
+  subTitle,
+  introduction,
+  thumbnailImage,
+  publishedDate,
+  authorName,
+  categoryName,
+}: ArticleProps) => {
   return (
-    <Card>
-      <Card.Img variant="top" src={imageUrl} alt={title} />
+    <Card className="h-100 shadow-sm">
+      <Card.Img
+        variant="top"
+        src={`${VITE_API_URL}/articles-images/${thumbnailImage}`}
+        // src={thumbnailImage}
+        alt={title}
+        style={{ height: "180px", objectFit: "cover" }}
+      />
       <Card.Body>
-        <Card.Title className="fs-5">{title}</Card.Title>
-        <Card.Text className="text-muted small">{description}</Card.Text>
-        <a href={link} className="text-success fw-bold small">
-          ... LIRE LA SUITE
-        </a>
+        <Card.Subtitle className="mb-2 text-muted">
+          {categoryName}
+        </Card.Subtitle>
+        <Card.Title>{title}</Card.Title>
+        <Card.Text>
+          <strong>{subTitle}</strong>
+          <br />
+          {/* {introduction} */}
+        </Card.Text>
       </Card.Body>
+      <Card.Footer>
+        <small className="text-muted">
+          {authorName} – {new Date(publishedDate).toLocaleDateString()}
+        </small>
+      </Card.Footer>
     </Card>
   );
 };
