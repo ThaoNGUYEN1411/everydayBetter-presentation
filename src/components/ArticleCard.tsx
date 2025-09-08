@@ -37,7 +37,7 @@ const ArticleCard = ({
         <Card.Text>
           <strong>{subTitle}</strong>
           <br />
-          {/* {introduction} */}
+          {introduction}
         </Card.Text>
       </Card.Body>
       <Card.Footer>

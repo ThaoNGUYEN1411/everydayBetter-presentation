@@ -195,8 +195,6 @@ export const activityModel: ActivityModel = {
   }),
   createTrackingLog: thunk(async (_action, payload, { injections }) => {
     const { httpService } = injections;
-    console.log(payload);
-
     await httpService.post(`/tracking-logs/`, payload, {
       withCredentials: true,
     });
