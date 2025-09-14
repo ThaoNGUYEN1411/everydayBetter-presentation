@@ -270,7 +270,6 @@ const TrackingLog: FC = () => {
                                 <FontAwesomeIcon
                                   icon={faCheckIcon}
                                   size="lg"
-                                  // className="text-success"
                                   className={
                                     trackingAct.positive
                                       ? "text-success"

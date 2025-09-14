@@ -5,19 +5,19 @@ import {
   AdminPage,
   AuthenticateUserPage,
   CreateUserPage,
-  HomePage,
+  ArticlesPage,
+  ArticleDetailPage,
+  PrivacyPolicy,
+  AboutPage,
+  ContactPage,
+  NotFoundPage,
+  FAQPage,
 } from "./lazy-pages";
 import Guard from "./Guard";
 import RootLayout from "../layouts/RootLayout";
-import NotFoundPage from "../pages/NotFoundPage";
 import AdminLayout from "../layouts/AdminLayout";
-import PrivacyPolicy from "../pages/PrivacyPolicy";
-import AboutPage from "../pages/AboutPage";
-import FAQPage from "../pages/FAQPage";
-import ContactPage from "../pages/ContactPage";
-import ArticlesPage from "../pages/ArticlesPage";
-import ArticleDetailPage from "../pages/ArticleDetailPage";
-//todo: add page in lazy loading et test
+import HomePage from "../pages/HomePage";
+
 const RouterApp = () => {
   return (
     <BrowserRouter>
@@ -35,7 +35,6 @@ const RouterApp = () => {
               <Route path="create" element={<CreateUserPage />} />
               <Route path="authenticate" element={<AuthenticateUserPage />} />
             </Route>
-            {/* todo: add la<y loading blog or articles? */}
             <Route
               path="activities"
               element={

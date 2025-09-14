@@ -61,7 +61,6 @@ const DetailActivity: FC<Props> = ({ id }) => {
 
   return (
     <Card className="p-4 mb-5 mt-5 position-relative">
-      {/* Icones en haut à droite */}
       <div className="position-absolute top-0 end-0 m-3 d-flex gap-2 mt-4 me-4">
         <FontAwesomeIcon
           icon={faPenIcon}

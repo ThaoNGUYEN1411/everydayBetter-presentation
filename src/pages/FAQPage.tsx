@@ -15,7 +15,9 @@ const FAQPage = () => {
       <Accordion>
         {faqList.map((item, index) => (
           <Accordion.Item eventKey={index.toString()} key={index}>
-            <Accordion.Header>{item.question}</Accordion.Header>
+            <Accordion.Header className="question">
+              <h4>{item.question}</h4>
+            </Accordion.Header>
             <Accordion.Body defaultChecked>{item.answer}</Accordion.Body>
           </Accordion.Item>
         ))}

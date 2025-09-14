@@ -196,49 +196,6 @@ footer {
 .flag {
   width: 20px;
 }
-/* =====articles===== */
-.search,
-.search-result {
-  width: 361px;
-}
-
-.search {
-  position: relative;
-  height: var(--search-height);
-  padding-left: 16px;
-  display: flex;
-  background-color: rgba(22, 24, 35, 0.06);
-  border-radius: var(--search-border-radius);
-  border: 1.5px solid transparent;
-
-  &::after {
-    content: "";
-    position: absolute;
-    top: var(--search-top-spacer);
-    right: var(--search-button-width);
-    width: 1px;
-    height: calc(var(--search-height) - var(--search-top-spacer) * 2);
-    background-color: rgba(22, 24, 35, 0.12);
-  }
-
-  &:focus-within {
-    border-color: rgba(22, 24, 35, 0.2);
-  }
-}
-.search-input {
-  flex: 1;
-  height: 100%;
-  color: var(--black);
-  font-size: 1.4rem;
-  caret-color: var(--primary);
-  background-color: transparent;
-}
-.search-input:focus {
-  border: none;
-}
-.search-input:not(:placeholder-shown) ~ .search-btn {
-  color: rgba(4, 5, 7, 0.75);
-}
 
 .text-hover-blue:hover {
   color: #347df2 !important;
@@ -249,4 +206,9 @@ footer {
 }
 .white-space {
   white-space: "pre-line";
+}
+
+.article-card {
+  height: "180px";
+  object-fit: "cover";
 }

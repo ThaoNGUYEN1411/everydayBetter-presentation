@@ -31,14 +31,12 @@ export default function ArticlesPage() {
     getAllCategoryList();
   }, []);
 
-  // Fonction pour récupérer articles selon catégorie
   const fetchArticles = async (categoryId: number | null) => {
     setLoading(true);
     await getArticleList(categoryId);
     setLoading(false);
   };
 
-  // Clic sur une catégorie
   const handleCategoryClick = (categoryId: number | null) => {
     setSelectedCategoryId(categoryId);
     fetchArticles(categoryId);
@@ -74,7 +72,6 @@ export default function ArticlesPage() {
           </ListGroup>
         </Col>
 
-        {/* Articles List */}
         <Col md={9}>
           {loading ? (
             <div className="d-flex justify-content-center align-items-center height-article">

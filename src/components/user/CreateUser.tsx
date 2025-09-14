@@ -51,10 +51,13 @@ const CreateUser: FC = () => {
   const handleToggle = () => setShowPassword(!showPassword);
   return (
     <div className="page d-flex justify-content-center mt-5">
-      <div className="p-5 my-5 shadow col-5">
+      <div className="p-5 my-5 shadow col-lg-5 col-sm-12">
         <h1 className="mb-4 text-center">{t("user.createUser.title")}</h1>
         <div className="d-flex justify-content-center">
-          <Form onSubmit={handleSubmit(onSubmit)} className="w-75">
+          <Form
+            onSubmit={handleSubmit(onSubmit)}
+            className="col-lg-8 col-sm-12"
+          >
             <Form.Group className="mb-4" controlId="nickname">
               <Form.Label>{t("user.nickname.title")}</Form.Label>
               <Col>

@@ -32,16 +32,16 @@ const AdminHeader: FC = () => {
         <Navbar.Toggle aria-controls="responsive-navbar-nav" />
         <Navbar.Collapse id="responsive-navbar-nav" className="mx-5 d-lg-flex">
           <Nav className="me-auto w-50 d-lg-flex justify-content-around">
-            <NavLink to="/user" className="nav-link">
+            <NavLink to="/admin/user" className="nav-link">
               {t("menu.admin.user")}
             </NavLink>
-            <NavLink to="/category" className="nav-link">
+            <NavLink to="/admin/category" className="nav-link">
               {t("menu.admin.categories")}
             </NavLink>
-            <NavLink to="/articles" className="nav-link">
+            <NavLink to="/admin/articles" className="nav-link">
               {t("menu.admin.articles")}
             </NavLink>
-            <NavLink to="/user-contact" className="nav-link">
+            <NavLink to="/admin/user-contact" className="nav-link">
               {t("menu.admin.user-contact")}
             </NavLink>
           </Nav>
