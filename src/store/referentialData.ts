@@ -26,7 +26,7 @@ export const referentialDataModel: ReferentialDataModel = {
           headers: {
             "Content-Type": "application/json",
           },
-          withCredentials: true, //add the cookies if server send Set-Cookie
+          withCredentials: true, //add token
         });
 
         actions.setCategoryList(response.data);

@@ -65,6 +65,7 @@ const HomePage: FC = () => {
                   variant="top"
                   src="/f1.webp"
                   className="w-80 text-center rounded shadow"
+                  alt={t("home.features.card3.title")}
                 />
                 <Card.Body>
                   <Card.Title>
@@ -86,6 +87,7 @@ const HomePage: FC = () => {
                   variant="top"
                   src="/f2.webp"
                   className="w-80 text-center rounded shadow"
+                  alt={t("home.features.card2.text")}
                 />
                 <Card.Body>
                   <Card.Title>
@@ -105,6 +107,7 @@ const HomePage: FC = () => {
                   variant="top"
                   src="/f4.webp"
                   className="w-80 text-center rounded shadow"
+                  alt={t("home.features.card1.text")}
                 />
                 <Card.Body>
                   <Card.Title>

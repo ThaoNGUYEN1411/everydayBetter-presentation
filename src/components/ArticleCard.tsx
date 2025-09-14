@@ -25,7 +25,7 @@ const ArticleCard = ({
         variant="top"
         src={`/uploads/articles-images/${thumbnailImage}`}
         alt={title}
-        style={{ height: "180px", objectFit: "cover" }}
+        className="article-card"
       />
       <Card.Body>
         <Card.Subtitle className="mb-2 text-muted">

@@ -37,23 +37,37 @@ const Header: FC = () => {
             <NavLink to="/advices" className="nav-link text-hover-blue">
               {t("menu.advice")}
             </NavLink>
-            <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
-              <NavDropdown.Item>
-                <NavLink to="/about" className="nav-link text-hover-blue">
-                  {t("menu.about")}
-                </NavLink>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <NavLink to="/contact" className="nav-link text-hover-blue">
-                  {t("menu.contact")}
-                </NavLink>
-              </NavDropdown.Item>
-              <NavDropdown.Item>
-                <NavLink to="/faq" className="nav-link text-hover-blue">
-                  {t("menu.faq")}
-                </NavLink>
-              </NavDropdown.Item>
-            </NavDropdown>
+            <div className="d-none d-lg-block">
+              <NavDropdown title={t("menu.learnMore")} id="nav-dropdown">
+                <NavDropdown.Item>
+                  <NavLink to="/about" className="nav-link text-hover-blue">
+                    {t("menu.about")}
+                  </NavLink>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink to="/contact" className="nav-link text-hover-blue">
+                    {t("menu.contact")}
+                  </NavLink>
+                </NavDropdown.Item>
+                <NavDropdown.Item>
+                  <NavLink to="/faq" className="nav-link text-hover-blue">
+                    {t("menu.faq")}
+                  </NavLink>
+                </NavDropdown.Item>
+              </NavDropdown>
+            </div>
+            {/* Version mobile (liens directs) */}
+            <div className="d-block d-lg-none">
+              <NavLink to="/about" className="nav-link text-hover-blue">
+                {t("menu.about")}
+              </NavLink>
+              <NavLink to="/contact" className="nav-link text-hover-blue">
+                {t("menu.contact")}
+              </NavLink>
+              <NavLink to="/faq" className="nav-link text-hover-blue">
+                {t("menu.faq")}
+              </NavLink>
+            </div>
             {nickname &&
               (!roles?.includes("ROLE_ADMIN") ? (
                 <NavLink to="activities" className="nav-link text-hover-blue">
